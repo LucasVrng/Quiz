@@ -1,0 +1,4010 @@
+{
+  "version": 1,
+  "exportedAt": "2026-09-02T10:53:42.817527Z",
+  "categories": [
+    {
+      "id": "id_7534de8dd913",
+      "name": "Nintendo",
+      "color": "#ff5d6c",
+      "parentId": null
+    },
+    {
+      "id": "id_e0146f1a7593",
+      "name": "Disney",
+      "color": "#5ecbff",
+      "parentId": null
+    },
+    {
+      "id": "id_f8eba3cbf364",
+      "name": "Cinéma",
+      "color": "#ffb627",
+      "parentId": null
+    },
+    {
+      "id": "id_0109dac595bc",
+      "name": "Culture générale",
+      "color": "#35d07f",
+      "parentId": null
+    },
+    {
+      "id": "id_45ae0abfe314",
+      "name": "Internet",
+      "color": "#2fd8c9",
+      "parentId": null
+    },
+    {
+      "id": "id_3c09aceb1b12",
+      "name": "Memes",
+      "color": "#f2789f",
+      "parentId": null
+    },
+    {
+      "id": "id_astronomy",
+      "name": "Astronomie",
+      "color": "#4cc9f0",
+      "parentId": null
+    },
+    {
+      "id": "id_astronomy_en",
+      "name": "Astronomy",
+      "color": "#4cc9f0",
+      "parentId": null
+    },
+    {
+      "id": "id_football",
+      "name": "Football",
+      "color": "#f72585",
+      "parentId": null
+    },
+    {
+      "id": "id_football_en",
+      "name": "Football",
+      "color": "#f72585",
+      "parentId": null
+    },
+    {
+      "id": "id_literature",
+      "name": "Littérature",
+      "color": "#7209b7",
+      "parentId": null
+    },
+    {
+      "id": "id_literature_en",
+      "name": "Literature",
+      "color": "#7209b7",
+      "parentId": null
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "id_07a3b5637b1b",
+      "name": "Nintendo — 20 questions",
+      "description": "Mario, Zelda, Pokémon, Kirby et les classiques Nintendo.",
+      "categoryIds": [
+        "id_7534de8dd913"
+      ],
+      "language": "fr",
+      "thumbnail": null,
+      "difficulty": "moyen",
+      "createdAt": "2026-09-02T10:53:42.817527Z",
+      "updatedAt": "2026-09-02T10:53:42.817527Z",
+      "questions": [
+        {
+          "id": "id_62f09eee95ac",
+          "type": "qcm",
+          "text": "Quel est le nom du plombier moustachu, mascotte de Nintendo ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_82e3347108af",
+              "text": "Mario"
+            },
+            {
+              "id": "id_eb2c2160deb0",
+              "text": "Luigi"
+            },
+            {
+              "id": "id_fb0298ce98f4",
+              "text": "Wario"
+            },
+            {
+              "id": "id_c6f600037daf",
+              "text": "Toad"
+            }
+          ],
+          "correctAnswerId": "id_82e3347108af",
+          "explanation": "Mario est LE personnage emblématique de Nintendo depuis 1981.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_fd320d46ab09",
+          "type": "qcm",
+          "text": "Dans quel jeu Mario apparaît-il pour la première fois ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_bcd4d7ef85df",
+              "text": "Super Mario Bros."
+            },
+            {
+              "id": "id_d644c3cf294e",
+              "text": "Donkey Kong"
+            },
+            {
+              "id": "id_8b2646825c62",
+              "text": "Mario Bros."
+            },
+            {
+              "id": "id_cd27e122908e",
+              "text": "Duck Hunt"
+            }
+          ],
+          "correctAnswerId": "id_d644c3cf294e",
+          "explanation": "Mario (alors appelé « Jumpman ») fait ses débuts dans Donkey Kong en 1981.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_d092efb181e1",
+          "type": "qcm",
+          "text": "Quelle entreprise a créé la console portable Game Boy ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_53b14157d9d5",
+              "text": "Sega"
+            },
+            {
+              "id": "id_2b7b2dbc372a",
+              "text": "Nintendo"
+            },
+            {
+              "id": "id_d10f37b1cba5",
+              "text": "Atari"
+            },
+            {
+              "id": "id_a7c2494a6778",
+              "text": "Sony"
+            }
+          ],
+          "correctAnswerId": "id_2b7b2dbc372a",
+          "explanation": "La Game Boy est sortie en 1989 et a été un immense succès portable.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "consoles"
+          ]
+        },
+        {
+          "id": "id_f6ebd0323c80",
+          "type": "qcm",
+          "text": "Qui est le principal antagoniste de la saga Zelda ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_dd9a476d3c3b",
+              "text": "Bowser"
+            },
+            {
+              "id": "id_22cfb4313faf",
+              "text": "Ganon"
+            },
+            {
+              "id": "id_cd67415d7dd7",
+              "text": "Dr. Eggman"
+            },
+            {
+              "id": "id_a0e5a5072aa1",
+              "text": "King Dedede"
+            }
+          ],
+          "correctAnswerId": "id_22cfb4313faf",
+          "explanation": "Ganon (ou Ganondorf) est l'ennemi juré de Link et de la princesse Zelda.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "zelda"
+          ]
+        },
+        {
+          "id": "id_186489ba7ea1",
+          "type": "qcm",
+          "text": "En quelle année est sorti le tout premier jeu The Legend of Zelda ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_e6d09809d7a0",
+              "text": "1985"
+            },
+            {
+              "id": "id_219c7044a3b8",
+              "text": "1986"
+            },
+            {
+              "id": "id_c535a962e69d",
+              "text": "1990"
+            },
+            {
+              "id": "id_de11b1f0e9aa",
+              "text": "1998"
+            }
+          ],
+          "correctAnswerId": "id_219c7044a3b8",
+          "explanation": "The Legend of Zelda est sorti au Japon en février 1986 sur Famicom Disk System.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "zelda"
+          ]
+        },
+        {
+          "id": "id_de509f4e6f0b",
+          "type": "qcm",
+          "text": "Comment s'appelle la princesse que Mario sauve régulièrement ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_a601bbdaa68f",
+              "text": "Zelda"
+            },
+            {
+              "id": "id_e934a107ad52",
+              "text": "Daisy"
+            },
+            {
+              "id": "id_fbc3bcf5962c",
+              "text": "Peach"
+            },
+            {
+              "id": "id_46b4fa2cdb7f",
+              "text": "Rosalina"
+            }
+          ],
+          "correctAnswerId": "id_fbc3bcf5962c",
+          "explanation": "La princesse Peach règne sur le Royaume Champignon.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_0ef44074506c",
+          "type": "qcm",
+          "text": "Quel est le nom de la console qui a introduit les manettes Joy-Con ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_ea4ce29bc291",
+              "text": "Wii U"
+            },
+            {
+              "id": "id_3c9a1af315d9",
+              "text": "Nintendo 3DS"
+            },
+            {
+              "id": "id_83bd0dfc0118",
+              "text": "Nintendo Switch"
+            },
+            {
+              "id": "id_56d11d5128ed",
+              "text": "GameCube"
+            }
+          ],
+          "correctAnswerId": "id_83bd0dfc0118",
+          "explanation": "La Switch, sortie en 2017, est une console hybride avec ses fameuses manettes Joy-Con.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "consoles"
+          ]
+        },
+        {
+          "id": "id_11814f36db40",
+          "type": "qcm",
+          "text": "Qui a créé le personnage de Mario ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_e7bf596e68b1",
+              "text": "Satoru Iwata"
+            },
+            {
+              "id": "id_df1f37887fc0",
+              "text": "Shigeru Miyamoto"
+            },
+            {
+              "id": "id_43bcb93be91b",
+              "text": "Gunpei Yokoi"
+            },
+            {
+              "id": "id_74c74d0a43a3",
+              "text": "Masahiro Sakurai"
+            }
+          ],
+          "correctAnswerId": "id_df1f37887fc0",
+          "explanation": "Shigeru Miyamoto est aussi le créateur de Zelda et Donkey Kong.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_f0ef2e6d8fb7",
+          "type": "qcm",
+          "text": "Quel est le compagnon dinosaure de Mario ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_8cf0187d90e3",
+              "text": "Birdo"
+            },
+            {
+              "id": "id_525894a589b1",
+              "text": "Yoshi"
+            },
+            {
+              "id": "id_1a583ccca0a1",
+              "text": "Kirby"
+            },
+            {
+              "id": "id_6666500886db",
+              "text": "Koopa"
+            }
+          ],
+          "correctAnswerId": "id_525894a589b1",
+          "explanation": "Yoshi fait sa première apparition dans Super Mario World en 1990.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_8bdd9bc7efc2",
+          "type": "qcm",
+          "text": "Quel est le tout premier jeu Pokémon sorti en 1996 au Japon ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_630a34cbe19f",
+              "text": "Pokémon Or"
+            },
+            {
+              "id": "id_c19ce5508c0a",
+              "text": "Pokémon Rouge et Vert"
+            },
+            {
+              "id": "id_1001342e2eb9",
+              "text": "Pokémon Rubis"
+            },
+            {
+              "id": "id_f3603a044677",
+              "text": "Pokémon Diamant"
+            }
+          ],
+          "correctAnswerId": "id_c19ce5508c0a",
+          "explanation": "Pokémon Rouge et Vert sont sortis le 27 février 1996 sur Game Boy, lançant toute la franchise.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "pokemon"
+          ]
+        },
+        {
+          "id": "id_d8556a8515ee",
+          "type": "qcm",
+          "text": "Quel type d'animal est Tom Nook dans Animal Crossing ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_5202493cf27e",
+              "text": "Chat"
+            },
+            {
+              "id": "id_706c756cd56f",
+              "text": "Raton laveur (tanuki)"
+            },
+            {
+              "id": "id_11a080127e1b",
+              "text": "Ours"
+            },
+            {
+              "id": "id_bd19216df78c",
+              "text": "Hérisson"
+            }
+          ],
+          "correctAnswerId": "id_706c756cd56f",
+          "explanation": "Tom Nook est un tanuki, souvent traduit par « raton laveur » en français.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "animal-crossing"
+          ]
+        },
+        {
+          "id": "id_a2a4ab78536d",
+          "type": "qcm",
+          "text": "En quelle année Nintendo a-t-elle été fondée, à l'origine pour vendre des cartes à jouer ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_598648694a8a",
+              "text": "1889"
+            },
+            {
+              "id": "id_a78991372a10",
+              "text": "1901"
+            },
+            {
+              "id": "id_a067ab0c05a0",
+              "text": "1923"
+            },
+            {
+              "id": "id_6b6ad1900e25",
+              "text": "1945"
+            }
+          ],
+          "correctAnswerId": "id_598648694a8a",
+          "explanation": "Nintendo a été fondée à Kyoto pour fabriquer des cartes à jouer Hanafuda.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_b63de7c83558",
+          "type": "qcm",
+          "text": "Quel est le nom du rival de Mario, vêtu de violet et jaune ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_3968f5fd3c4e",
+              "text": "Bowser"
+            },
+            {
+              "id": "id_c0d46dba6647",
+              "text": "Wario"
+            },
+            {
+              "id": "id_0d86c49c8df3",
+              "text": "Waluigi"
+            },
+            {
+              "id": "id_8f3d28541846",
+              "text": "King Boo"
+            }
+          ],
+          "correctAnswerId": "id_c0d46dba6647",
+          "explanation": "Wario est apparu pour la première fois dans Super Mario Land 2 (1992).",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_c1803039ec09",
+          "type": "qcm",
+          "text": "Quelle console Nintendo a introduit Super Mario 64, l'un des premiers jeux de plateforme en 3D ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_fa038264efbe",
+              "text": "Super Nintendo"
+            },
+            {
+              "id": "id_65669ce505b5",
+              "text": "Nintendo 64"
+            },
+            {
+              "id": "id_8f29d91d4847",
+              "text": "GameCube"
+            },
+            {
+              "id": "id_deb321334fed",
+              "text": "Wii"
+            }
+          ],
+          "correctAnswerId": "id_65669ce505b5",
+          "explanation": "Super Mario 64 (1996) a révolutionné les jeux de plateforme en 3D.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_d2b5a18c9a14",
+          "type": "qcm",
+          "text": "Quel est le nom de la boule rose capable d'avaler ses ennemis pour copier leurs pouvoirs ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_cd53fbc03342",
+              "text": "Kirby"
+            },
+            {
+              "id": "id_557feeafa0e5",
+              "text": "Yoshi"
+            },
+            {
+              "id": "id_912f572ee6ea",
+              "text": "Jigglypuff"
+            },
+            {
+              "id": "id_d32fc2463c88",
+              "text": "Meta Knight"
+            }
+          ],
+          "correctAnswerId": "id_cd53fbc03342",
+          "explanation": "Kirby est né en 1992 dans le jeu Kirby's Dream Land.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "kirby"
+          ]
+        },
+        {
+          "id": "id_dca228de1825",
+          "type": "qcm",
+          "text": "Combien de joueurs peuvent jouer en simultané sur un seul écran (splitté) dans Mario Kart 8 Deluxe ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_bfa16c33eec7",
+              "text": "2"
+            },
+            {
+              "id": "id_8b007bfcc2fc",
+              "text": "4"
+            },
+            {
+              "id": "id_e016535dfb7a",
+              "text": "6"
+            },
+            {
+              "id": "id_4ea6a0f9f0af",
+              "text": "8"
+            }
+          ],
+          "correctAnswerId": "id_8b007bfcc2fc",
+          "explanation": "Mario Kart 8 Deluxe permet jusqu'à 4 joueurs en écran splitté sur une seule console.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario-kart"
+          ]
+        },
+        {
+          "id": "id_f85ce1610cb3",
+          "type": "qcm",
+          "text": "Que fait le chien de Duck Hunt quand le joueur rate un canard ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_8560082f3523",
+              "text": "Il pleure"
+            },
+            {
+              "id": "id_5be32399048e",
+              "text": "Il rit"
+            },
+            {
+              "id": "id_4ddaf97fa128",
+              "text": "Il aboie"
+            },
+            {
+              "id": "id_0acc92aec67e",
+              "text": "Il s'endort"
+            }
+          ],
+          "correctAnswerId": "id_5be32399048e",
+          "explanation": "Ce rire moqueur est resté culte, au point que le chien réapparaît comme trophée dans Super Smash Bros.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_66b549770341",
+          "type": "qcm",
+          "text": "Quel est le titre du tout premier jeu de la série Metroid, sorti en 1986 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_39db9ffa8ec3",
+              "text": "Metroid"
+            },
+            {
+              "id": "id_e6517a6fafa4",
+              "text": "Metroid Prime"
+            },
+            {
+              "id": "id_10abaf046518",
+              "text": "Super Metroid"
+            },
+            {
+              "id": "id_122aaa32f58e",
+              "text": "Metroid II"
+            }
+          ],
+          "correctAnswerId": "id_39db9ffa8ec3",
+          "explanation": "Le jeu original est sorti sur Famicom Disk System au Japon.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "metroid"
+          ]
+        },
+        {
+          "id": "id_377e7a4bb3a7",
+          "type": "qcm",
+          "text": "Comment s'appelle l'héroïne de la saga Metroid ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_bf5237f32e6b",
+              "text": "Zelda"
+            },
+            {
+              "id": "id_822c79f4d672",
+              "text": "Samus Aran"
+            },
+            {
+              "id": "id_c8c57a4ff28a",
+              "text": "Peach"
+            },
+            {
+              "id": "id_f9772df27f3c",
+              "text": "Palutena"
+            }
+          ],
+          "correctAnswerId": "id_822c79f4d672",
+          "explanation": "Samus Aran est une chasseuse de primes intergalactique, révélée être une femme à la fin du premier jeu — une surprise pour l'époque.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "metroid"
+          ]
+        },
+        {
+          "id": "id_066d0a3a8d3f",
+          "type": "qcm",
+          "text": "Quel jeu de combat Nintendo réunit Mario, Link, Pikachu, Kirby et bien d'autres personnages ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_dff85c5c20f1",
+              "text": "Mario Kart"
+            },
+            {
+              "id": "id_2787839dbcf9",
+              "text": "Super Smash Bros."
+            },
+            {
+              "id": "id_2c20f69f2ae3",
+              "text": "Nintendo All-Stars"
+            },
+            {
+              "id": "id_2a216a1b6484",
+              "text": "Mario Party"
+            }
+          ],
+          "correctAnswerId": "id_2787839dbcf9",
+          "explanation": "La série a débuté en 1999 sur Nintendo 64.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "smash"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "id_8d321b9631dc",
+      "name": "Disney — 20 questions",
+      "description": "Studios, films d'animation, parcs et rachats qui ont façonné l'empire Disney.",
+      "categoryIds": [
+        "id_e0146f1a7593"
+      ],
+      "language": "fr",
+      "thumbnail": null,
+      "difficulty": "moyen",
+      "createdAt": "2026-09-02T10:53:42.817527Z",
+      "updatedAt": "2026-09-02T10:53:42.817527Z",
+      "questions": [
+        {
+          "id": "id_c9f04b02d3c1",
+          "type": "qcm",
+          "text": "Qui a fondé les studios Disney en 1923 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_c9821dc58fc9",
+              "text": "Walt Disney seul"
+            },
+            {
+              "id": "id_cc3049c26511",
+              "text": "Walt et Roy Disney"
+            },
+            {
+              "id": "id_c3b7edacfb2e",
+              "text": "Walt Disney et Ub Iwerks"
+            },
+            {
+              "id": "id_ff6a5769f0c7",
+              "text": "Michael Eisner"
+            }
+          ],
+          "correctAnswerId": "id_cc3049c26511",
+          "explanation": "Walt et son frère Roy ont fondé le « Disney Brothers Cartoon Studio » à Los Angeles.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_931e29c3fbdf",
+          "type": "qcm",
+          "text": "Quel est le premier long-métrage d'animation de Disney ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_808179dc53ca",
+              "text": "Pinocchio"
+            },
+            {
+              "id": "id_c3c0b65cc67b",
+              "text": "Blanche-Neige et les Sept Nains"
+            },
+            {
+              "id": "id_768db4718f65",
+              "text": "Fantasia"
+            },
+            {
+              "id": "id_317d43603ae4",
+              "text": "Bambi"
+            }
+          ],
+          "correctAnswerId": "id_c3c0b65cc67b",
+          "explanation": "Sorti en 1937, c'est aussi le premier long-métrage d'animation en couleur de l'histoire du cinéma américain.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_9b0faf8f5acf",
+          "type": "qcm",
+          "text": "Quelle petite souris est devenue le symbole de Disney ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2ab20ee30b66",
+              "text": "Jerry"
+            },
+            {
+              "id": "id_c3f9038ff10c",
+              "text": "Mickey Mouse"
+            },
+            {
+              "id": "id_83ad83dfb0fb",
+              "text": "Stuart Little"
+            },
+            {
+              "id": "id_507bacf1efef",
+              "text": "Ratatouille"
+            }
+          ],
+          "correctAnswerId": "id_c3f9038ff10c",
+          "explanation": "Mickey est apparu pour la première fois dans le court-métrage « Steamboat Willie » en 1928.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mickey"
+          ]
+        },
+        {
+          "id": "id_5cf319c0c549",
+          "type": "qcm",
+          "text": "Dans quel État américain se trouve le tout premier parc Disneyland, ouvert en 1955 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_09da46bb23bd",
+              "text": "Floride"
+            },
+            {
+              "id": "id_3aec7670d03d",
+              "text": "Californie"
+            },
+            {
+              "id": "id_27996d8968a6",
+              "text": "Nevada"
+            },
+            {
+              "id": "id_7fc90b30ba3d",
+              "text": "Texas"
+            }
+          ],
+          "correctAnswerId": "id_3aec7670d03d",
+          "explanation": "Disneyland a ouvert ses portes à Anaheim, en Californie.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "parcs"
+          ]
+        },
+        {
+          "id": "id_f9498133c3c8",
+          "type": "qcm",
+          "text": "En quelle année Disney a-t-il racheté le studio Pixar ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2136d384e82f",
+              "text": "2001"
+            },
+            {
+              "id": "id_e920ee317bf2",
+              "text": "2006"
+            },
+            {
+              "id": "id_de5d0d90ca7e",
+              "text": "2012"
+            },
+            {
+              "id": "id_bdc0875a3051",
+              "text": "2019"
+            }
+          ],
+          "correctAnswerId": "id_e920ee317bf2",
+          "explanation": "Ce rachat a rapproché Disney du studio derrière Toy Story et Monstres & Cie.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "pixar"
+          ]
+        },
+        {
+          "id": "id_0607f9b6c9a2",
+          "type": "qcm",
+          "text": "Quel studio, racheté par Disney en 2012, a créé Star Wars ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_567e3d3569b7",
+              "text": "Marvel Studios"
+            },
+            {
+              "id": "id_c30ccf270b17",
+              "text": "Lucasfilm"
+            },
+            {
+              "id": "id_f7b528e90c8e",
+              "text": "DreamWorks"
+            },
+            {
+              "id": "id_963ca4ffc28a",
+              "text": "Illumination"
+            }
+          ],
+          "correctAnswerId": "id_c30ccf270b17",
+          "explanation": "Ce rachat a permis à Disney de produire les nouvelles trilogies Star Wars.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "star-wars"
+          ]
+        },
+        {
+          "id": "id_f4e1494a1386",
+          "type": "qcm",
+          "text": "Quel est le nom du renne dans La Reine des Neiges ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9588df64d480",
+              "text": "Olaf"
+            },
+            {
+              "id": "id_9686f7b128ed",
+              "text": "Sven"
+            },
+            {
+              "id": "id_f2420bf12496",
+              "text": "Kristoff"
+            },
+            {
+              "id": "id_485b8eb1946d",
+              "text": "Marshmallow"
+            }
+          ],
+          "correctAnswerId": "id_9686f7b128ed",
+          "explanation": "Sven est le fidèle compagnon de Kristoff.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "reine-des-neiges"
+          ]
+        },
+        {
+          "id": "id_9226de009abd",
+          "type": "qcm",
+          "text": "Dans quel film Disney trouve-t-on le personnage de Simba ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_41d907a129ea",
+              "text": "Tarzan"
+            },
+            {
+              "id": "id_b40778026420",
+              "text": "Le Roi Lion"
+            },
+            {
+              "id": "id_bad19d621b01",
+              "text": "Frère des Ours"
+            },
+            {
+              "id": "id_5da0e6d74e9c",
+              "text": "Dinosaure"
+            }
+          ],
+          "correctAnswerId": "id_b40778026420",
+          "explanation": "Le Roi Lion est sorti en 1994 et reste l'un des plus grands succès de Disney.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "roi-lion"
+          ]
+        },
+        {
+          "id": "id_e8371dccacd0",
+          "type": "qcm",
+          "text": "Quelle princesse Disney vit sous la mer ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9904c41fa6a7",
+              "text": "Belle"
+            },
+            {
+              "id": "id_a8a18bb6bb0d",
+              "text": "Ariel"
+            },
+            {
+              "id": "id_c4f0a8b58c4f",
+              "text": "Jasmine"
+            },
+            {
+              "id": "id_05dddefc7fe0",
+              "text": "Pocahontas"
+            }
+          ],
+          "correctAnswerId": "id_a8a18bb6bb0d",
+          "explanation": "Ariel est l'héroïne de La Petite Sirène (1989).",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "princesses"
+          ]
+        },
+        {
+          "id": "id_f533bd440a04",
+          "type": "qcm",
+          "text": "Quel est le métier du père de Belle dans La Belle et la Bête ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_03e218fa639a",
+              "text": "Boulanger"
+            },
+            {
+              "id": "id_bec7c4b5759f",
+              "text": "Inventeur"
+            },
+            {
+              "id": "id_52fbf42e0d51",
+              "text": "Forgeron"
+            },
+            {
+              "id": "id_667488beb784",
+              "text": "Marchand"
+            }
+          ],
+          "correctAnswerId": "id_bec7c4b5759f",
+          "explanation": "Maurice est un inventeur un peu excentrique.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "princesses"
+          ]
+        },
+        {
+          "id": "id_845306fcd086",
+          "type": "qcm",
+          "text": "En quelle année Disney a-t-il racheté Marvel Entertainment ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_8871e5fd7c39",
+              "text": "2006"
+            },
+            {
+              "id": "id_1802123d077d",
+              "text": "2009"
+            },
+            {
+              "id": "id_767abb260e79",
+              "text": "2012"
+            },
+            {
+              "id": "id_76530c9fb75a",
+              "text": "2015"
+            }
+          ],
+          "correctAnswerId": "id_1802123d077d",
+          "explanation": "Ce rachat a donné naissance à l'ère du Marvel Cinematic Universe sous l'égide de Disney.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "marvel"
+          ]
+        },
+        {
+          "id": "id_0355189d07de",
+          "type": "qcm",
+          "text": "Quel est le nom du service de streaming lancé par Disney en novembre 2019 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_80b1e306e99b",
+              "text": "Disney+"
+            },
+            {
+              "id": "id_f7eccf8b94f7",
+              "text": "Hulu"
+            },
+            {
+              "id": "id_590671839ef9",
+              "text": "DisneyFlix"
+            },
+            {
+              "id": "id_b7256157586b",
+              "text": "Disney Now"
+            }
+          ],
+          "correctAnswerId": "id_80b1e306e99b",
+          "explanation": "Disney+ regroupe les contenus Disney, Pixar, Marvel, Star Wars et National Geographic.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "streaming"
+          ]
+        },
+        {
+          "id": "id_df696b81d590",
+          "type": "qcm",
+          "text": "Quel personnage Disney a le nez qui s'allonge quand il ment ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_7b2582016ea8",
+              "text": "Dumbo"
+            },
+            {
+              "id": "id_45204976e41b",
+              "text": "Pinocchio"
+            },
+            {
+              "id": "id_f89cd43a0250",
+              "text": "Baloo"
+            },
+            {
+              "id": "id_36885fa2cef6",
+              "text": "Le Génie"
+            }
+          ],
+          "correctAnswerId": "id_45204976e41b",
+          "explanation": "Pinocchio est sorti en 1940, un an après Blanche-Neige.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_13ef5f370073",
+          "type": "qcm",
+          "text": "Quel est le nom du perroquet complice de Jafar dans Aladdin ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_90b5b1a72b47",
+              "text": "Iago"
+            },
+            {
+              "id": "id_ddb2ce7e639b",
+              "text": "Zazu"
+            },
+            {
+              "id": "id_b8c3f49bd167",
+              "text": "Rajah"
+            },
+            {
+              "id": "id_f222028e6f83",
+              "text": "Abu"
+            }
+          ],
+          "correctAnswerId": "id_90b5b1a72b47",
+          "explanation": "Iago est le compagnon sarcastique du sorcier Jafar.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "aladdin"
+          ]
+        },
+        {
+          "id": "id_0e8f7dcfe5c9",
+          "type": "qcm",
+          "text": "Quel studio a produit Toy Story, premier long-métrage entièrement animé par ordinateur ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_ccaa9add6c30",
+              "text": "DreamWorks"
+            },
+            {
+              "id": "id_f0667b3ce043",
+              "text": "Pixar"
+            },
+            {
+              "id": "id_214dd9587ab8",
+              "text": "Disney Animation"
+            },
+            {
+              "id": "id_ebfce78ca561",
+              "text": "Blue Sky Studios"
+            }
+          ],
+          "correctAnswerId": "id_f0667b3ce043",
+          "explanation": "Sorti en 1995, Toy Story a marqué l'histoire de l'animation.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "pixar"
+          ]
+        },
+        {
+          "id": "id_c3e1946b6717",
+          "type": "qcm",
+          "text": "Quel est le nom du tigre ami de Winnie l'Ourson ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_a93bfb364cc2",
+              "text": "Coco Lapin"
+            },
+            {
+              "id": "id_646ff90682ed",
+              "text": "Tigrou"
+            },
+            {
+              "id": "id_af8c8f750321",
+              "text": "Bourriquet"
+            },
+            {
+              "id": "id_72ee8670cc30",
+              "text": "Porcinet"
+            }
+          ],
+          "correctAnswerId": "id_646ff90682ed",
+          "explanation": "Tigrou est connu pour son énergie débordante et ses bonds.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "winnie"
+          ]
+        },
+        {
+          "id": "id_50b112d3e58a",
+          "type": "qcm",
+          "text": "Dans quel pays se déroule l'histoire de Mulan ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_5b01b1a73b47",
+              "text": "Japon"
+            },
+            {
+              "id": "id_e7aba1a57110",
+              "text": "Chine"
+            },
+            {
+              "id": "id_fc9f88f7ed66",
+              "text": "Corée"
+            },
+            {
+              "id": "id_512037c34e04",
+              "text": "Thaïlande"
+            }
+          ],
+          "correctAnswerId": "id_e7aba1a57110",
+          "explanation": "Mulan (1998) s'inspire d'une légende chinoise ancienne.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mulan"
+          ]
+        },
+        {
+          "id": "id_f7f29208896c",
+          "type": "qcm",
+          "text": "Quel est le nom de la sorcière des mers dans La Petite Sirène ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9f4d878bd5c7",
+              "text": "Maléfique"
+            },
+            {
+              "id": "id_9950a899d4dc",
+              "text": "Ursula"
+            },
+            {
+              "id": "id_cce0f8bb84fb",
+              "text": "Cruella"
+            },
+            {
+              "id": "id_3de2fc15716b",
+              "text": "Mère Gothel"
+            }
+          ],
+          "correctAnswerId": "id_9950a899d4dc",
+          "explanation": "Ursula échange la voix d'Ariel contre des jambes humaines.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "petite-sirene"
+          ]
+        },
+        {
+          "id": "id_d1030e2cb19b",
+          "type": "qcm",
+          "text": "En quelle année a ouvert Walt Disney World en Floride ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_ba8a52ce7ac0",
+              "text": "1955"
+            },
+            {
+              "id": "id_1bc669cdecbd",
+              "text": "1966"
+            },
+            {
+              "id": "id_6163c99ce816",
+              "text": "1971"
+            },
+            {
+              "id": "id_0f36501a6151",
+              "text": "1983"
+            }
+          ],
+          "correctAnswerId": "id_6163c99ce816",
+          "explanation": "Walt Disney World a ouvert cinq ans après la mort de Walt Disney, survenue en 1966.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "parcs"
+          ]
+        },
+        {
+          "id": "id_54ae2b4941dc",
+          "type": "qcm",
+          "text": "Quel est le nom du crabe conseiller du roi Triton dans La Petite Sirène ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_c5b7cba26d64",
+              "text": "Flounder"
+            },
+            {
+              "id": "id_87741e144d64",
+              "text": "Sébastien"
+            },
+            {
+              "id": "id_56a897ebd00a",
+              "text": "Polochon"
+            },
+            {
+              "id": "id_3db6b09fa2e5",
+              "text": "Timon"
+            }
+          ],
+          "correctAnswerId": "id_87741e144d64",
+          "explanation": "Sébastien est aussi connu pour son grand numéro musical « Sous l'océan ».",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "petite-sirene"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "id_2baa17f4b4c9",
+      "name": "Cinéma — 20 questions",
+      "description": "Réalisateurs, sagas, Oscars et grands classiques du 7e art.",
+      "categoryIds": [
+        "id_f8eba3cbf364"
+      ],
+      "language": "fr",
+      "thumbnail": null,
+      "difficulty": "moyen",
+      "createdAt": "2026-09-02T10:53:42.817527Z",
+      "updatedAt": "2026-09-02T10:53:42.817527Z",
+      "questions": [
+        {
+          "id": "id_7a7d5c93f5a5",
+          "type": "qcm",
+          "text": "Quel est le nom de la récompense la plus prestigieuse décernée chaque année à Hollywood ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_08c668a94935",
+              "text": "Le Golden Globe"
+            },
+            {
+              "id": "id_c51d0a41a6c6",
+              "text": "L'Oscar"
+            },
+            {
+              "id": "id_8a72a05f0571",
+              "text": "Le César"
+            },
+            {
+              "id": "id_76220691c893",
+              "text": "Le Lion d'Or"
+            }
+          ],
+          "correctAnswerId": "id_c51d0a41a6c6",
+          "explanation": "Les Oscars sont décernés depuis 1929 par l'Academy of Motion Picture Arts and Sciences.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "oscars"
+          ]
+        },
+        {
+          "id": "id_8516579a3516",
+          "type": "qcm",
+          "text": "Quel réalisateur est connu pour Inception, Interstellar et Oppenheimer ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2862b0e7af75",
+              "text": "Steven Spielberg"
+            },
+            {
+              "id": "id_e59cd2d60950",
+              "text": "Christopher Nolan"
+            },
+            {
+              "id": "id_010f39bdc948",
+              "text": "James Cameron"
+            },
+            {
+              "id": "id_11df37c799ee",
+              "text": "Denis Villeneuve"
+            }
+          ],
+          "correctAnswerId": "id_e59cd2d60950",
+          "explanation": "Nolan est réputé pour ses scénarios complexes et son goût pour les effets pratiques.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "realisateurs"
+          ]
+        },
+        {
+          "id": "id_c96deea2a143",
+          "type": "qcm",
+          "text": "Dans quelle ville se déroule le célèbre festival de cinéma qui remet la Palme d'Or ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2110379b6207",
+              "text": "Venise"
+            },
+            {
+              "id": "id_83c1888c445b",
+              "text": "Berlin"
+            },
+            {
+              "id": "id_aa8c4402fd9c",
+              "text": "Cannes"
+            },
+            {
+              "id": "id_011a0dfc79b5",
+              "text": "Deauville"
+            }
+          ],
+          "correctAnswerId": "id_aa8c4402fd9c",
+          "explanation": "Le Festival de Cannes existe depuis 1946 et récompense le meilleur film par la Palme d'Or.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "festivals"
+          ]
+        },
+        {
+          "id": "id_ba19a8aed53b",
+          "type": "qcm",
+          "text": "Quel film est considéré comme le premier long-métrage « parlant » de l'histoire (1927) ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2235c61b3b77",
+              "text": "Metropolis"
+            },
+            {
+              "id": "id_ae1c04675bba",
+              "text": "Le Chanteur de jazz"
+            },
+            {
+              "id": "id_a056c868b9ca",
+              "text": "Les Temps modernes"
+            },
+            {
+              "id": "id_2626320d99ab",
+              "text": "Nosferatu"
+            }
+          ],
+          "correctAnswerId": "id_ae1c04675bba",
+          "explanation": "« The Jazz Singer » est sorti en 1927 et a marqué la fin de l'ère du cinéma muet.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_0add31456a2f",
+          "type": "qcm",
+          "text": "Qui a réalisé la trilogie originale du Seigneur des Anneaux ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_3f68ebfff55e",
+              "text": "Guillermo del Toro"
+            },
+            {
+              "id": "id_701205cd00ee",
+              "text": "Peter Jackson"
+            },
+            {
+              "id": "id_0d24250bac59",
+              "text": "George Lucas"
+            },
+            {
+              "id": "id_2019d27c7818",
+              "text": "Ridley Scott"
+            }
+          ],
+          "correctAnswerId": "id_701205cd00ee",
+          "explanation": "La trilogie est sortie entre 2001 et 2003.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "seigneur-des-anneaux"
+          ]
+        },
+        {
+          "id": "id_63da0865145e",
+          "type": "qcm",
+          "text": "Quel acteur incarne Iron Man dans le Marvel Cinematic Universe ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_0a1eb5d15875",
+              "text": "Chris Evans"
+            },
+            {
+              "id": "id_eae1e78e1902",
+              "text": "Chris Hemsworth"
+            },
+            {
+              "id": "id_20e3d76e5c3b",
+              "text": "Robert Downey Jr."
+            },
+            {
+              "id": "id_dd83926dd36f",
+              "text": "Mark Ruffalo"
+            }
+          ],
+          "correctAnswerId": "id_20e3d76e5c3b",
+          "explanation": "Il a incarné Tony Stark de 2008 à 2019.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "marvel"
+          ]
+        },
+        {
+          "id": "id_b8d392472b41",
+          "type": "qcm",
+          "text": "Quel film a remporté le tout premier Oscar du meilleur film, en 1929 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_50d6ae62555f",
+              "text": "Wings"
+            },
+            {
+              "id": "id_8f7877ce6d30",
+              "text": "Sunrise"
+            },
+            {
+              "id": "id_0fe1d106a5d2",
+              "text": "Metropolis"
+            },
+            {
+              "id": "id_13a7c750e806",
+              "text": "The Circus"
+            }
+          ],
+          "correctAnswerId": "id_50d6ae62555f",
+          "explanation": "« Wings » (Ailes) a remporté le tout premier Oscar du meilleur film lors de la cérémonie de 1929.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "oscars"
+          ]
+        },
+        {
+          "id": "id_4f6a88f16e0e",
+          "type": "qcm",
+          "text": "Quelle saga de films met en scène un jeune sorcier nommé Harry ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_e188266e9c02",
+              "text": "Le Seigneur des Anneaux"
+            },
+            {
+              "id": "id_2fdcae70f476",
+              "text": "Harry Potter"
+            },
+            {
+              "id": "id_02e3718d0d03",
+              "text": "Narnia"
+            },
+            {
+              "id": "id_8fc4562deffc",
+              "text": "Percy Jackson"
+            }
+          ],
+          "correctAnswerId": "id_2fdcae70f476",
+          "explanation": "La saga compte 8 films sortis entre 2001 et 2011.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "harry-potter"
+          ]
+        },
+        {
+          "id": "id_264d65adc244",
+          "type": "qcm",
+          "text": "Quel réalisateur a créé la saga Star Wars ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_fa408b489860",
+              "text": "Steven Spielberg"
+            },
+            {
+              "id": "id_219d86d01fcb",
+              "text": "George Lucas"
+            },
+            {
+              "id": "id_0066fdc283e6",
+              "text": "James Cameron"
+            },
+            {
+              "id": "id_d4dad3143ece",
+              "text": "Ridley Scott"
+            }
+          ],
+          "correctAnswerId": "id_219d86d01fcb",
+          "explanation": "Le premier film est sorti en 1977.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "star-wars"
+          ]
+        },
+        {
+          "id": "id_70ea2c9c2432",
+          "type": "qcm",
+          "text": "Quel film de James Cameron, sorti en 2009, est devenu un immense succès grâce à la 3D ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_e0521279ecf3",
+              "text": "Titanic"
+            },
+            {
+              "id": "id_91ee7540ba81",
+              "text": "Avatar"
+            },
+            {
+              "id": "id_223f6c492ee0",
+              "text": "Aliens"
+            },
+            {
+              "id": "id_328a1eeee826",
+              "text": "Terminator 2"
+            }
+          ],
+          "correctAnswerId": "id_91ee7540ba81",
+          "explanation": "Avatar a marqué un tournant dans l'utilisation de la 3D et des effets spéciaux au cinéma.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "avatar"
+          ]
+        },
+        {
+          "id": "id_7e5ad1e72395",
+          "type": "qcm",
+          "text": "Dans quel pays est né le cinéma, avec les premières projections publiques des frères Lumière (1895) ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_f8951e8ff094",
+              "text": "États-Unis"
+            },
+            {
+              "id": "id_92054df0762f",
+              "text": "France"
+            },
+            {
+              "id": "id_0993c85c6a2e",
+              "text": "Royaume-Uni"
+            },
+            {
+              "id": "id_b26d2f99de35",
+              "text": "Allemagne"
+            }
+          ],
+          "correctAnswerId": "id_92054df0762f",
+          "explanation": "Les frères Lumière ont organisé leur première projection publique payante à Paris en 1895.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_48ed3e64bae2",
+          "type": "qcm",
+          "text": "Quel acteur est connu pour son rôle de Jack Sparrow dans Pirates des Caraïbes ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_0df1a7feac5d",
+              "text": "Orlando Bloom"
+            },
+            {
+              "id": "id_e5209da58544",
+              "text": "Johnny Depp"
+            },
+            {
+              "id": "id_d6ad10b0564f",
+              "text": "Geoffrey Rush"
+            },
+            {
+              "id": "id_72621613c87a",
+              "text": "Javier Bardem"
+            }
+          ],
+          "correctAnswerId": "id_e5209da58544",
+          "explanation": "Le premier film de la saga est sorti en 2003.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "pirates-des-caraibes"
+          ]
+        },
+        {
+          "id": "id_002b0ed2a87e",
+          "type": "qcm",
+          "text": "Comment appelle-t-on une courte scène ajoutée pendant ou après le générique d'un film ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_bd639a44a657",
+              "text": "Un flashback"
+            },
+            {
+              "id": "id_1f5a1205fd71",
+              "text": "Une scène post-générique"
+            },
+            {
+              "id": "id_76c4758583b6",
+              "text": "Un teaser"
+            },
+            {
+              "id": "id_b989a242b541",
+              "text": "Un prologue"
+            }
+          ],
+          "correctAnswerId": "id_1f5a1205fd71",
+          "explanation": "Les films Marvel sont particulièrement connus pour leurs scènes post-génériques.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_7ec26be7e361",
+          "type": "qcm",
+          "text": "Quel réalisateur est célèbre pour Les Dents de la mer et E.T. l'extra-terrestre ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2ba78388fe32",
+              "text": "George Lucas"
+            },
+            {
+              "id": "id_0a059dbec360",
+              "text": "Steven Spielberg"
+            },
+            {
+              "id": "id_7deabf7878a5",
+              "text": "Tim Burton"
+            },
+            {
+              "id": "id_bfa0d11bac96",
+              "text": "Martin Scorsese"
+            }
+          ],
+          "correctAnswerId": "id_0a059dbec360",
+          "explanation": "Spielberg est l'un des réalisateurs les plus influents d'Hollywood depuis les années 1970.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "realisateurs"
+          ]
+        },
+        {
+          "id": "id_558231f33b46",
+          "type": "qcm",
+          "text": "Quel film d'animation japonais de Hayao Miyazaki a remporté l'Oscar du meilleur film d'animation en 2003 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9d0c2d772060",
+              "text": "Princesse Mononoké"
+            },
+            {
+              "id": "id_1abbdd19fa7f",
+              "text": "Le Voyage de Chihiro"
+            },
+            {
+              "id": "id_61391c44919d",
+              "text": "Mon voisin Totoro"
+            },
+            {
+              "id": "id_8a7fe2b429bb",
+              "text": "Le Château ambulant"
+            }
+          ],
+          "correctAnswerId": "id_1abbdd19fa7f",
+          "explanation": "C'est le premier film du studio Ghibli à remporter un Oscar.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "animation"
+          ]
+        },
+        {
+          "id": "id_616dd6afcb92",
+          "type": "qcm",
+          "text": "Quel acteur a incarné le Joker dans le film « Joker » sorti en 2019 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_fbe50387cdc8",
+              "text": "Heath Ledger"
+            },
+            {
+              "id": "id_c3946ba5f8e7",
+              "text": "Joaquin Phoenix"
+            },
+            {
+              "id": "id_b2afd59b0a9f",
+              "text": "Jared Leto"
+            },
+            {
+              "id": "id_059e418d7aed",
+              "text": "Jack Nicholson"
+            }
+          ],
+          "correctAnswerId": "id_c3946ba5f8e7",
+          "explanation": "Cette performance lui a valu l'Oscar du meilleur acteur en 2020.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "dc"
+          ]
+        },
+        {
+          "id": "id_3ab14047f08c",
+          "type": "qcm",
+          "text": "Quel est le nom de la ville fictive où se déroule la majorité des films Batman ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_68a38608f4d9",
+              "text": "Metropolis"
+            },
+            {
+              "id": "id_8b82f8e11f2e",
+              "text": "Gotham City"
+            },
+            {
+              "id": "id_7f8e2d4da0d8",
+              "text": "Star City"
+            },
+            {
+              "id": "id_709117722d7f",
+              "text": "Central City"
+            }
+          ],
+          "correctAnswerId": "id_8b82f8e11f2e",
+          "explanation": "Gotham City est aussi le décor de nombreux comics DC.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "dc"
+          ]
+        },
+        {
+          "id": "id_21edc712f66c",
+          "type": "qcm",
+          "text": "Quelle est la langue originale du film « Parasite », premier film non anglophone à remporter l'Oscar du meilleur film (2020) ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_c55420eab714",
+              "text": "Japonais"
+            },
+            {
+              "id": "id_c19367ca84d9",
+              "text": "Coréen"
+            },
+            {
+              "id": "id_df05425d60ef",
+              "text": "Mandarin"
+            },
+            {
+              "id": "id_09cc7242dc83",
+              "text": "Thaï"
+            }
+          ],
+          "correctAnswerId": "id_c19367ca84d9",
+          "explanation": "Réalisé par Bong Joon-ho, « Parasite » a marqué l'histoire des Oscars.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "oscars"
+          ]
+        },
+        {
+          "id": "id_39c8aafc853e",
+          "type": "qcm",
+          "text": "Quel duo d'acteurs incarne les rôles principaux dans Titanic (1997) ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_ecd7b1b9c366",
+              "text": "Brad Pitt et Angelina Jolie"
+            },
+            {
+              "id": "id_232842432083",
+              "text": "Leonardo DiCaprio et Kate Winslet"
+            },
+            {
+              "id": "id_5f5e07070c2f",
+              "text": "Tom Cruise et Nicole Kidman"
+            },
+            {
+              "id": "id_2a440fa22494",
+              "text": "Matt Damon et Julia Roberts"
+            }
+          ],
+          "correctAnswerId": "id_232842432083",
+          "explanation": "Le film, réalisé par James Cameron, reste l'un des plus grands succès du box-office.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "titanic"
+          ]
+        },
+        {
+          "id": "id_d2c196a48b7c",
+          "type": "qcm",
+          "text": "Comment appelle-t-on un film tourné avec un budget très réduit, souvent hors du système des grands studios ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_57a2f6289903",
+              "text": "Un blockbuster"
+            },
+            {
+              "id": "id_7dbaefc8b429",
+              "text": "Un film indépendant"
+            },
+            {
+              "id": "id_48aaec15037b",
+              "text": "Un docu-fiction"
+            },
+            {
+              "id": "id_f397e3719ed5",
+              "text": "Un court-métrage"
+            }
+          ],
+          "correctAnswerId": "id_7dbaefc8b429",
+          "explanation": "On parle aussi de « film indé », souvent primé dans des festivals comme Sundance.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "vocabulaire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "id_688e94fe342a",
+      "name": "Culture générale — 20 questions",
+      "description": "Géographie, histoire, science et art pour tester tes connaissances.",
+      "categoryIds": [
+        "id_0109dac595bc"
+      ],
+      "language": "fr",
+      "thumbnail": null,
+      "difficulty": "moyen",
+      "createdAt": "2026-09-02T10:53:42.817527Z",
+      "updatedAt": "2026-09-02T10:53:42.817527Z",
+      "questions": [
+        {
+          "id": "id_05489bc221c3",
+          "type": "qcm",
+          "text": "Quelle est la capitale de la France ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_b8748399245d",
+              "text": "Lyon"
+            },
+            {
+              "id": "id_52fb43ec20eb",
+              "text": "Marseille"
+            },
+            {
+              "id": "id_59c7d13a3df1",
+              "text": "Paris"
+            },
+            {
+              "id": "id_62bb22a0ba59",
+              "text": "Toulouse"
+            }
+          ],
+          "correctAnswerId": "id_59c7d13a3df1",
+          "explanation": "Paris est la capitale de la France depuis des siècles.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_d1ed52098c82",
+          "type": "qcm",
+          "text": "Quel est le plus haut sommet du monde ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_141b4b5f18b7",
+              "text": "Mont Blanc"
+            },
+            {
+              "id": "id_4e10903f2ac3",
+              "text": "K2"
+            },
+            {
+              "id": "id_0b07e2800094",
+              "text": "Everest"
+            },
+            {
+              "id": "id_9db2644543cf",
+              "text": "Kilimandjaro"
+            }
+          ],
+          "correctAnswerId": "id_0b07e2800094",
+          "explanation": "L'Everest culmine à 8 849 mètres, à la frontière entre le Népal et le Tibet.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_79d51657c5ad",
+          "type": "qcm",
+          "text": "Quel est le symbole chimique de l'or ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2b45eafc51db",
+              "text": "Or"
+            },
+            {
+              "id": "id_f199ad7dcb52",
+              "text": "Au"
+            },
+            {
+              "id": "id_a43df62ef8f0",
+              "text": "Ag"
+            },
+            {
+              "id": "id_57625a45a0dc",
+              "text": "Go"
+            }
+          ],
+          "correctAnswerId": "id_f199ad7dcb52",
+          "explanation": "« Au » vient du latin « aurum ».",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "science"
+          ]
+        },
+        {
+          "id": "id_e36d684b54e1",
+          "type": "qcm",
+          "text": "En quelle année a eu lieu la prise de la Bastille, marquant le début de la Révolution française ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_805d676dc099",
+              "text": "1789"
+            },
+            {
+              "id": "id_b971dd09963a",
+              "text": "1815"
+            },
+            {
+              "id": "id_ffcc57d0ed0c",
+              "text": "1848"
+            },
+            {
+              "id": "id_d168b425c954",
+              "text": "1901"
+            }
+          ],
+          "correctAnswerId": "id_805d676dc099",
+          "explanation": "La prise de la Bastille a eu lieu le 14 juillet 1789.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_b16ff80de12c",
+          "type": "qcm",
+          "text": "Quel est le plus grand océan du monde ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_c7726a3a30a4",
+              "text": "Atlantique"
+            },
+            {
+              "id": "id_4146e5f25b91",
+              "text": "Indien"
+            },
+            {
+              "id": "id_65b538a1d284",
+              "text": "Pacifique"
+            },
+            {
+              "id": "id_5a034b3d4fc2",
+              "text": "Arctique"
+            }
+          ],
+          "correctAnswerId": "id_65b538a1d284",
+          "explanation": "L'océan Pacifique couvre environ un tiers de la surface de la Terre.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_484d3c863314",
+          "type": "qcm",
+          "text": "Combien de continents sont généralement recensés ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_efb98277c111",
+              "text": "5"
+            },
+            {
+              "id": "id_9c2ca02454bb",
+              "text": "6"
+            },
+            {
+              "id": "id_bd8f94e03e1c",
+              "text": "7"
+            },
+            {
+              "id": "id_35ae3968629f",
+              "text": "8"
+            }
+          ],
+          "correctAnswerId": "id_bd8f94e03e1c",
+          "explanation": "Europe, Asie, Afrique, Amérique du Nord, Amérique du Sud, Océanie et Antarctique.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_6dae6721a555",
+          "type": "qcm",
+          "text": "Quel savant est célèbre pour sa théorie de la relativité ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_c06b293bf113",
+              "text": "Isaac Newton"
+            },
+            {
+              "id": "id_cef48020057e",
+              "text": "Albert Einstein"
+            },
+            {
+              "id": "id_862c02937f67",
+              "text": "Galilée"
+            },
+            {
+              "id": "id_790071e6eec8",
+              "text": "Nikola Tesla"
+            }
+          ],
+          "correctAnswerId": "id_cef48020057e",
+          "explanation": "Sa théorie a révolutionné la physique moderne au début du XXe siècle.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "science"
+          ]
+        },
+        {
+          "id": "id_f99e6df74848",
+          "type": "qcm",
+          "text": "Quelle est la plus longue rivière du monde ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_7df94e0bab9a",
+              "text": "Amazone"
+            },
+            {
+              "id": "id_9dd563947458",
+              "text": "Nil"
+            },
+            {
+              "id": "id_f0820f500e30",
+              "text": "Mississippi"
+            },
+            {
+              "id": "id_b04e000aa6f6",
+              "text": "Yangtsé"
+            }
+          ],
+          "correctAnswerId": "id_9dd563947458",
+          "explanation": "Le débat existe avec l'Amazone, mais le Nil est traditionnellement cité avec environ 6 650 km.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_411ea6499b4e",
+          "type": "qcm",
+          "text": "Quel est le plus petit État du monde ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_c128af6688a9",
+              "text": "Monaco"
+            },
+            {
+              "id": "id_59a6fe9a5b04",
+              "text": "Vatican"
+            },
+            {
+              "id": "id_8019989830ab",
+              "text": "Saint-Marin"
+            },
+            {
+              "id": "id_f2568509bf44",
+              "text": "Liechtenstein"
+            }
+          ],
+          "correctAnswerId": "id_59a6fe9a5b04",
+          "explanation": "L'État de la Cité du Vatican mesure environ 0,49 km².",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_5eb0a4970375",
+          "type": "qcm",
+          "text": "En quelle année l'homme a-t-il marché sur la Lune pour la première fois ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9a98dbf09740",
+              "text": "1965"
+            },
+            {
+              "id": "id_8f5a099ec87e",
+              "text": "1969"
+            },
+            {
+              "id": "id_39d593d32aac",
+              "text": "1972"
+            },
+            {
+              "id": "id_716c3d6ef9fa",
+              "text": "1981"
+            }
+          ],
+          "correctAnswerId": "id_8f5a099ec87e",
+          "explanation": "Neil Armstrong a posé le pied sur la Lune le 21 juillet 1969, lors de la mission Apollo 11.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_4a41eb5a6ce4",
+          "type": "qcm",
+          "text": "Quelle est la monnaie utilisée au Japon ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_8f0fae718bc3",
+              "text": "Won"
+            },
+            {
+              "id": "id_8d6af9f0c70f",
+              "text": "Yuan"
+            },
+            {
+              "id": "id_7d5fefec3085",
+              "text": "Yen"
+            },
+            {
+              "id": "id_2c485491abf3",
+              "text": "Ringgit"
+            }
+          ],
+          "correctAnswerId": "id_7d5fefec3085",
+          "explanation": "Le yen est la monnaie officielle du Japon depuis 1871.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_ce8660757157",
+          "type": "qcm",
+          "text": "Combien d'os compte le squelette d'un corps humain adulte ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_602548025131",
+              "text": "106"
+            },
+            {
+              "id": "id_de65981d0cb5",
+              "text": "156"
+            },
+            {
+              "id": "id_accbea1492f4",
+              "text": "206"
+            },
+            {
+              "id": "id_81c0f9a04377",
+              "text": "256"
+            }
+          ],
+          "correctAnswerId": "id_accbea1492f4",
+          "explanation": "Un nourrisson naît avec plus d'os, qui fusionnent en grandissant.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "science"
+          ]
+        },
+        {
+          "id": "id_601e790e7420",
+          "type": "qcm",
+          "text": "Quel pays a la forme d'une botte sur la carte d'Europe ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_11f64a7d3504",
+              "text": "Espagne"
+            },
+            {
+              "id": "id_5270871a829c",
+              "text": "Italie"
+            },
+            {
+              "id": "id_b365a2edfa53",
+              "text": "Grèce"
+            },
+            {
+              "id": "id_e2eb4686dda4",
+              "text": "Portugal"
+            }
+          ],
+          "correctAnswerId": "id_5270871a829c",
+          "explanation": "La péninsule italienne est facilement reconnaissable sur une carte.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_054d895f4b7c",
+          "type": "qcm",
+          "text": "Quelle est la langue la plus parlée au monde en nombre de locuteurs natifs ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_32c8a64fa666",
+              "text": "Anglais"
+            },
+            {
+              "id": "id_ceb5ae4a028a",
+              "text": "Espagnol"
+            },
+            {
+              "id": "id_a3b4b90b6e40",
+              "text": "Mandarin"
+            },
+            {
+              "id": "id_921a47cc1762",
+              "text": "Hindi"
+            }
+          ],
+          "correctAnswerId": "id_a3b4b90b6e40",
+          "explanation": "Le mandarin est la langue maternelle de plusieurs centaines de millions de personnes.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "langues"
+          ]
+        },
+        {
+          "id": "id_0c4f0d46c489",
+          "type": "qcm",
+          "text": "Quel est l'élément chimique le plus abondant dans l'univers ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_dcaf4ac520d2",
+              "text": "Oxygène"
+            },
+            {
+              "id": "id_e6e0eadbb7a0",
+              "text": "Carbone"
+            },
+            {
+              "id": "id_5eff1f3d4f5f",
+              "text": "Hydrogène"
+            },
+            {
+              "id": "id_33247385f65b",
+              "text": "Hélium"
+            }
+          ],
+          "correctAnswerId": "id_5eff1f3d4f5f",
+          "explanation": "L'hydrogène compose environ 75% de la matière ordinaire de l'univers.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "science"
+          ]
+        },
+        {
+          "id": "id_c76c57aa7460",
+          "type": "qcm",
+          "text": "En quelle année le mur de Berlin est-il tombé ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_b8c63b1ef065",
+              "text": "1985"
+            },
+            {
+              "id": "id_2036e2bec0e1",
+              "text": "1989"
+            },
+            {
+              "id": "id_aa37a5f114ea",
+              "text": "1991"
+            },
+            {
+              "id": "id_42b97a617e97",
+              "text": "1995"
+            }
+          ],
+          "correctAnswerId": "id_2036e2bec0e1",
+          "explanation": "Le mur est tombé le 9 novembre 1989, symbolisant la fin de la Guerre froide en Europe.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_6821b8fed60d",
+          "type": "qcm",
+          "text": "Quel est le plus grand désert du monde (par superficie) ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_17b5ae32ba4c",
+              "text": "Sahara"
+            },
+            {
+              "id": "id_904ebd618822",
+              "text": "Gobi"
+            },
+            {
+              "id": "id_369c47e7821d",
+              "text": "Antarctique"
+            },
+            {
+              "id": "id_a3afc780843d",
+              "text": "Kalahari"
+            }
+          ],
+          "correctAnswerId": "id_369c47e7821d",
+          "explanation": "Un désert se définit par son faible niveau de précipitations : l'Antarctique en est donc un, et le plus grand.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "geographie"
+          ]
+        },
+        {
+          "id": "id_3cf28bde5aa1",
+          "type": "qcm",
+          "text": "Combien de temps la Terre met-elle à faire le tour du Soleil ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_1eba9216cd61",
+              "text": "24 heures"
+            },
+            {
+              "id": "id_79aefdb11baa",
+              "text": "30 jours"
+            },
+            {
+              "id": "id_2efcbebce573",
+              "text": "365 jours"
+            },
+            {
+              "id": "id_2b2deb47a547",
+              "text": "10 ans"
+            }
+          ],
+          "correctAnswerId": "id_2efcbebce573",
+          "explanation": "C'est la définition d'une année.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "science"
+          ]
+        },
+        {
+          "id": "id_6f115c1d3bd8",
+          "type": "qcm",
+          "text": "Quel peintre est célèbre pour « La Nuit étoilée » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_d08f2d1058cd",
+              "text": "Pablo Picasso"
+            },
+            {
+              "id": "id_be0d65ff1356",
+              "text": "Vincent van Gogh"
+            },
+            {
+              "id": "id_4464ff3c2e1f",
+              "text": "Claude Monet"
+            },
+            {
+              "id": "id_e73bfed31c58",
+              "text": "Salvador Dalí"
+            }
+          ],
+          "correctAnswerId": "id_be0d65ff1356",
+          "explanation": "Van Gogh a peint cette œuvre en 1889.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "art"
+          ]
+        },
+        {
+          "id": "id_49cd042a7e3b",
+          "type": "qcm",
+          "text": "Quelle est la vitesse de la lumière dans le vide, arrondie ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_d765a6e84ed6",
+              "text": "300 000 km/s"
+            },
+            {
+              "id": "id_7bf4097c7de7",
+              "text": "150 000 km/s"
+            },
+            {
+              "id": "id_c3245181b5a3",
+              "text": "1 000 000 km/s"
+            },
+            {
+              "id": "id_4155d367f518",
+              "text": "3 000 km/s"
+            }
+          ],
+          "correctAnswerId": "id_d765a6e84ed6",
+          "explanation": "Une valeur fondamentale en physique, notée « c ».",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "science"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "id_031afbe8917c",
+      "name": "Internet — 20 questions",
+      "description": "Histoire du web, réseaux sociaux et grandes entreprises tech.",
+      "categoryIds": [
+        "id_45ae0abfe314"
+      ],
+      "language": "fr",
+      "thumbnail": null,
+      "difficulty": "moyen",
+      "createdAt": "2026-09-02T10:53:42.817527Z",
+      "updatedAt": "2026-09-02T10:53:42.817527Z",
+      "questions": [
+        {
+          "id": "id_3c4cbbe420ec",
+          "type": "qcm",
+          "text": "Qui est considéré comme l'inventeur du World Wide Web ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_2ecf54d03c45",
+              "text": "Bill Gates"
+            },
+            {
+              "id": "id_591b861ea6bd",
+              "text": "Tim Berners-Lee"
+            },
+            {
+              "id": "id_241b361224d3",
+              "text": "Steve Jobs"
+            },
+            {
+              "id": "id_a550a759f527",
+              "text": "Vint Cerf"
+            }
+          ],
+          "correctAnswerId": "id_591b861ea6bd",
+          "explanation": "Il a créé le Web en 1989 alors qu'il travaillait au CERN.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_74ce50e9def6",
+          "type": "qcm",
+          "text": "Quelle entreprise a été fondée par Larry Page et Sergey Brin en 1998 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_5f3612d4d8db",
+              "text": "Yahoo"
+            },
+            {
+              "id": "id_f7f666345280",
+              "text": "Google"
+            },
+            {
+              "id": "id_5d102a9759ad",
+              "text": "Microsoft"
+            },
+            {
+              "id": "id_acf0e01e24b7",
+              "text": "Amazon"
+            }
+          ],
+          "correctAnswerId": "id_f7f666345280",
+          "explanation": "Google est né d'un projet de recherche à l'université Stanford.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "entreprises"
+          ]
+        },
+        {
+          "id": "id_70e2e595ce6b",
+          "type": "qcm",
+          "text": "Quel a été le premier réseau social à dépasser le milliard d'utilisateurs ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_77c329d7fc70",
+              "text": "Twitter"
+            },
+            {
+              "id": "id_f4951c3c4d0b",
+              "text": "Instagram"
+            },
+            {
+              "id": "id_e8d2d47481ce",
+              "text": "Facebook"
+            },
+            {
+              "id": "id_488be593db56",
+              "text": "MySpace"
+            }
+          ],
+          "correctAnswerId": "id_e8d2d47481ce",
+          "explanation": "Facebook a atteint ce seuil en 2012.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "reseaux-sociaux"
+          ]
+        },
+        {
+          "id": "id_2d72a3d32258",
+          "type": "qcm",
+          "text": "Que signifie le sigle « URL » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_ae9eca708ce8",
+              "text": "Universal Resource List"
+            },
+            {
+              "id": "id_06cbf8d1fd18",
+              "text": "Uniform Resource Locator"
+            },
+            {
+              "id": "id_53e0f5a1e4e2",
+              "text": "United Ressource Link"
+            },
+            {
+              "id": "id_b705cd1d26d6",
+              "text": "Unique Reference Line"
+            }
+          ],
+          "correctAnswerId": "id_06cbf8d1fd18",
+          "explanation": "Il désigne l'adresse complète d'une ressource sur le web.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_35f10f5aac4b",
+          "type": "qcm",
+          "text": "Quelle est la première vidéo jamais mise en ligne sur YouTube ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9c015ff7497a",
+              "text": "« Charlie bit my finger »"
+            },
+            {
+              "id": "id_7563191f9abd",
+              "text": "« Me at the zoo »"
+            },
+            {
+              "id": "id_4558f1338cb3",
+              "text": "« Gangnam Style »"
+            },
+            {
+              "id": "id_d49fbdf6bbfb",
+              "text": "« Despacito »"
+            }
+          ],
+          "correctAnswerId": "id_7563191f9abd",
+          "explanation": "Mise en ligne en avril 2005 par le co-fondateur Jawed Karim.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "youtube"
+          ]
+        },
+        {
+          "id": "id_eaadcca22b84",
+          "type": "qcm",
+          "text": "Quel symbole sépare le nom d'utilisateur du domaine dans une adresse e-mail ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_25a2f0cf170b",
+              "text": "#"
+            },
+            {
+              "id": "id_325ddbf36e82",
+              "text": "@"
+            },
+            {
+              "id": "id_2d25bba68d53",
+              "text": "&"
+            },
+            {
+              "id": "id_81bb919aaac8",
+              "text": "%"
+            }
+          ],
+          "correctAnswerId": "id_325ddbf36e82",
+          "explanation": "Ray Tomlinson a popularisé son usage dans les e-mails dès 1971.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_8dd7a32777fa",
+          "type": "qcm",
+          "text": "Quel site encyclopédique collaboratif a été lancé en 2001 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_4fbddf489803",
+              "text": "Britannica Online"
+            },
+            {
+              "id": "id_bf85bc163ad4",
+              "text": "Wikipedia"
+            },
+            {
+              "id": "id_8effa7a1ed66",
+              "text": "Encarta"
+            },
+            {
+              "id": "id_479d552b1ad2",
+              "text": "Google Knowledge"
+            }
+          ],
+          "correctAnswerId": "id_bf85bc163ad4",
+          "explanation": "Wikipedia est rédigée et modifiée par des bénévoles du monde entier.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "wikipedia"
+          ]
+        },
+        {
+          "id": "id_9b45a4e9b70d",
+          "type": "qcm",
+          "text": "Quelle entreprise a créé le navigateur Chrome ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_5a436ea31f68",
+              "text": "Microsoft"
+            },
+            {
+              "id": "id_9abd640c5ca1",
+              "text": "Apple"
+            },
+            {
+              "id": "id_1fcd00370e58",
+              "text": "Google"
+            },
+            {
+              "id": "id_f88fa473a102",
+              "text": "Mozilla"
+            }
+          ],
+          "correctAnswerId": "id_1fcd00370e58",
+          "explanation": "Chrome a été lancé par Google en 2008.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "entreprises"
+          ]
+        },
+        {
+          "id": "id_7cf308b7850f",
+          "type": "qcm",
+          "text": "Quel réseau social, basé sur des vidéos courtes, est devenu massivement populaire à partir de 2018-2019 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_8d8da3991d46",
+              "text": "Snapchat"
+            },
+            {
+              "id": "id_fb9c50b9a478",
+              "text": "TikTok"
+            },
+            {
+              "id": "id_6c560db40421",
+              "text": "Vine"
+            },
+            {
+              "id": "id_a7e55e597a27",
+              "text": "BeReal"
+            }
+          ],
+          "correctAnswerId": "id_fb9c50b9a478",
+          "explanation": "TikTok appartient à l'entreprise chinoise ByteDance.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "reseaux-sociaux"
+          ]
+        },
+        {
+          "id": "id_acdb28c85862",
+          "type": "qcm",
+          "text": "Que signifie l'acronyme « HTML » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_7325e176a382",
+              "text": "HyperText Markup Language"
+            },
+            {
+              "id": "id_800a4b526060",
+              "text": "High Tech Modern Language"
+            },
+            {
+              "id": "id_3984dbf50ab6",
+              "text": "Home Tool Markup Language"
+            },
+            {
+              "id": "id_dc6e6041f52b",
+              "text": "HyperTransfer Made Local"
+            }
+          ],
+          "correctAnswerId": "id_7325e176a382",
+          "explanation": "C'est le langage de base utilisé pour structurer les pages web.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_fb6097e4542c",
+          "type": "qcm",
+          "text": "Quel service de messagerie a été lancé par Google en 2004 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_57d32f89f33e",
+              "text": "Outlook"
+            },
+            {
+              "id": "id_3f33358584cc",
+              "text": "Yahoo Mail"
+            },
+            {
+              "id": "id_0e673b26009d",
+              "text": "Gmail"
+            },
+            {
+              "id": "id_28619af24c73",
+              "text": "Hotmail"
+            }
+          ],
+          "correctAnswerId": "id_0e673b26009d",
+          "explanation": "Gmail a été l'un des premiers services à offrir un espace de stockage massif à l'époque.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "entreprises"
+          ]
+        },
+        {
+          "id": "id_1aeac24b413d",
+          "type": "qcm",
+          "text": "Quelle entreprise, fondée par Jeff Bezos en 1994, a débuté comme librairie en ligne ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_a740ddc622f9",
+              "text": "eBay"
+            },
+            {
+              "id": "id_3f12c1f4926c",
+              "text": "Amazon"
+            },
+            {
+              "id": "id_aa5ac8bb3811",
+              "text": "Alibaba"
+            },
+            {
+              "id": "id_ab6aadcec5aa",
+              "text": "Walmart"
+            }
+          ],
+          "correctAnswerId": "id_3f12c1f4926c",
+          "explanation": "Amazon s'est ensuite diversifié dans presque tous les secteurs du commerce en ligne.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "entreprises"
+          ]
+        },
+        {
+          "id": "id_eccede912ef8",
+          "type": "qcm",
+          "text": "Comment appelle-t-on une image ou vidéo qui se propage rapidement et massivement sur internet ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_36347e27fd9e",
+              "text": "Un troll"
+            },
+            {
+              "id": "id_f6ac135c372c",
+              "text": "Un mème"
+            },
+            {
+              "id": "id_c7bc287eb780",
+              "text": "Un buzzword"
+            },
+            {
+              "id": "id_a4e72dd87481",
+              "text": "Un hashtag"
+            }
+          ],
+          "correctAnswerId": "id_f6ac135c372c",
+          "explanation": "Le terme « mème » a été popularisé bien avant internet par le biologiste Richard Dawkins.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_2fa5a9e346ef",
+          "type": "qcm",
+          "text": "Quel était le nom du tout premier site web créé par Tim Berners-Lee ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_1e2c8d7ea1fe",
+              "text": "www.internet.com"
+            },
+            {
+              "id": "id_2bbc09b7a9b5",
+              "text": "info.cern.ch"
+            },
+            {
+              "id": "id_69fdba10fb41",
+              "text": "hello-world.net"
+            },
+            {
+              "id": "id_4e14ca5795dd",
+              "text": "firstpage.org"
+            }
+          ],
+          "correctAnswerId": "id_2bbc09b7a9b5",
+          "explanation": "Ce site expliquait ce qu'était le World Wide Web.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_c834496b91da",
+          "type": "qcm",
+          "text": "Quelle entreprise a racheté Instagram en 2012 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_a74ef8149155",
+              "text": "Twitter"
+            },
+            {
+              "id": "id_7574c52d4fbe",
+              "text": "Facebook"
+            },
+            {
+              "id": "id_98da9ffa38ad",
+              "text": "Google"
+            },
+            {
+              "id": "id_9e0c719312b8",
+              "text": "Snapchat"
+            }
+          ],
+          "correctAnswerId": "id_7574c52d4fbe",
+          "explanation": "Le rachat s'est fait pour environ un milliard de dollars.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "reseaux-sociaux"
+          ]
+        },
+        {
+          "id": "id_2b95ff6fd4fb",
+          "type": "qcm",
+          "text": "Quel réseau social Mark Zuckerberg a-t-il créé en 2004 alors qu'il était étudiant à Harvard ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_3acac40db0a1",
+              "text": "MySpace"
+            },
+            {
+              "id": "id_8dc75c2d8c8c",
+              "text": "Facebook"
+            },
+            {
+              "id": "id_3a9a62f8d518",
+              "text": "LinkedIn"
+            },
+            {
+              "id": "id_13244b87fb71",
+              "text": "Friendster"
+            }
+          ],
+          "correctAnswerId": "id_8dc75c2d8c8c",
+          "explanation": "Facebook s'appelait à l'origine « TheFacebook ».",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "reseaux-sociaux"
+          ]
+        },
+        {
+          "id": "id_657de50cfa62",
+          "type": "qcm",
+          "text": "Que signifie l'abréviation « www », que l'on trouve au début de nombreuses adresses de sites ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_5b03a9cd15d4",
+              "text": "World Wide Web"
+            },
+            {
+              "id": "id_10ff00cadb2a",
+              "text": "Web World Wide"
+            },
+            {
+              "id": "id_3561864b4200",
+              "text": "Worldwide Website"
+            },
+            {
+              "id": "id_67fcf9df8b25",
+              "text": "World Web Wide"
+            }
+          ],
+          "correctAnswerId": "id_5b03a9cd15d4",
+          "explanation": "C'est le système d'hypertexte qui a rendu Internet accessible au grand public.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_6e249e3aa289",
+          "type": "qcm",
+          "text": "Quel protocole sécurisé (symbolisé par un cadenas) permet de naviguer en toute sécurité sur un site ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_b84d6c75e202",
+              "text": "FTP"
+            },
+            {
+              "id": "id_3e034b99eb56",
+              "text": "HTTPS"
+            },
+            {
+              "id": "id_b16bdb03b1c2",
+              "text": "SMTP"
+            },
+            {
+              "id": "id_ce88ba3a4709",
+              "text": "VPN"
+            }
+          ],
+          "correctAnswerId": "id_3e034b99eb56",
+          "explanation": "Le « S » de HTTPS signifie « Secure ».",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "securite"
+          ]
+        },
+        {
+          "id": "id_ff8b72fc8471",
+          "type": "qcm",
+          "text": "Quelle plateforme de streaming musical a été lancée en Suède en 2008 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9eb757b81525",
+              "text": "Deezer"
+            },
+            {
+              "id": "id_e92711f80400",
+              "text": "Spotify"
+            },
+            {
+              "id": "id_3c7b027cceff",
+              "text": "Apple Music"
+            },
+            {
+              "id": "id_78e118759de3",
+              "text": "SoundCloud"
+            }
+          ],
+          "correctAnswerId": "id_e92711f80400",
+          "explanation": "Spotify s'est ensuite imposé comme le leader mondial du streaming musical.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "entreprises"
+          ]
+        },
+        {
+          "id": "id_d2c04fb9c1a0",
+          "type": "qcm",
+          "text": "Comment appelle-t-on une personne qui publie des messages provocateurs pour créer des conflits en ligne ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_45941e5cbded",
+              "text": "Un hacker"
+            },
+            {
+              "id": "id_3de7d87479f8",
+              "text": "Un troll"
+            },
+            {
+              "id": "id_40806f2ae098",
+              "text": "Un bot"
+            },
+            {
+              "id": "id_d3b6abf2ba08",
+              "text": "Un influenceur"
+            }
+          ],
+          "correctAnswerId": "id_3de7d87479f8",
+          "explanation": "Le terme viendrait de la pêche à la traîne, une façon de « faire mordre » sa cible.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "vocabulaire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "id_1f67abaaa188",
+      "name": "Memes — 20 questions",
+      "description": "L'histoire et la culture des mèmes les plus emblématiques d'internet.",
+      "categoryIds": [
+        "id_3c09aceb1b12"
+      ],
+      "language": "fr",
+      "thumbnail": null,
+      "difficulty": "moyen",
+      "createdAt": "2026-09-02T10:53:42.817527Z",
+      "updatedAt": "2026-09-02T10:53:42.817527Z",
+      "questions": [
+        {
+          "id": "id_4978d15b3c46",
+          "type": "qcm",
+          "text": "Quelle chanson est associée au célèbre mème « Rickroll » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_70210a4280af",
+              "text": "« Never Gonna Give You Up » de Rick Astley"
+            },
+            {
+              "id": "id_3f376361c5f3",
+              "text": "« Thriller » de Michael Jackson"
+            },
+            {
+              "id": "id_82abac7fb51d",
+              "text": "« Africa » de Toto"
+            },
+            {
+              "id": "id_35e65311e321",
+              "text": "« All Star » de Smash Mouth"
+            }
+          ],
+          "correctAnswerId": "id_70210a4280af",
+          "explanation": "Le mème consiste à piéger quelqu'un en le redirigeant vers ce clip de 1987.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_5b22d32b6a7f",
+          "type": "qcm",
+          "text": "Quelle race de chien est associée au mème « Doge » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_5f94ff0a1cff",
+              "text": "Corgi"
+            },
+            {
+              "id": "id_f2a15f12f3de",
+              "text": "Shiba Inu"
+            },
+            {
+              "id": "id_a33c1fce2664",
+              "text": "Husky"
+            },
+            {
+              "id": "id_e2b15f842a48",
+              "text": "Bulldog"
+            }
+          ],
+          "correctAnswerId": "id_f2a15f12f3de",
+          "explanation": "La chienne à l'origine du mème s'appelle Kabosu.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_7a51f43f4c23",
+          "type": "qcm",
+          "text": "Quel défi caritatif viral de 2014 consistait à se verser un seau d'eau glacée sur la tête ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_3f36606d1906",
+              "text": "Le Cold Challenge"
+            },
+            {
+              "id": "id_c8d89677180c",
+              "text": "L'Ice Bucket Challenge"
+            },
+            {
+              "id": "id_02f87a255478",
+              "text": "Le Polar Plunge"
+            },
+            {
+              "id": "id_2e6f61951ea9",
+              "text": "Le Cinnamon Challenge"
+            }
+          ],
+          "correctAnswerId": "id_c8d89677180c",
+          "explanation": "Ce défi a permis de récolter des fonds pour la recherche sur la maladie de Charcot (SLA).",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "challenges"
+          ]
+        },
+        {
+          "id": "id_42542997417c",
+          "type": "qcm",
+          "text": "Quel mème montre un homme qui se retourne pour regarder une autre femme alors que sa copine le regarde, exaspérée ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_e290355f7a81",
+              "text": "Distracted Boyfriend"
+            },
+            {
+              "id": "id_a58590fd2882",
+              "text": "Woman Yelling at Cat"
+            },
+            {
+              "id": "id_05d35983dc6c",
+              "text": "Drake Hotline Bling"
+            },
+            {
+              "id": "id_09f36b622b4a",
+              "text": "Change My Mind"
+            }
+          ],
+          "correctAnswerId": "id_e290355f7a81",
+          "explanation": "C'est à l'origine une photo de banque d'images, devenue virale en 2017.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_5e686368a605",
+          "type": "qcm",
+          "text": "Quelle danse est devenue virale sur YouTube en 2013, en référence à une chanson de Baauer ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_6bfcb91a2f7e",
+              "text": "Gangnam Style"
+            },
+            {
+              "id": "id_7cd713d25b99",
+              "text": "La Harlem Shake"
+            },
+            {
+              "id": "id_505b3d7bb648",
+              "text": "Le Floss"
+            },
+            {
+              "id": "id_4502729d4798",
+              "text": "Le Dab"
+            }
+          ],
+          "correctAnswerId": "id_7cd713d25b99",
+          "explanation": "Des milliers de vidéos de « Harlem Shake » ont été publiées en quelques semaines.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "challenges"
+          ]
+        },
+        {
+          "id": "id_26ac1412cd01",
+          "type": "qcm",
+          "text": "Quel est le vrai nom de la célèbre chatte connue sous le nom de « Grumpy Cat » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_de91cbc7d397",
+              "text": "Tardar Sauce"
+            },
+            {
+              "id": "id_427a030f4409",
+              "text": "Lil Bub"
+            },
+            {
+              "id": "id_c5b24d07c5e7",
+              "text": "Nyan Cat"
+            },
+            {
+              "id": "id_8b889e0daf1b",
+              "text": "Keyboard Cat"
+            }
+          ],
+          "correctAnswerId": "id_de91cbc7d397",
+          "explanation": "Son expression faciale, due à une malformation, lui donnait un air éternellement grognon.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "animaux"
+          ]
+        },
+        {
+          "id": "id_25748e80657a",
+          "type": "qcm",
+          "text": "Quel mème représente un chat orange en pixel art volant dans l'espace avec une traînée arc-en-ciel ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_e24688623141",
+              "text": "Grumpy Cat"
+            },
+            {
+              "id": "id_0b0a0bbdf7af",
+              "text": "Nyan Cat"
+            },
+            {
+              "id": "id_afeffab42977",
+              "text": "Doge"
+            },
+            {
+              "id": "id_41116cdd209d",
+              "text": "Longcat"
+            }
+          ],
+          "correctAnswerId": "id_0b0a0bbdf7af",
+          "explanation": "Ce mème est apparu en 2011 et est devenu un classique de la culture internet.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_b448bc446a3e",
+          "type": "qcm",
+          "text": "Quel personnage de comic, créé par Matt Furie, est devenu l'un des mèmes les plus partagés des années 2010 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_0bd0e98bc295",
+              "text": "Pepe la grenouille"
+            },
+            {
+              "id": "id_349271bd208c",
+              "text": "Wojak"
+            },
+            {
+              "id": "id_0a2937645fdf",
+              "text": "Feels Guy"
+            },
+            {
+              "id": "id_cbee095c3f88",
+              "text": "Sad Frog"
+            }
+          ],
+          "correctAnswerId": "id_0bd0e98bc295",
+          "explanation": "Pepe est apparu à l'origine dans la bande dessinée « Boy's Club » en 2005.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "personnages"
+          ]
+        },
+        {
+          "id": "id_3cfde7646bdd",
+          "type": "qcm",
+          "text": "Comment appelle-t-on un mème qui devient extrêmement populaire en très peu de temps ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_7c01a8fb8f0d",
+              "text": "Un mème « viral »"
+            },
+            {
+              "id": "id_b93cecb40ad4",
+              "text": "Un mème « mort »"
+            },
+            {
+              "id": "id_30b1eee9dad2",
+              "text": "Un mème « niche »"
+            },
+            {
+              "id": "id_15800fa3824a",
+              "text": "Un mème « classique »"
+            }
+          ],
+          "correctAnswerId": "id_7c01a8fb8f0d",
+          "explanation": "L'idée de « viralité » compare la propagation d'un contenu à celle d'un virus.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_448834bb5d62",
+          "type": "qcm",
+          "text": "Quel mème montre un bébé au visage déterminé serrant le poing après une course, symbole de réussite ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_748b68b96f78",
+              "text": "Success Kid"
+            },
+            {
+              "id": "id_6d63b090462f",
+              "text": "Overly Attached Girlfriend"
+            },
+            {
+              "id": "id_6c4fa216ac4a",
+              "text": "Bad Luck Brian"
+            },
+            {
+              "id": "id_085291d4cd83",
+              "text": "Ridiculously Photogenic Guy"
+            }
+          ],
+          "correctAnswerId": "id_748b68b96f78",
+          "explanation": "La photo originale a été prise en 2007.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_3e29a459178e",
+          "type": "qcm",
+          "text": "Quel site est souvent considéré comme le berceau de nombreux mèmes, notamment via son forum « /b/ » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_1d5f41959266",
+              "text": "Reddit"
+            },
+            {
+              "id": "id_b8d13691c967",
+              "text": "4chan"
+            },
+            {
+              "id": "id_98edf26ecf59",
+              "text": "Tumblr"
+            },
+            {
+              "id": "id_9d527598531a",
+              "text": "MySpace"
+            }
+          ],
+          "correctAnswerId": "id_b8d13691c967",
+          "explanation": "4chan a été fondé en 2003 par Christopher Poole.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "origines"
+          ]
+        },
+        {
+          "id": "id_f7a0c60e56cf",
+          "type": "qcm",
+          "text": "Quel mème montre un chat qui semble « jouer du piano » dans une vidéo montée de façon comique ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_c4c4f43b3939",
+              "text": "Piano Cat"
+            },
+            {
+              "id": "id_5308fb436b10",
+              "text": "Keyboard Cat"
+            },
+            {
+              "id": "id_391dad78f0a0",
+              "text": "Grumpy Cat"
+            },
+            {
+              "id": "id_ee9caf5f7f0c",
+              "text": "Maru"
+            }
+          ],
+          "correctAnswerId": "id_5308fb436b10",
+          "explanation": "La vidéo originale du chat au piano date en réalité de 1984, republiée sur YouTube en 2007.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "animaux"
+          ]
+        },
+        {
+          "id": "id_3f1bc62700c5",
+          "type": "qcm",
+          "text": "Quel visage souriant à la bouche exagérée, dessiné en noir et blanc, symbolise la moquerie sur les forums ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_5a931defaf12",
+              "text": "Wojak"
+            },
+            {
+              "id": "id_414564a44bdf",
+              "text": "Trollface"
+            },
+            {
+              "id": "id_15906f6410aa",
+              "text": "Pepe"
+            },
+            {
+              "id": "id_85aea68e500f",
+              "text": "Chad"
+            }
+          ],
+          "correctAnswerId": "id_414564a44bdf",
+          "explanation": "Créé en 2008, il accompagne souvent le mot « Problem? ».",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "personnages"
+          ]
+        },
+        {
+          "id": "id_e684ed0eeea2",
+          "type": "qcm",
+          "text": "Quel mème montre un petit chien assis dans une pièce en feu en affirmant que « tout va bien » ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_9965b0354454",
+              "text": "This is fine"
+            },
+            {
+              "id": "id_8582c81450af",
+              "text": "Doge"
+            },
+            {
+              "id": "id_43541f404990",
+              "text": "Woman Yelling at Cat"
+            },
+            {
+              "id": "id_73df83bd2a24",
+              "text": "Distracted Boyfriend"
+            }
+          ],
+          "correctAnswerId": "id_9965b0354454",
+          "explanation": "Ce mème vient d'une bande dessinée de KC Green publiée en 2013.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_09783bc16730",
+          "type": "qcm",
+          "text": "Quelle application a popularisé les « stories » éphémères qui disparaissent après 24h ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_f59bdb8da40d",
+              "text": "Snapchat"
+            },
+            {
+              "id": "id_01e1155ca039",
+              "text": "TikTok"
+            },
+            {
+              "id": "id_61d9a2816dab",
+              "text": "Twitter"
+            },
+            {
+              "id": "id_48a6b0bda35b",
+              "text": "Facebook"
+            }
+          ],
+          "correctAnswerId": "id_f59bdb8da40d",
+          "explanation": "Instagram a ensuite copié ce format avec succès en 2016.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "reseaux-sociaux"
+          ]
+        },
+        {
+          "id": "id_35ece70be4f8",
+          "type": "qcm",
+          "text": "Comment appelle-t-on l'image ou la structure de base réutilisée pour créer des variantes d'un mème ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_81a7d1e36b23",
+              "text": "Un template"
+            },
+            {
+              "id": "id_434269f33147",
+              "text": "Un podcast"
+            },
+            {
+              "id": "id_1ccf0f1a5f93",
+              "text": "Un article"
+            },
+            {
+              "id": "id_27f1d0a04d72",
+              "text": "Un sondage"
+            }
+          ],
+          "correctAnswerId": "id_81a7d1e36b23",
+          "explanation": "Un même template peut donner naissance à des milliers de variations différentes.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_7812bcc5e726",
+          "type": "qcm",
+          "text": "Quel mème associe une photo de femme en pleurs à une photo de chat assis à table devant des légumes ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_419f03a7e592",
+              "text": "Distracted Boyfriend"
+            },
+            {
+              "id": "id_75413da199ab",
+              "text": "Woman Yelling at Cat"
+            },
+            {
+              "id": "id_b3251c2b7196",
+              "text": "Crying Cat"
+            },
+            {
+              "id": "id_c559d21ba3b9",
+              "text": "Two Buttons"
+            }
+          ],
+          "correctAnswerId": "id_75413da199ab",
+          "explanation": "Ce mème combine deux images distinctes devenues virales ensemble en 2019.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_2db0b171e168",
+          "type": "qcm",
+          "text": "Comment appelle-t-on un mème tellement réutilisé qu'il est devenu ennuyeux ou dépassé ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_aa35d0673a01",
+              "text": "Un mème « frais »"
+            },
+            {
+              "id": "id_e8aacd401269",
+              "text": "Un mème « mort » (dead meme)"
+            },
+            {
+              "id": "id_744f730ebe2f",
+              "text": "Un mème « premium »"
+            },
+            {
+              "id": "id_4e289256eca2",
+              "text": "Un mème « rare »"
+            }
+          ],
+          "correctAnswerId": "id_e8aacd401269",
+          "explanation": "Le cycle de vie d'un mème passe souvent de « frais » à « mort » en quelques semaines.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "vocabulaire"
+          ]
+        },
+        {
+          "id": "id_64694430a07f",
+          "type": "qcm",
+          "text": "Quel personnage minimaliste, au visage blême et sans expression, exprime souvent l'ironie ou le mal-être en ligne ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_72f9ef0e1633",
+              "text": "Wojak"
+            },
+            {
+              "id": "id_49a5f90fd9da",
+              "text": "Pepe"
+            },
+            {
+              "id": "id_618539b62cd0",
+              "text": "Chad"
+            },
+            {
+              "id": "id_26b9721ee85a",
+              "text": "Doge"
+            }
+          ],
+          "correctAnswerId": "id_72f9ef0e1633",
+          "explanation": "Wojak est utilisé dans d'innombrables variantes sur les forums.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "personnages"
+          ]
+        },
+        {
+          "id": "id_198b04f462a0",
+          "type": "qcm",
+          "text": "Quelle expression, popularisée en ligne, consiste à affirmer qu'une théorie farfelue est en fait vraie, souvent par ironie ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_3410b306c0c6",
+              "text": "« Fake news »"
+            },
+            {
+              "id": "id_1099416b2de2",
+              "text": "« Illuminati confirmed »"
+            },
+            {
+              "id": "id_53d3d5ea906d",
+              "text": "« It's over 9000 »"
+            },
+            {
+              "id": "id_f6dcb805432e",
+              "text": "« Task failed successfully »"
+            }
+          ],
+          "correctAnswerId": "id_1099416b2de2",
+          "explanation": "Cette expression tourne en dérision les théories du complot.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "vocabulaire"
+          ]
+        }
+      ]
+    }
+  ]
+}
