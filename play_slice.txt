@@ -1,0 +1,362 @@
+}
+function renderAutoplayPreviewQuestion(target,q,setup,preset){
+  const previewQ=q.type==='guess_character'?getAutoplayGuessQuestion(q,{guessMode:setup.guessMode||'normal',guessDifficulty:setup.guessDifficulty||'normal',guessModeByQuestion:setup.guessModeByQuestion||{},guessRandomByQuestion:{},pos:0}):q;
+  let image='';
+  if(previewQ.image){
+    if(previewQ.type==='guess_character') image=modeImageHTML(previewQ,'stage-guess-image preview-anim-img','animation-delay:.08s;');
+    else image=`<img class="stage-qimg preview-anim-img" src="${previewQ.image}" alt="">`;
+  }
+  target.innerHTML=`<div class="preview-timer"><span>3</span></div>${image}<div class="stage-qtext-wrap preview-anim-text"><div class="stage-qtext">${escapeHTML(previewQ.text||'Question')}</div></div>${previewQ.type!=='guess_character'&&previewQ.answers?.length?`<div class="stage-answers">${previewQ.answers.slice(0,4).map((a,i)=>`<div class="stage-tile preview-anim-tile ${['a','b','c','d'][i]}">${escapeHTML(a.text||'')}</div>`).join('')}</div>`:''}<div class="preview-caption">La prévisualisation joue la première question avec tes réglages actuels.</div>`;
+}
+function renderAutoplayPreviewReveal(target,q,setup,preset){
+  if(q.type==='guess_character'){
+    target.innerHTML=`<div class="stage-guess-reveal stage-reveal-soft preview-reveal-soft"><div class="stage-guess-reveal-bg" aria-hidden="true"><img src="${q.image||''}" alt=""></div><div class="stage-guess-reveal-media"><img class="stage-guess-reveal-img" src="${q.image||''}" alt=""></div><div class="stage-guess-reveal-copy"><div class="stage-guess-kicker">RÉPONSE</div><div class="stage-reveal-line"></div><div class="stage-guess-answer">${escapeHTML(q.answerText||'Réponse')}</div></div></div>`;
+  } else if(q.type==='number' && 'value' in q){
+    target.innerHTML=`<div class="preview-number-reveal"><div class="stage-guess-kicker">RÉPONSE</div><div class="preview-number-value">${escapeHTML(String(q.value))}${q.unit?` ${escapeHTML(q.unit)}`:''}</div></div>`;
+  } else {
+    const answer=q.answers?.find(a=>a.id===q.correctAnswerId);
+    target.innerHTML=`<div class="preview-answer-card"><div class="stage-guess-kicker">BONNE RÉPONSE</div><div class="stage-reveal-line"></div><div class="stage-guess-answer">${escapeHTML(answer?.text||'Réponse')}</div></div>`;
+  }
+}
+function openAutoplayPreview(){
+  const quiz=getQuiz(STATE.autoplaySetup?.quizId);
+  if(!quiz?.questions?.length) return;
+  const modal=document.getElementById('modal-root');
+  if(!modal) return;
+  modal.innerHTML=`<div class="modal-overlay open" id="autoplay-preview-overlay"><div class="autoplay-preview-modal"><div class="autoplay-preview-header"><div><strong>Aperçu Auto Play</strong><span>16:9 · première question</span></div><button class="btn btn-ghost btn-icon" data-action="close-autoplay-preview">${Icons.x(17)}</button></div><div class="autoplay-preview-stage"></div><div class="autoplay-preview-footer"><span>Le preset et les effets sont appliqués en direct.</span><div><button class="btn btn-outline btn-sm" data-action="restart-autoplay-preview">Rejouer</button><button class="btn btn-primary btn-sm" data-action="close-autoplay-preview">Fermer</button></div></div></div></div>`;
+  restartAutoplayPreview();
+}
+function closeAutoplayPreview(){ clearTimeout(window._autoplayPreviewTimer); const root=document.getElementById('modal-root'); if(root) root.innerHTML=''; }
+function openAutoplaySetup(quizId){
+  const quiz=getQuiz(quizId);
+  if(!quiz || quiz.questions.length===0){ showToast(tr('empty_questions_title'),'err'); return; }
+  STATE.autoplaySetup={quizId,responseTime:10,revealDuration:4,nextDelay:1.4,shuffleQ:false,shuffleA:false,guessMode:'normal',guessDifficulty:'normal',guessModeByQuestion:{},preset:'auto',backgroundMode:'style'};
+  ensureAutoplayGuessSelections(STATE.autoplaySetup,quiz);
+  STATE.view='autoplaySetup';
+  render();
+}
+function renderAutoplaySetupView(){
+  const s=STATE.autoplaySetup;
+  const quiz=getQuiz(s.quizId);
+  if(!quiz){STATE.view='library';return renderLibrary();}
+  ensureAutoplayGuessSelections(s,quiz);
+  const times=[5,10,15,20];
+  const guessQuestions=(quiz.questions||[]).filter(q=>q.type==='guess_character');
+  const guessSection=guessQuestions.length?`
+    <div class="section-title" style="margin-top:28px;">Guess the Character</div>
+    <p class="hint" style="margin-bottom:12px;">Ces réglages concernent uniquement les questions « Guess the character ». Les autres types de questions du quiz continuent de fonctionner normalement.</p>
+    <div class="field">
+      <label class="field-label">Effet des personnages</label>
+      <div class="autoplay-effect-grid">
+        ${guessEffectChoices().map(([id,title,desc])=>`<button type="button" class="guess-mode-choice ${s.guessMode===id?'selected':''}" data-action="ap-set-guess-mode" data-mode="${id}"><strong>${title}</strong><span>${desc}</span></button>`).join('')}
+      </div>
+    </div>
+    <div class="field" style="margin-top:16px;">
+      <label class="field-label">Difficulté des effets</label>
+      <div class="guess-difficulty-grid">
+        ${[['easy','Facile','Effets légers'],['normal','Normale','Bon équilibre'],['hard','Difficile','Effets plus marqués']].map(([id,title,desc])=>`<button type="button" class="guess-difficulty-choice ${s.guessDifficulty===id?'selected':''}" data-action="ap-set-guess-difficulty" data-difficulty="${id}"><strong>${title}</strong><span>${desc}</span></button>`).join('')}
+      </div>
+    </div>
+    ${s.guessMode==='per_question'?`<div class="autoplay-per-question-list"><div class="field-label" style="margin-bottom:8px;">Effet de chaque personnage</div>${guessQuestions.map((q,i)=>`<div class="autoplay-per-question-row"><div class="autoplay-per-question-copy"><span class="autoplay-q-index">${i+1}</span><div><strong>${escapeHTML(q.answerText||'Personnage')}</strong><small>${escapeHTML((q.text||'').slice(0,90))}</small></div></div><select data-action="ap-set-guess-question-mode" data-qid="${q.id}">${guessEffectOptions(s.guessModeByQuestion[q.id]||'normal')}</select></div>`).join('')}</div>`:''}
+  `:'';
+  const presets=autoplayPresets();
+  return `
+  <div class="topbar"><div><button class="btn btn-outline btn-sm" data-action="set-view" data-view="library">${Icons.arrowLeft(13)} ${tr('back_to_library')}</button></div></div>
+  <div class="autoplay-setup panel autoplay-setup-youtube">
+    <div class="autoplay-setup-header">
+      <div><h1 style="margin-bottom:4px;">${tr('autoplay_setup_title')}</h1><p class="sub" style="color:var(--text-dim);margin-bottom:0;">${tr('autoplay_setup_sub')} — <strong>${escapeHTML(quiz.name)}</strong> (${quiz.questions.length} ${tr(quiz.questions.length===1?'q_count_1':'q_count')})</p></div>
+      <div class="autoplay-youtube-badge"><span>16:9</span><span>OBS / YouTube</span></div>
+    </div>
+    <div class="section-title autoplay-section-heading" style="margin-top:28px;">Style vidéo</div>
+    <p class="hint autoplay-preset-hint">Choisis une direction visuelle. Tu peux ensuite modifier les réglages de durée, d'effets et de mélange sans changer de preset.</p>
+    <div class="autoplay-preset-grid">
+      ${presets.map(p=>`<button type="button" class="autoplay-preset-card ${s.preset===p.id?'selected':''}" data-action="ap-set-preset" data-preset="${p.id}">
+        <span class="autoplay-preset-icon preset-${p.id}">${p.icon}</span><span class="autoplay-preset-copy"><strong>${p.title}</strong><small>${p.desc}</small></span><span class="autoplay-preset-check">${s.preset===p.id?'✓':''}</span>
+      </button>`).join('')}
+    </div>
+    <div class="field autoplay-background-field">
+      <label class="field-label">Décor de fond</label>
+      <select class="autoplay-background-select" data-action="ap-set-background-mode">
+        <option value="style" ${s.backgroundMode==='style'?'selected':''}>Décor du style — recommandé</option>
+        <option value="mix" ${s.backgroundMode==='mix'?'selected':''}>Décor + ambiance de la miniature</option>
+        <option value="thumbnail" ${s.backgroundMode==='thumbnail'?'selected':''} ${!quiz.thumbnail?'disabled':''}>Miniature du quiz comme décor</option>
+      </select>
+      <p class="hint">Le décor principal reste propre et lisible. La miniature peut seulement ajouter une ambiance colorée en arrière-plan.</p>
+    </div>
+    <div class="section-title autoplay-section-heading">${tr('timing_title')}</div>
+    <div class="field"><label class="field-label">${tr('response_time')}</label><div class="mode-grid" style="grid-template-columns:repeat(4,1fr);">${times.map(t=>`<div class="mode-opt ${s.responseTime===t?'selected':''}" data-action="ap-set-response-time" data-value="${t}">${t}${tr('duration_short')}</div>`).join('')}</div></div>
+    <div class="two-col">
+      <div class="field"><label class="field-label">${tr('reveal_duration')}</label><div class="range-row"><input type="range" min="1" max="6" value="${s.revealDuration}" data-action="ap-set-reveal-duration"><span class="val" id="ap-reveal-val">${s.revealDuration}s</span></div></div>
+      <div class="field"><label class="field-label">${tr('next_delay')}</label><div class="range-row"><input type="range" min="0" max="5" step="0.5" value="${s.nextDelay}" data-action="ap-set-next-delay"><span class="val" id="ap-delay-val">${s.nextDelay}s</span></div></div>
+    </div>
+    ${guessSection}
+    <div class="section-title">${tr('shuffle_title')}</div>
+    <div class="checkbox-row" style="margin-bottom:22px;"><div class="cat-toggle ${s.shuffleQ?'selected':''}" data-action="ap-toggle-shuffle-q">${tr('shuffle_questions')}</div><div class="cat-toggle ${s.shuffleA?'selected':''}" data-action="ap-toggle-shuffle-a">${tr('shuffle_answers')}</div></div>
+    <p class="hint" style="margin-bottom:18px;">${tr('fullscreen_hint')}</p>
+    <div class="autoplay-launch-actions">
+      <button class="btn btn-outline" data-action="autoplay-preview">${Icons.play(15)} Aperçu</button>
+      <button class="btn btn-primary" data-action="launch-autoplay-stage">${Icons.cast(16)} ${tr('start_quiz')}</button>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   20. AUTO PLAY — BROADCAST STAGE ENGINE
+   ============================================================ */
+let apTimers = { phaseTimeout:null, tickRAF:null };
+let _stageEndActionsTimer = null;
+function clearApTimers(){
+  if(apTimers.phaseTimeout) clearTimeout(apTimers.phaseTimeout);
+  if(apTimers.tickRAF) cancelAnimationFrame(apTimers.tickRAF);
+  apTimers.phaseTimeout=null; apTimers.tickRAF=null;
+}
+function shuffleArray(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function launchAutoplayStage(){
+  const s = STATE.autoplaySetup;
+  const quiz = getQuiz(s.quizId);
+  if(!quiz) return;
+  let order = quiz.questions.map((_,i)=>i);
+  if(s.shuffleQ) order = shuffleArray(order);
+  ensureAutoplayGuessSelections(s,quiz);
+  STATE.autoplayEngine = {
+    quizId:s.quizId, order, pos:0, phase:'counting',
+    responseTime:s.responseTime, revealDuration:s.revealDuration, nextDelay:s.nextDelay, shuffleA:s.shuffleA, preset:resolveAutoplayPreset(quiz,s.preset||'auto'), backgroundMode:s.backgroundMode||'style',
+    guessMode:s.guessMode||'normal', guessDifficulty:s.guessDifficulty||'normal', guessModeByQuestion:{...(s.guessModeByQuestion||{})}, guessRandomByQuestion:{},
+    phaseStart:performance.now(), answerOrder:null, _answerOrderForQ:null,
+  };
+  renderStageShell();        // creates the fullscreen-capable container ONCE for the whole quiz
+  renderQuestionIntoStage(()=>runAutoplayPhaseTimer());
+}
+function runAutoplayPhaseTimer(){
+  clearApTimers();
+  const eng = STATE.autoplayEngine;
+  if(!eng) return;
+  if(eng.phase==='counting'){
+    eng.phaseStart = performance.now();
+    tickCountdown();
+    apTimers.phaseTimeout = setTimeout(()=>{
+      eng.phase='revealing'; eng.phaseStart=performance.now();
+      updateRevealVisuals();
+      runAutoplayPhaseTimer();
+    }, eng.responseTime*1000);
+  } else if(eng.phase==='revealing'){
+    apTimers.phaseTimeout = setTimeout(()=>{
+      if(eng.pos >= eng.order.length-1){
+        eng.phase='finished';
+        renderFinishedStage();
+      } else {
+        eng.phase='pausing';
+        apTimers.phaseTimeout = setTimeout(()=>{
+          eng.pos++; eng.phase='counting';
+          renderQuestionIntoStage(()=>runAutoplayPhaseTimer());
+        }, eng.nextDelay*1000);
+      }
+    }, eng.revealDuration*1000);
+  }
+}
+function tickCountdown(){
+  const eng = STATE.autoplayEngine;
+  if(!eng || eng.phase!=='counting') return;
+  const elapsed = (performance.now()-eng.phaseStart)/1000;
+  const remain = Math.max(0, eng.responseTime-elapsed);
+  const pct = clamp(elapsed/eng.responseTime,0,1);
+  updateCountdownDOM(remain,pct);
+  apTimers.tickRAF = requestAnimationFrame(tickCountdown);
+}
+function updateCountdownDOM(remain,pct){
+  const ringFg = document.getElementById('timer-ring-fg');
+  const num = document.getElementById('timer-ring-num');
+  const wrap = document.getElementById('timer-ring-wrap');
+  if(ringFg){ const c=2*Math.PI*55; ringFg.style.strokeDasharray=c; ringFg.style.strokeDashoffset=c*pct; }
+  if(num) num.textContent = Math.ceil(remain);
+  if(wrap) wrap.classList.toggle('urgent', remain<=3 && remain>0);
+}
+
+/* The stage container (#stage-16x9) is created ONCE per quiz run and never destroyed
+   mid-quiz — only its inner #stage-content is swapped between questions. This keeps the
+   browser's fullscreen element alive across phase transitions and avoids re-triggering
+   entrance animations on every reveal. */
+function renderStageShell(){
+  const root = document.getElementById('autoplay-root');
+  if(!root) return;
+  const quiz=STATE.autoplayEngine ? getQuiz(STATE.autoplayEngine.quizId) : null;
+  const presetClass=STATE.autoplayEngine?.preset ? ` autoplay-preset-${STATE.autoplayEngine.preset}` : '';
+  const preset = STATE.autoplayEngine?.preset || 'cinematic';
+  const bgMedia=autoplayBackgroundMarkup(preset,STATE.autoplayEngine?.backgroundMode||'style',quiz?.thumbnail||'');
+  root.innerHTML = `<div class="stage-wrap${presetClass ? ' '+presetClass : ''}" id="stage-wrap"><div class="stage-16x9${presetClass}" id="stage-16x9">
+    <svg width="0" height="0" style="position:absolute"><defs>
+      <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#7c5cfc"/>
+        <stop offset="50%" stop-color="#ffb627"/>
+        <stop offset="100%" stop-color="#ff5d6c"/>
+      </linearGradient>
+    </defs></svg>
+    <div class="stage-video-meta">
+      <div class="stage-video-title" id="stage-video-title"></div>
+      <div class="stage-video-progress" id="stage-video-progress">1 / 1</div>
+    </div>
+    <div class="stage-video-progress-line"><span id="stage-video-progress-fill"></span></div>
+    ${bgMedia}<div class="stage-content" id="stage-content"></div>
+    <div class="stage-exit" style="display:flex;gap:8px;">
+      <button class="btn btn-ghost btn-icon" data-action="toggle-fullscreen-stage" title="${tr('toggle_fullscreen')}">${Icons.maximize(16)}</button>
+      <button class="btn btn-ghost btn-icon" data-action="exit-autoplay-stage" title="${tr('exit_stage')}">${Icons.x(16)}</button>
+    </div>
+  </div></div>`;
+}
+function renderQuestionIntoStage(onReady){
+  const eng = STATE.autoplayEngine;
+  const quiz = eng && getQuiz(eng.quizId);
+  const content = document.getElementById('stage-content');
+  if(!eng || !quiz || !content) return;
+  const populate = () => { populateStageContent(eng, quiz, content); if(onReady) onReady(); };
+  if(content.children.length){
+    content.classList.add('stage-fade-out');
+    setTimeout(populate, 280);
+  } else {
+    populate();
+  }
+}
+function getAutoplayGuessQuestion(q,eng){
+  if(q.type!=='guess_character') return q;
+  let mode=eng.guessMode||'normal';
+  if(mode==='per_question') mode=eng.guessModeByQuestion?.[q.id]||'normal';
+  if(mode==='random'){
+    if(!eng.guessRandomByQuestion[q.id]){
+      const pool=['normal','pixelated','silhouette','blurred'];
+      eng.guessRandomByQuestion[q.id]=pool[Math.floor(Math.random()*pool.length)];
+    }
+    mode=eng.guessRandomByQuestion[q.id];
+  }
+  const values=guessEffectValues(eng.guessDifficulty||'normal');
+  return {...q,imageMode:mode,pixelSize:values.pixelSize,blurPx:values.blurPx};
+}
+
+function populateStageContent(eng,quiz,content){
+  const originalQ=quiz.questions[eng.order[eng.pos]];const q=getAutoplayGuessQuestion(originalQ,eng);const type=QuestionTypes[q.type];
+  if(eng._answerOrderForQ!==q.id){let ord=q.answers.map((_,i)=>i);if(eng.shuffleA)ord=shuffleArray(ord);eng.answerOrder=ord;eng._answerOrderForQ=q.id;}
+  let main='';
+  if(q.type==='ranking'){
+    const ids=eng.answerOrder.map(i=>q.answers[i]);
+    main=`<div class="stage-qtext-wrap qfade-in" style="animation-delay:.14s;"><div class="stage-qtext">${escapeHTML(q.text)}</div></div>${q.criterion?`<div style="color:rgba(255,255,255,.65);font-size:clamp(13px,1.3vw,17px);text-align:center;margin-top:4px;">${escapeHTML(q.criterion)}</div>`:''}<div class="stage-ranking">${ids.map((a,i)=>`<div class="stage-ranking-item" data-aid="${a.id}"><span class="ranking-index">${i+1}</span><span>${escapeHTML(a.text)}</span></div>`).join('')}</div>`;
+  } else if(q.type==='number'){
+    main=`<div class="number-stage-wrap"><div class="number-value-display">?</div><div class="number-scale"><div class="number-scale-fill" id="stage-number-fill"></div><div class="number-marker" id="stage-number-marker"></div></div><div class="number-scale-labels"><span>${q.min}</span><span>${q.max}</span></div><div class="stage-number-value" id="stage-number-value"></div></div>`;
+  } else {
+    let imgHTML='';
+    if(q.image){if(q.type==='guess_character')imgHTML=modeImageHTML(q,'stage-guess-image qfade-in','animation-delay:.08s;');else if(q.type==='zoom')imgHTML=`<div class="zoom-stage-wrap qfade-in" style="--zoom-from:${q.zoomStart||3};"><img class="zoom-stage-img" src="${q.image}" style="--zoom-duration:${eng.responseTime}s;animation-duration:${eng.responseTime}s;"></div>`;else imgHTML=`<img class="stage-qimg qfade-in" src="${q.image}" style="animation-delay:.08s;">`;}
+    if(q.type==='guess_character'){ main=`${imgHTML}<div class="stage-qtext-wrap qfade-in" style="animation-delay:.14s;"><div class="stage-qtext">${escapeHTML(q.text)}</div></div>`; } else {
+      const letters=['a','b','c','d','e','f'];
+      const answersHTML=eng.answerOrder.map((ansIdx,i)=>{const a=q.answers[ansIdx],letter=letters[i];return `<div class="stage-tile ${letter}" data-aid="${a.id}" style="animation-delay:${(.24+i*.07).toFixed(2)}s">${type.renderPlayTile(a,letter)}</div>`;}).join('');
+      main=`${imgHTML}<div class="stage-qtext-wrap qfade-in" style="animation-delay:.14s;"><div class="stage-qtext">${escapeHTML(q.text)}</div></div><div class="stage-answers">${answersHTML}</div>`;
+    }
+  }
+  const c=2*Math.PI*55;content.classList.remove('stage-fade-out');content.innerHTML=`<div class="timer-ring qfade-in" id="timer-ring-wrap"><svg viewBox="0 0 130 130" width="130" height="130"><circle class="bg" cx="65" cy="65" r="55"></circle><circle class="fg" id="timer-ring-fg" cx="65" cy="65" r="55" stroke-dasharray="${c}" stroke-dashoffset="0"></circle></svg><div class="num" id="timer-ring-num">${eng.responseTime}</div></div>${main}`;
+  const titleEl=document.getElementById('stage-video-title');
+  const progressEl=document.getElementById('stage-video-progress');
+  const progressFill=document.getElementById('stage-video-progress-fill');
+  if(titleEl) titleEl.textContent=quiz.name||'QuizCast';
+  if(progressEl) progressEl.textContent=`${eng.pos+1} / ${eng.order.length}`;
+  if(progressFill) progressFill.style.width=`${((eng.pos+1)/Math.max(1,eng.order.length))*100}%`;
+  if(q.type==='number'){const qtxt=content.querySelector('.stage-qtext');if(!qtxt){const w=document.createElement('div');w.className='stage-qtext-wrap qfade-in';w.innerHTML=`<div class="stage-qtext">${escapeHTML(q.text)}</div>`;content.insertBefore(w,content.querySelector('.number-stage-wrap'));}}
+  flushPendingModeImages();updateCountdownDOM(eng.responseTime,0);
+}
+function updateRevealVisuals(){
+  const eng=STATE.autoplayEngine,quiz=eng&&getQuiz(eng.quizId);
+  if(!eng||!quiz)return;
+  const q=quiz.questions[eng.order[eng.pos]];
+  const ringWrap=document.getElementById('timer-ring-wrap');
+  if(ringWrap)ringWrap.classList.add('hiding');
+  const content=document.getElementById('stage-content');
+  if(q.type==='ranking'){
+    const list=document.querySelector('#stage-content .stage-ranking');if(!list)return;
+    const before=new Map([...list.children].map(el=>[el.dataset.aid,el.getBoundingClientRect().top]));
+    [...q.answers].forEach((a,i)=>{const el=[...list.children].find(x=>x.dataset.aid===a.id);if(el)list.appendChild(el);});
+    list.classList.add('revealed');
+    [...list.children].forEach((el,i)=>{const old=before.get(el.dataset.aid);const now=el.getBoundingClientRect().top;if(old!=null){const dy=old-now;el.style.transform=`translateY(${dy}px)`;requestAnimationFrame(()=>{el.style.transform='';});}const n=el.querySelector('.ranking-index');if(n)n.textContent=i+1;});
+    return;
+  }
+  if(q.type==='number'){
+    const pct=clamp((q.value-q.min)/(q.max-q.min)*100,0,100);const fill=document.getElementById('stage-number-fill'),marker=document.getElementById('stage-number-marker'),val=document.getElementById('stage-number-value');
+    if(fill)fill.style.width=pct+'%';if(marker){marker.style.left=pct+'%';marker.classList.add('revealed');}if(val){val.textContent=`${q.value}${q.unit?' '+q.unit:''}`;val.classList.add('visible');}return;
+  }
+  if(q.type==='guess_character'){
+    if(content){
+      content.classList.add('stage-reveal-out');
+      setTimeout(()=>{
+        content.innerHTML=`<div class="stage-guess-reveal stage-reveal-soft">
+          <div class="stage-guess-reveal-bg" aria-hidden="true"><img src="${q.image||''}" alt=""></div>
+          <div class="stage-guess-reveal-media"><img class="stage-guess-reveal-img" src="${q.image||''}" alt=""></div>
+          <div class="stage-guess-reveal-copy">
+            <div class="stage-guess-kicker">${tr('guess_correct_answer')}</div>
+            <div class="stage-reveal-line"></div>
+            <div class="stage-guess-answer">${escapeHTML(q.answerText||'Réponse inconnue')}</div>
+          </div>
+        </div>`;
+        content.classList.remove('stage-reveal-out');
+        content.classList.add('stage-reveal-in');
+        setTimeout(()=>content.classList.remove('stage-reveal-in'),800);
+      },260);
+    }
+    return;
+  }
+  if(content){ content.classList.add('stage-reveal-in'); setTimeout(()=>content.classList.remove('stage-reveal-in'),700); }
+  document.querySelectorAll('#stage-content .stage-tile').forEach(tile=>{if(tile.dataset.aid===q.correctAnswerId){tile.classList.add('correct-pulse');const badge=document.createElement('span');badge.className='correct-badge';badge.innerHTML=Icons.check(20);tile.appendChild(badge);}else tile.classList.add('dim');});
+}
+function confettiPieces(){
+  const colors = ['#7c5cfc','#2fd8c9','#ffb627','#ff5d6c','#35d07f','#5ecbff'];
+  let html = '';
+  for(let i=0;i<18;i++){
+    const left = (Math.random()*90+5).toFixed(1);
+    const delay = (Math.random()*2.6).toFixed(2);
+    const dur = (2.2+Math.random()*1.4).toFixed(2);
+    const color = colors[i % colors.length];
+    const size = (6+Math.random()*5).toFixed(0);
+    const drift = (Math.random()*60-30).toFixed(0);
+    html += `<span class="confetti-piece" style="left:${left}%;background:${color};width:${size}px;height:${(size*1.7).toFixed(0)}px;animation-delay:${delay}s;animation-duration:${dur}s;--drift:${drift}px;"></span>`;
+  }
+  return html;
+}
+function renderFinishedStage(){
+  const eng = STATE.autoplayEngine;
+  const quiz = eng && getQuiz(eng.quizId);
+  if(!eng || !quiz) return;
+  clearApTimers();
+  const content = document.getElementById('stage-content');
+  if(!content) return;
+  content.innerHTML = `
+    <div class="stage-end qfade-in">
+      <div class="confetti-wrap">${confettiPieces()}</div>
+      <div class="stage-end-emoji">🎬</div>
+      <h2>${tr('stage_thanks')}</h2>
+      <div class="stage-end-actions" id="stage-end-actions" style="opacity:0;pointer-events:none;transition:opacity .6s ease;">
+        <button class="btn btn-outline" data-action="exit-autoplay-stage">${tr('stage_exit_lib')}</button>
+        <button class="btn btn-primary" data-action="replay-autoplay-stage">${Icons.repeat(14)} ${tr('stage_replay')}</button>
+      </div>
+    </div>`;
+  clearTimeout(_stageEndActionsTimer);
+  _stageEndActionsTimer = setTimeout(()=>{
+    const el = document.getElementById('stage-end-actions');
+    if(el){ el.style.opacity='1'; el.style.pointerEvents='auto'; }
+  }, 5000);
+}
+function toggleFullscreenStage(){
+  if(document.fullscreenElement){ document.exitFullscreen().catch(()=>{}); }
+  else if(document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen().catch(()=>{}); }
+}
+function exitAutoplayStage(){
+  clearApTimers();
+  clearTimeout(_stageEndActionsTimer);
+  if(document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+  STATE.autoplayEngine=null;
+  const root = document.getElementById('autoplay-root'); if(root) root.innerHTML='';
+  STATE.view='library';
+  render();
+}
+function replayAutoplayStage(){
+  clearApTimers();
+  clearTimeout(_stageEndActionsTimer);
+  launchAutoplayStage();
+}

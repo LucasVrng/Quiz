@@ -1,0 +1,670 @@
+{
+  "version": 1,
+  "exportedAt": "2026-09-05T13:40:47.366Z",
+  "categories": [
+    {
+      "id": "id_uk5ehljckb6i",
+      "name": "Nintendo",
+      "color": "#ff5d6c",
+      "parentId": "id_zchi6ea2kb6i"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "id_ow1louw0pd7y",
+      "name": "Nintendo — 20 questions",
+      "description": "Mario, Zelda, Pokémon, Kirby et les classiques Nintendo.",
+      "categoryIds": [
+        "id_uk5ehljckb6i"
+      ],
+      "language": "fr",
+      "thumbnail": null,
+      "difficulty": "facile",
+      "createdAt": "2026-09-05T13:16:24.238Z",
+      "updatedAt": "2026-09-05T13:40:44.823Z",
+      "questions": [
+        {
+          "id": "id_ngivzc1ypd7y",
+          "type": "qcm",
+          "text": "Quel est le nom du plombier moustachu, mascotte de Nintendo ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_km05ddr4pd7y",
+              "text": "Mario"
+            },
+            {
+              "id": "id_249621b1pd7y",
+              "text": "Luigi"
+            },
+            {
+              "id": "id_ofhrg513pd7y",
+              "text": "Wario"
+            },
+            {
+              "id": "id_h3r7j57lpd7y",
+              "text": "Toad"
+            }
+          ],
+          "correctAnswerId": "id_km05ddr4pd7y",
+          "explanation": "Mario est LE personnage emblématique de Nintendo depuis 1981.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_6acewd6kpd7y",
+          "type": "qcm",
+          "text": "Dans quel jeu Mario apparaît-il pour la première fois ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_ve37cmwhpd7y",
+              "text": "Super Mario Bros."
+            },
+            {
+              "id": "id_n5kr9nivpd7y",
+              "text": "Donkey Kong"
+            },
+            {
+              "id": "id_2rcpl80lpd7y",
+              "text": "Mario Bros."
+            },
+            {
+              "id": "id_frftr2f3pd7y",
+              "text": "Duck Hunt"
+            }
+          ],
+          "correctAnswerId": "id_n5kr9nivpd7y",
+          "explanation": "Mario (alors appelé « Jumpman ») fait ses débuts dans Donkey Kong en 1981.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_b6o164hxpd7y",
+          "type": "qcm",
+          "text": "En quelle année est sortie la Game Boy?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_eqbvzrycpd7y",
+              "text": "1985"
+            },
+            {
+              "id": "id_2p4tj5a8pd7y",
+              "text": "1993"
+            },
+            {
+              "id": "id_npbbq8hppd7y",
+              "text": "1989"
+            },
+            {
+              "id": "id_tqc1ny9epd7y",
+              "text": "1996"
+            }
+          ],
+          "correctAnswerId": "id_npbbq8hppd7y",
+          "explanation": "La Game Boy est sortie en 1989 et a été un immense succès portable.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "consoles"
+          ]
+        },
+        {
+          "id": "id_so9pihebpd7y",
+          "type": "qcm",
+          "text": "Qui est le principal antagoniste de la saga Zelda ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_7zegqxxgpd7y",
+              "text": "Bowser"
+            },
+            {
+              "id": "id_t3dcojejpd7y",
+              "text": "Ganon"
+            },
+            {
+              "id": "id_crch0kp3pd7y",
+              "text": "Dr. Eggman"
+            },
+            {
+              "id": "id_10kxc8q1pd7y",
+              "text": "King Dedede"
+            }
+          ],
+          "correctAnswerId": "id_t3dcojejpd7y",
+          "explanation": "Ganon (ou Ganondorf) est l'ennemi juré de Link et de la princesse Zelda.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "zelda"
+          ]
+        },
+        {
+          "id": "id_f475obllpd7y",
+          "type": "qcm",
+          "text": "En quelle année est sorti le tout premier jeu The Legend of Zelda ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_zmyuf6ytpd7y",
+              "text": "1985"
+            },
+            {
+              "id": "id_9octscmfpd7y",
+              "text": "1986"
+            },
+            {
+              "id": "id_g3lbwmmmpd7y",
+              "text": "1990"
+            },
+            {
+              "id": "id_db0bxl2wpd7y",
+              "text": "1998"
+            }
+          ],
+          "correctAnswerId": "id_9octscmfpd7y",
+          "explanation": "The Legend of Zelda est sorti au Japon en février 1986 sur Famicom Disk System.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "zelda"
+          ]
+        },
+        {
+          "id": "id_24kb833hpd7y",
+          "type": "qcm",
+          "text": "Comment s'appelle la princesse de Sarasaland que Mario sauve dans Mario Land ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_aiztje6lpd7y",
+              "text": "Zelda"
+            },
+            {
+              "id": "id_u10vhuz8pd7y",
+              "text": "Daisy"
+            },
+            {
+              "id": "id_aln9lykppd7y",
+              "text": "Peach"
+            },
+            {
+              "id": "id_4b1z2s9mpd7y",
+              "text": "Rosalina"
+            }
+          ],
+          "correctAnswerId": "id_u10vhuz8pd7y",
+          "explanation": "La princesse Peach règne sur le Royaume Champignon.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_jq8dv31cpd7y",
+          "type": "qcm",
+          "text": "Quel est le nom de la console qui a introduit les manettes Joy-Con ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_soqmq5xwpd7y",
+              "text": "Wii U"
+            },
+            {
+              "id": "id_85h4ymmlpd7y",
+              "text": "Nintendo 3DS"
+            },
+            {
+              "id": "id_7yctfy8kpd7y",
+              "text": "Nintendo Switch"
+            },
+            {
+              "id": "id_44xybvkhpd7y",
+              "text": "GameCube"
+            }
+          ],
+          "correctAnswerId": "id_7yctfy8kpd7y",
+          "explanation": "La Switch, sortie en 2017, est une console hybride avec ses fameuses manettes Joy-Con.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "consoles"
+          ]
+        },
+        {
+          "id": "id_ly3u9oz6pd7y",
+          "type": "qcm",
+          "text": "Qui a créé le personnage de Mario ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_g4hv4zo3pd7y",
+              "text": "Satoru Iwata"
+            },
+            {
+              "id": "id_i66tusu3pd7y",
+              "text": "Shigeru Miyamoto"
+            },
+            {
+              "id": "id_0gsnqa9bpd7y",
+              "text": "Gunpei Yokoi"
+            },
+            {
+              "id": "id_gb2y2d0apd7y",
+              "text": "Masahiro Sakurai"
+            }
+          ],
+          "correctAnswerId": "id_i66tusu3pd7y",
+          "explanation": "Shigeru Miyamoto est aussi le créateur de Zelda et Donkey Kong.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_b9jr0wf7pd7y",
+          "type": "qcm",
+          "text": "Quel est le compagnon dinosaure de Mario ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_cl68qns0pd7y",
+              "text": "Birdo"
+            },
+            {
+              "id": "id_frwairlxpd7y",
+              "text": "Yoshi"
+            },
+            {
+              "id": "id_qnh8tvacpd7y",
+              "text": "Kirby"
+            },
+            {
+              "id": "id_a1rxy4i2pd7y",
+              "text": "Koopa"
+            }
+          ],
+          "correctAnswerId": "id_frwairlxpd7y",
+          "explanation": "Yoshi fait sa première apparition dans Super Mario World en 1990.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_xuuydulbpd7y",
+          "type": "qcm",
+          "text": "Quel est le tout premier jeu Pokémon sorti en 1996 au Japon ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_qr62xptjpd7y",
+              "text": "Pokémon Or"
+            },
+            {
+              "id": "id_b71pish5pd7y",
+              "text": "Pokémon Rouge et Vert"
+            },
+            {
+              "id": "id_prmietr7pd7y",
+              "text": "Pokémon Rubis"
+            },
+            {
+              "id": "id_15sr5bj6pd7y",
+              "text": "Pokémon Diamant"
+            }
+          ],
+          "correctAnswerId": "id_b71pish5pd7y",
+          "explanation": "Pokémon Rouge et Vert sont sortis le 27 février 1996 sur Game Boy, lançant toute la franchise.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "pokemon"
+          ]
+        },
+        {
+          "id": "id_9q0pjmxmpd7y",
+          "type": "qcm",
+          "text": "Quel type d'animal est Tom Nook dans Animal Crossing ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_nl71sq42pd7y",
+              "text": "Chat"
+            },
+            {
+              "id": "id_fqbkghfipd7y",
+              "text": "Raton laveur (tanuki)"
+            },
+            {
+              "id": "id_dqc7wh9fpd7y",
+              "text": "Ours"
+            },
+            {
+              "id": "id_71yx2mbopd7y",
+              "text": "Hérisson"
+            }
+          ],
+          "correctAnswerId": "id_fqbkghfipd7y",
+          "explanation": "Tom Nook est un tanuki, souvent traduit par « raton laveur » en français.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "animal-crossing"
+          ]
+        },
+        {
+          "id": "id_388e5m1gpd7y",
+          "type": "qcm",
+          "text": "En quelle année Nintendo a-t-elle été fondée, à l'origine pour vendre des cartes à jouer ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_idyweq0npd7y",
+              "text": "1889"
+            },
+            {
+              "id": "id_srxxsnzypd7y",
+              "text": "1901"
+            },
+            {
+              "id": "id_zblbda3ipd7y",
+              "text": "1923"
+            },
+            {
+              "id": "id_tjj62346pd7y",
+              "text": "1945"
+            }
+          ],
+          "correctAnswerId": "id_idyweq0npd7y",
+          "explanation": "Nintendo a été fondée à Kyoto pour fabriquer des cartes à jouer Hanafuda.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "histoire"
+          ]
+        },
+        {
+          "id": "id_nssbt8skpd7y",
+          "type": "qcm",
+          "text": "Quel est le nom du rival de Mario, vêtu de violet et jaune ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_pg5zj8xkpd7y",
+              "text": "Bowser"
+            },
+            {
+              "id": "id_uybs67dxpd7y",
+              "text": "Wario"
+            },
+            {
+              "id": "id_ow00cljtpd7y",
+              "text": "Waluigi"
+            },
+            {
+              "id": "id_6imu0s2apd7y",
+              "text": "King Boo"
+            }
+          ],
+          "correctAnswerId": "id_uybs67dxpd7y",
+          "explanation": "Wario est apparu pour la première fois dans Super Mario Land 2 (1992).",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_siur4177pd7y",
+          "type": "qcm",
+          "text": "Quelle console Nintendo a introduit Super Mario Sunshine ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_q9m9cwyapd7y",
+              "text": "Super Nintendo"
+            },
+            {
+              "id": "id_wz48q9izpd7y",
+              "text": "Nintendo 64"
+            },
+            {
+              "id": "id_sjzxyy54pd7y",
+              "text": "GameCube"
+            },
+            {
+              "id": "id_2cqi496qpd7y",
+              "text": "Wii"
+            }
+          ],
+          "correctAnswerId": "id_wz48q9izpd7y",
+          "explanation": "Super Mario 64 (1996) a révolutionné les jeux de plateforme en 3D.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario"
+          ]
+        },
+        {
+          "id": "id_2dwlufb1pd7y",
+          "type": "qcm",
+          "text": "Comment s'appelle le tout premier jeu Kirby?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_10885z02pd7y",
+              "text": "Kirby's Dream Land"
+            },
+            {
+              "id": "id_nawhgxdapd7y",
+              "text": "Kirby Super Star"
+            },
+            {
+              "id": "id_o0yfuw9bpd7y",
+              "text": "Kirby's Adventure"
+            },
+            {
+              "id": "id_3ou7x6icpd7y",
+              "text": "Kirby & The Amazing Mirror"
+            }
+          ],
+          "correctAnswerId": "id_10885z02pd7y",
+          "explanation": "Kirby est né en 1992 dans le jeu Kirby's Dream Land.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "kirby"
+          ]
+        },
+        {
+          "id": "id_uyviro8vpd7y",
+          "type": "qcm",
+          "text": "Combien de joueurs peuvent jouer en simultané sur un seul écran (splitté) dans Mario Kart 8 Deluxe ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_qc11uewypd7y",
+              "text": "2"
+            },
+            {
+              "id": "id_si3wnyclpd7y",
+              "text": "4"
+            },
+            {
+              "id": "id_8amnnr5spd7y",
+              "text": "6"
+            },
+            {
+              "id": "id_b0lbvsr5pd7y",
+              "text": "8"
+            }
+          ],
+          "correctAnswerId": "id_b0lbvsr5pd7y",
+          "explanation": "Mario Kart 8 Deluxe permet jusqu'à 4 joueurs en écran splitté sur une seule console.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "mario-kart"
+          ]
+        },
+        {
+          "id": "id_qoemgs4qpd7y",
+          "type": "qcm",
+          "text": "Que fait le chien de Duck Hunt quand le joueur rate un canard ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_h8zxfwinpd7y",
+              "text": "Il pleure"
+            },
+            {
+              "id": "id_zhs2lv4xpd7y",
+              "text": "Il rit"
+            },
+            {
+              "id": "id_tkcj3cq2pd7y",
+              "text": "Il aboie"
+            },
+            {
+              "id": "id_1fjq7ew7pd7y",
+              "text": "Il s'endort"
+            }
+          ],
+          "correctAnswerId": "id_zhs2lv4xpd7y",
+          "explanation": "Ce rire moqueur est resté culte, au point que le chien réapparaît comme trophée dans Super Smash Bros.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "classiques"
+          ]
+        },
+        {
+          "id": "id_le6zk09cpd7y",
+          "type": "qcm",
+          "text": "Quel est le titre du tout premier jeu de la série Metroid, sorti en 1986 ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_x6e8rf52pd7y",
+              "text": "Metroid"
+            },
+            {
+              "id": "id_8mzg2zdfpd7y",
+              "text": "Metroid Prime"
+            },
+            {
+              "id": "id_wjoeig6hpd7y",
+              "text": "Super Metroid"
+            },
+            {
+              "id": "id_b8pj3x6mpd7y",
+              "text": "Metroid II"
+            }
+          ],
+          "correctAnswerId": "id_x6e8rf52pd7y",
+          "explanation": "Le jeu original est sorti sur Famicom Disk System au Japon.",
+          "duration": 15,
+          "difficulty": "difficile",
+          "tags": [
+            "metroid"
+          ]
+        },
+        {
+          "id": "id_8fa4jdtbpd7y",
+          "type": "qcm",
+          "text": "Comment s'appelle l'héroïne de la saga Metroid ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_40bwm933pd7y",
+              "text": "Zelda"
+            },
+            {
+              "id": "id_80zlct8zpd7y",
+              "text": "Samus Aran"
+            },
+            {
+              "id": "id_bjj8qgxypd7y",
+              "text": "Peach"
+            },
+            {
+              "id": "id_vx9j9qp9pd7y",
+              "text": "Palutena"
+            }
+          ],
+          "correctAnswerId": "id_80zlct8zpd7y",
+          "explanation": "Samus Aran est une chasseuse de primes intergalactique, révélée être une femme à la fin du premier jeu — une surprise pour l'époque.",
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "metroid"
+          ]
+        },
+        {
+          "id": "id_i0vh01cwpd7y",
+          "type": "qcm",
+          "text": "Quel jeu de combat Nintendo réunit Mario, Link, Pikachu, Kirby et bien d'autres personnages ?",
+          "image": null,
+          "imageMode": "normal",
+          "answers": [
+            {
+              "id": "id_251d7ovppd7y",
+              "text": "Mario Kart"
+            },
+            {
+              "id": "id_ygqnynqfpd7y",
+              "text": "Super Smash Bros."
+            },
+            {
+              "id": "id_qqudv09dpd7y",
+              "text": "Nintendo All-Stars"
+            },
+            {
+              "id": "id_gvbt253xpd7y",
+              "text": "Mario Party"
+            }
+          ],
+          "correctAnswerId": "id_ygqnynqfpd7y",
+          "explanation": "La série a débuté en 1999 sur Nintendo 64.",
+          "duration": 10,
+          "difficulty": "facile",
+          "tags": [
+            "smash"
+          ]
+        }
+      ],
+      "isDemo": false
+    }
+  ]
+}
