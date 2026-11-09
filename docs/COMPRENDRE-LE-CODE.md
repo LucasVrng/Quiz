@@ -1,6 +1,6 @@
 # Comprendre QuizCast : guide du code
 
-Ce guide décrit le projet tel qu’il est organisé aujourd’hui. Il sert de carte pour retrouver le code à modifier, comprendre les fonctions nommées et suivre le trajet des données entre l’administration et le site public.
+Ce guide décrit les fondations du projet. Pour les ajouts de la refonte (studio, catalogue partagé, réponse libre et import en lot), lire aussi [le README actuel](../README.md) et [l’architecture](../README-ARCHITECTURE.md). Il sert de carte pour retrouver le code à modifier, comprendre les fonctions nommées et suivre le trajet des données entre l’administration et le site public.
 
 ## Pour commencer
 
@@ -129,7 +129,7 @@ Contient les traductions `I18N`, `STATE`, le stockage `Store`, les utilitaires, 
 
 ### `js/question-types.js` — registre des questions
 
-`QUESTION_TYPE_ORDER` ordonne les types dans l’éditeur. `QuestionTypes` décrit chaque type (`qcm`, `guess_character`, `true_false`, `ranking`, `zoom`, `number`) avec son icône, accent, libellé, fonction de création par défaut, titre de modal, champs d’édition et rendu de tuile en jeu. Pour ajouter un type, commencer ici, puis vérifier son traitement dans `play.js` et ses styles spécifiques.
+`QUESTION_TYPE_ORDER` ordonne les types dans l’éditeur. `QuestionTypes` décrit chaque type (`qcm`, `open_answer`, `guess_character`, `true_false`, `ranking`, `zoom`, `number`) avec son icône, accent, libellé, fonction de création par défaut, titre de modal, champs d’édition et rendu de tuile en jeu. Pour ajouter un type, commencer ici, puis vérifier son traitement dans `play.js` et ses styles spécifiques.
 
 - `defaultTileInner(answer, letter)` : contenu visuel commun d’une réponse à choix.
 - `letterFor(idx)` : associe un index à une lettre de tuile.

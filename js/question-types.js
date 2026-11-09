@@ -1,8 +1,17 @@
 /* ============================================================
    9. QUESTION TYPE REGISTRY  (modular — add new types here only)
    ============================================================ */
-const QUESTION_TYPE_ORDER = ['qcm','guess_character','true_false','ranking','zoom','number'];
+const QUESTION_TYPE_ORDER = ['qcm','open_answer','guess_character','true_false','ranking','zoom','number'];
 const QuestionTypes = {
+  open_answer:{
+    key:'open_answer',icon:Icons.checkSquare,accent:'var(--violet)',
+    label:()=>STATE.settings.uiLanguage==='en'?'Free answer':'Réponse libre',
+    desc:()=> 'Devinettes, mots et énigmes sans image',
+    createDefault(){return {id:uid(),type:'open_answer',text:'',answerText:'',acceptedAnswers:[],answers:[],duration:12,difficulty:'moyen',explanation:'',tags:[]};},
+    modalTitle(isNew){return isNew?'Nouvelle réponse libre':'Modifier la réponse libre';},
+    renderEditorExtra(q){return `<div class="field"><label class="field-label">Réponse attendue</label><input data-action="guess-answer-input" value="${escapeHTML(q.answerText||'')}"></div><div class="field"><label class="field-label">Autres réponses acceptées (séparées par ;)</label><input data-action="accepted-answers-input" value="${escapeHTML(q._acceptedRaw??(q.acceptedAnswers||[]).join('; '))}"><p class="hint">Majuscules et accents sont ignorés. Ajoute les synonymes utiles.</p></div>`;},
+    renderPlayTile:defaultTileInner
+  },
   qcm:{
     key:'qcm', icon:Icons.checkSquare, accent:'var(--violet)',
     label:()=>tr('qtype_qcm'), desc:()=>tr('qtype_qcm_desc'),

@@ -4,7 +4,7 @@
 function quizHasGuessCharacters(quiz){ return !!quiz?.questions?.some(q=>q.type==='guess_character' && q.image); }
 function startPlay(quizId, returnView, guessMode=null, guessDifficulty='normal'){
   const quiz=getQuiz(quizId);
-  if(!quiz || quiz.questions.length===0){showToast(tr('empty_questions_title'),'err');return;}
+  if(!quiz || quiz.questions.length===0){showToast(tr('empty_questions_title'),'err');STATE.view=returnView==='publicQuiz'?'publicQuizzes':'library';render();return;}
   if(returnView==='publicQuiz' && quizHasGuessCharacters(quiz) && !guessMode){
     STATE._guessModeSetup={quizId,returnView};
     renderGuessModeSetup(quiz);
@@ -77,12 +77,13 @@ function renderGuessNormal(q,p){
   if(!p.revealed) return `<div class=\"guess-input-wrap\"><input id=\"play-guess-input\" class=\"guess-answer-input\" type=\"text\" autocomplete=\"off\" placeholder=\"${escapeHTML(tr('guess_answer_ph'))}\"><button class=\"btn btn-primary\" data-action=\"submit-guess\">${tr('submit_guess')}</button></div>`;
   const accepted=[q.answerText,...(q.acceptedAnswers||[])].filter(Boolean).map(normalizeGuess);
   const correct=accepted.includes(normalizeGuess(p.answerText));
-  return `<div class=\"guess-reveal\"><img src=\"${q.image}\"><div class=\"guess-reveal-copy\"><div class=\"guess-answer-label\">${tr('guess_correct_answer')}</div><div class=\"guess-reveal-name\">${escapeHTML(q.answerText)}</div><div class=\"guess-reveal-result\">${correct?tr('answer_correct'):tr('answer_wrong')} — ${tr('guess_your_answer')}: ${escapeHTML(p.answerText)}</div>${q.explanation?`<div class=\"explanation-box\">${escapeHTML(q.explanation)}</div>`:''}</div></div>`;
+  return `<div class=\"guess-reveal\">${q.image?`<img src="${escapeHTML(q.image)}" alt="">`:""}<div class=\"guess-reveal-copy\"><div class=\"guess-answer-label\">${tr('guess_correct_answer')}</div><div class=\"guess-reveal-name\">${escapeHTML(q.answerText)}</div><div class=\"guess-reveal-result\">${correct?tr('answer_correct'):tr('answer_wrong')} — ${tr('guess_your_answer')}: ${escapeHTML(p.answerText)}</div>${q.explanation?`<div class=\"explanation-box\">${escapeHTML(q.explanation)}</div>`:''}</div></div>`;
 }
 function submitPlayNumber(){
   const p=STATE.play;if(!p||p.revealed)return;
   const quiz=getQuiz(p.quizId),q=quiz.questions[p.order[p.pos]];const input=document.getElementById('play-number-input');
-  const val=Number(input&&input.value);if(!Number.isFinite(val))return;p.answerValue=val;p.revealed=true;p.lastAnswerCorrect=val===Number(q.value);if(p.lastAnswerCorrect)p.correctCount++;render();
+  if(!input||!input.value.trim()||!input.checkValidity())return;
+  const val=Number(input.value);if(!Number.isFinite(val))return;p.answerValue=val;p.revealed=true;p.lastAnswerCorrect=val===Number(q.value);if(p.lastAnswerCorrect)p.correctCount++;render();
 }
 function nextPlayQuestion(){const p=STATE.play;if(!p)return;p.pos++;p.selectedId=null;p.revealed=false;p.answerValue=null;p.rankingSubmitted=false;p._rankingShuffle=null;render();}
 function restartPlay(){const p=STATE.play;if(p)startPlay(p.quizId,p.returnView,p.guessMode,p.guessDifficulty);}
@@ -151,7 +152,7 @@ function renderPlayView(){
   let imgHTML='';
   if(q.image){if(q.type==='guess_character'){const displayQ=getGuessDisplayQuestion(q,p);imgHTML=p.revealed?`<div class="play-question-img" style="display:flex;align-items:center;justify-content:center;"><img src="${q.image}" style="max-height:360px;max-width:100%;object-fit:contain;border-radius:14px;"></div>`:`<div class="play-question-img" style="display:flex;align-items:center;justify-content:center;">${modeImageHTML(displayQ,'','max-height:360px;max-width:100%;object-fit:contain;')}</div>`;}else if(q.type==='zoom')imgHTML=`<div class="zoom-image-wrap" style="height:260px;--zoom-scale:${p.revealed?1:q.zoomStart||3};"><img src="${q.image}"></div>`;else imgHTML=`<img class="play-question-img" src="${q.image}">`; }
   let body='';
-  if(q.type==='guess_character') body=renderGuessNormal(q,p);
+  if(['guess_character','open_answer'].includes(q.type)) body=renderGuessNormal(q,p);
   else if(q.type==='ranking') body=renderRankingNormal(q,p);
   else if(q.type==='number') body=renderNumberNormal(q,p);
   else {
@@ -191,6 +192,9 @@ function guessEffectOptions(selected){
 }
 function autoplayPresets(){
   return [
+    {id:'pop',title:'Pop Studio',desc:'Violet, menthe et citron · ludique et lumineux',icon:'✦',responseTime:12,revealDuration:4,nextDelay:.8,background:'pop',layout:'center',timerStyle:'bar',timerPosition:'auto'},
+    {id:'show',title:'Grand jeu',desc:'Bleu nuit et or · ambiance plateau télé',icon:'◉',responseTime:12,revealDuration:4,nextDelay:.8,background:'show',layout:'center',timerStyle:'ring',timerPosition:'auto'},
+    {id:'paper',title:'Clair & net',desc:'Crème et bleu · calme, simple et lisible',icon:'◐',responseTime:12,revealDuration:4,nextDelay:.8,background:'paper',layout:'center',timerStyle:'pill',timerPosition:'auto'},
     {id:'auto',title:'Auto par catégorie',desc:'Choisit automatiquement un univers visuel adapté au quiz',icon:'✦',responseTime:10,revealDuration:4,nextDelay:1.4,background:'cinematic',layout:'center',timerStyle:'pill',timerPosition:'auto'},
     {id:'nintendo',title:'Nintendo',desc:'Lumineux, joyeux, rond et très lisible',icon:'●',responseTime:9,revealDuration:4,nextDelay:1.2,background:'nintendo',layout:'split-left',timerStyle:'bar',timerPosition:'right-panel'},
     {id:'horror',title:'Horreur',desc:'Tendu, brumeux et plus théâtral',icon:'✦',responseTime:11,revealDuration:4.5,nextDelay:1.7,background:'horror',layout:'split-right',timerStyle:'minimal',timerPosition:'top-right'},
@@ -224,6 +228,7 @@ function autoplayDefaultLayoutForType(type,presetId='cinematic'){
 }
 function effectiveAutoplayLayout(eng,q){
   const byType=eng?.layoutByType||{};
+  if(q?.videoLayout && q.videoLayout!=='auto') return q.videoLayout;
   if(byType[q?.type]) return byType[q.type];
   if(eng?.layout && eng.layout!=='auto') return eng.layout;
   return autoplayDefaultLayoutForType(q?.type,eng?.preset||'cinematic');
@@ -261,7 +266,7 @@ function autoplayLayoutThumb(id){
   const image=id==='split-left'?'left':id==='split-right'?'right':id==='stacked'?'stacked':id==='cinematic'?'focus':'center';
   return `<div class="autoplay-layout-thumb layout-thumb-${image}" aria-hidden="true"><span class="thumb-img"></span><span class="thumb-copy"><i></i><i></i><i></i></span><span class="thumb-timer"></span></div>`;
 }
-function getAutoplayPreset(presetId){ return autoplayPresets().find(p=>p.id===presetId)||autoplayPresets()[0]; }
+function getAutoplayPreset(presetId){ return autoplayPresets().find(p=>p.id===presetId)||autoplayPresets().find(p=>p.id==='cinematic'); }
 function autoplayBackgroundVariantChoices(presetId){
   if(presetId==='nintendo') return [
     ['1','Ciel & collines'],
@@ -395,15 +400,16 @@ function buildAutoplayQuestionMarkup(eng,quiz,sourceQ,preview=false){
     info=`<div class="stage-number-info"><div class="number-value-display">?</div><div class="number-scale"><div class="number-scale-fill" id="stage-number-fill"></div><div class="number-marker" id="stage-number-marker"></div></div><div class="number-scale-labels"><span>${q.min}</span><span>${q.max}</span></div><div class="stage-number-value" id="stage-number-value"></div></div>`;
   }else if(q.type==='ranking'){
     const ids=eng.answerOrder.map(i=>q.answers[i]);
-    info=`${q.criterion?`<div class="stage-q-criterion">${escapeHTML(q.criterion)}</div>`:''}<div class="stage-ranking">${ids.map((a,i)=>`<div class="stage-ranking-item" data-aid="${a.id}"><span class="ranking-index">${i+1}</span><span>${escapeHTML(a.text)}</span></div>`).join('')}</div>`;
-  }else if(q.type==='guess_character'){
+    info=`<div class="stage-qtext-wrap"><div class="stage-qtext">${escapeHTML(q.text)}</div></div>${q.criterion?`<div class="stage-q-criterion">${escapeHTML(q.criterion)}</div>`:''}<div class="stage-ranking">${ids.map((a,i)=>`<div class="stage-ranking-item" data-aid="${a.id}"><span class="ranking-index">${i+1}</span><span>${escapeHTML(a.text)}</span></div>`).join('')}</div>`;
+  }else if(['guess_character','open_answer'].includes(q.type)){
     info=`<div class="stage-qtext-wrap qfade-in" style="animation-delay:.14s;"><div class="stage-qtext">${escapeHTML(q.text)}</div></div>`;
   }else{
     const letters=['a','b','c','d','e','f'];
     const answersHTML=(eng.answerOrder||[]).map((ansIdx,i)=>{const a=q.answers[ansIdx],letter=letters[i];return `<div class="stage-tile ${letter}" data-aid="${a.id}" style="animation-delay:${(.24+i*.07).toFixed(2)}s">${type.renderPlayTile(a,letter)}</div>`;}).join('');
     info=`<div class="stage-qtext-wrap qfade-in" style="animation-delay:.14s;"><div class="stage-qtext">${escapeHTML(q.text)}</div></div><div class="stage-answers">${answersHTML}</div>`;
   }
-  const timer=autoplayTimerMarkup(eng.timerStyle||'ring',eng.timerPosition||'auto',eng.responseTime||3,preview);
+  let timer=autoplayTimerMarkup(eng.timerStyle||'ring',eng.timerPosition||'auto',eng.responseTime||3,preview);
+  if(autoplayRevealLanguage(eng,quiz)==='en')timer=timer.replaceAll('Temps restant','Time left').replaceAll('Temps','Time');
   const hasVisual=Boolean(imgHTML);
   const layout=autoplayLayoutClass(effectiveAutoplayLayout(eng,q));
   const rootClass=`stage-question-layout ${layout}${hasVisual?' has-visual':' no-visual'} autoplay-question-type-${q.type}`;
@@ -430,149 +436,31 @@ function autoplayIntroMessage(id){
 }
 function openAutoplaySetup(quizId){
   const quiz=getQuiz(quizId);
-  if(!quiz || quiz.questions.length===0){ showToast(tr('empty_questions_title'),'err'); return; }
-  STATE.autoplaySetup={quizId,responseTime:10,revealDuration:4,nextDelay:1.4,shuffleQ:false,shuffleA:false,guessMode:'normal',guessDifficulty:'normal',guessModeByQuestion:{},preset:'auto',backgroundMode:'style',backgroundVariant:'1',customMediaUrl:'',customMediaType:'image',revealLanguage:'auto',layout:'auto',layoutByType:{},timerStyle:'pill',timerPosition:'auto',textStyle:'preset',introMessage:'lets-go'};
+  if(!quiz){STATE.view='library';render();return;}
+  if(!quiz.questions.length)showToast('Ajoute des questions dans l’éditeur avant la répétition.','err');
+  STATE.autoplaySetup={...studioDefaults(quiz),...(quiz.videoSettings||{}),quizId};
+  STATE.studioSample=0;STATE.studioReveal=false;
   ensureAutoplayGuessSelections(STATE.autoplaySetup,quiz);
   STATE.view='autoplaySetup';
   render();
 }
-function renderAutoplaySetupView(){
-  const s=STATE.autoplaySetup;
-  const quiz=getQuiz(s.quizId);
-  if(!quiz){STATE.view='library';return renderLibrary();}
-  ensureAutoplayGuessSelections(s,quiz);
-  const times=[5,10,15,20];
-  const guessQuestions=(quiz.questions||[]).filter(q=>q.type==='guess_character');
-  const guessSection=guessQuestions.length?`
-    <div class="section-title" style="margin-top:28px;">Guess the Character</div>
-    <p class="hint" style="margin-bottom:12px;">Ces réglages concernent uniquement les questions « Guess the character ». Les autres types de questions du quiz continuent de fonctionner normalement.</p>
-    <div class="field">
-      <label class="field-label">Effet des personnages</label>
-      <div class="autoplay-effect-grid">
-        ${guessEffectChoices().map(([id,title,desc])=>`<button type="button" class="guess-mode-choice ${s.guessMode===id?'selected':''}" data-action="ap-set-guess-mode" data-mode="${id}"><strong>${title}</strong><span>${desc}</span></button>`).join('')}
-      </div>
-    </div>
-    <div class="field" style="margin-top:16px;">
-      <label class="field-label">Difficulté des effets</label>
-      <div class="guess-difficulty-grid">
-        ${[['easy','Facile','Effets légers'],['normal','Normale','Bon équilibre'],['hard','Difficile','Effets plus marqués']].map(([id,title,desc])=>`<button type="button" class="guess-difficulty-choice ${s.guessDifficulty===id?'selected':''}" data-action="ap-set-guess-difficulty" data-difficulty="${id}"><strong>${title}</strong><span>${desc}</span></button>`).join('')}
-      </div>
-    </div>
-    ${s.guessMode==='per_question'?`<div class="autoplay-per-question-list"><div class="field-label" style="margin-bottom:8px;">Effet de chaque personnage</div>${guessQuestions.map((q,i)=>`<div class="autoplay-per-question-row"><div class="autoplay-per-question-copy"><span class="autoplay-q-index">${i+1}</span><div><strong>${escapeHTML(q.answerText||'Personnage')}</strong><small>${escapeHTML((q.text||'').slice(0,90))}</small></div></div><select data-action="ap-set-guess-question-mode" data-qid="${q.id}">${guessEffectOptions(s.guessModeByQuestion[q.id]||'normal')}</select></div>`).join('')}</div>`:''}
-  `:'';
-  const presets=autoplayPresets();
-  return `
-  <div class="topbar"><div><button class="btn btn-outline btn-sm" data-action="set-view" data-view="library">${Icons.arrowLeft(13)} ${tr('back_to_library')}</button></div></div>
-  <div class="autoplay-setup panel autoplay-setup-youtube">
-    <div class="autoplay-setup-header">
-      <div><h1 style="margin-bottom:4px;">${tr('autoplay_setup_title')}</h1><p class="sub" style="color:var(--text-dim);margin-bottom:0;">${tr('autoplay_setup_sub')} — <strong>${escapeHTML(quiz.name)}</strong> (${quiz.questions.length} ${tr(quiz.questions.length===1?'q_count_1':'q_count')})</p></div>
-      <div class="autoplay-youtube-badge"><span>16:9</span><span>OBS / YouTube</span></div>
-    </div>
-    <div class="section-title autoplay-section-heading" style="margin-top:28px;">Style vidéo</div>
-    <p class="hint autoplay-preset-hint">Choisis une direction visuelle. Tu peux ensuite modifier les réglages de durée, d'effets et de mélange sans changer de preset.</p>
-    <div class="autoplay-preset-grid">
-      ${presets.map(p=>`<button type="button" class="autoplay-preset-card ${s.preset===p.id?'selected':''}" data-action="ap-set-preset" data-preset="${p.id}">
-        <span class="autoplay-preset-icon preset-${p.id}">${p.icon}</span><span class="autoplay-preset-copy"><strong>${p.title}</strong><small>${p.desc}</small></span><span class="autoplay-preset-check">${s.preset===p.id?'✓':''}</span>
-      </button>`).join('')}
-    </div>
-    <div class="field autoplay-background-field">
-      <label class="field-label">Décor de fond</label>
-      <select class="autoplay-background-select" data-action="ap-set-background-mode">
-        <option value="style" ${s.backgroundMode==='style'?'selected':''}>Décor du style — recommandé</option>
-        <option value="mix" ${s.backgroundMode==='mix'?'selected':''}>Décor + ambiance de la miniature</option>
-        <option value="thumbnail" ${s.backgroundMode==='thumbnail'?'selected':''} ${!quiz.thumbnail?'disabled':''}>Miniature du quiz comme décor</option>
-        <option value="custom" ${s.backgroundMode==='custom'?'selected':''}>Média externe — image, GIF ou vidéo</option>
-      </select>
-      <p class="hint">Tu peux garder le décor du style, utiliser la miniature du quiz, ou remplacer complètement le fond par ton propre média.</p>
-      ${s.backgroundMode==='custom'?`
-      <div class="autoplay-custom-media-box">
-        <div class="two-col">
-          <div>
-            <label class="field-label">URL du média</label>
-            <input class="input" type="url" data-action="ap-set-custom-media-url" value="${escapeHTML(s.customMediaUrl||'')}" placeholder="https://...">
-            <p class="hint">Image, GIF ou fichier vidéo hébergé en ligne.</p>
-          </div>
-          <div>
-            <label class="field-label">Ou importer un fichier</label>
-            <input class="input" type="file" accept="image/*,video/*,.gif" data-action="ap-set-custom-media-file">
-            <p class="hint">Utilisé pour cette session Auto Play. Les vidéos locales ne sont pas copiées dans la bibliothèque.</p>
-          </div>
-        </div>
-        ${s.customMediaUrl?`<div class="autoplay-custom-media-preview-wrap">${autoplayExternalMediaPreview(s.customMediaUrl,s.customMediaType||'image')}</div>`:''}
-      </div>`:''}
-    </div>
-    <div class="two-col autoplay-style-options">
-      <div class="field autoplay-background-field">
-        <label class="field-label">Variante du décor</label>
-        <select class="autoplay-background-select" data-action="ap-set-background-variant">${autoplayBackgroundVariantOptions(s.preset==='auto'?resolveAutoplayPreset(quiz,'auto'):s.preset,s.backgroundVariant||'1')}</select>
-        <div class="autoplay-background-preview-grid">${autoplayBackgroundPreviewMarkup(s.preset==='auto'?resolveAutoplayPreset(quiz,'auto'):s.preset,s.backgroundVariant||'1')}</div>
-        <p class="hint">Nintendo possède plusieurs décors originaux. Clique directement sur un aperçu ou utilise le sélecteur.</p>
-      </div>
-      <div class="field autoplay-background-field">
-        <label class="field-label">Langue des réponses à l'écran</label>
-        <select class="autoplay-background-select" data-action="ap-set-reveal-language">
-          <option value="auto" ${(s.revealLanguage||'auto')==='auto'?'selected':''}>Automatique — langue du quiz</option>
-          <option value="fr" ${s.revealLanguage==='fr'?'selected':''}>Français — « Réponse correcte »</option>
-          <option value="en" ${s.revealLanguage==='en'?'selected':''}>English — “Correct answer”</option>
-        </select>
-        <p class="hint">Cette langue concerne les labels affichés dans la vidéo, indépendamment de la langue de l'interface admin.</p>
-      </div>
-      <div class="field autoplay-background-field">
-        <label class="field-label">Style du texte</label>
-        <select class="autoplay-background-select" data-action="ap-set-text-style">${autoplayTextStyleOptions(s.textStyle||'preset')}</select>
-        <p class="hint">Le choix s’applique au titre, à la question, au timer et aux écrans d’introduction.</p>
-      </div>
-    </div>
-    <div class="section-title autoplay-section-heading">Disposition des questions</div>
-    <p class="hint autoplay-preset-hint">Le preset donne une direction générale, puis chaque type de question peut avoir son propre layout. Ainsi un QCM peut rester centré pendant qu'un personnage occupe la moitié de l'écran.</p>
-    <div class="field autoplay-background-field">
-      <label class="field-label">Disposition générale</label>
-      <select class="autoplay-background-select" data-action="ap-set-layout-default">${autoplayLayoutOverrideOptions(s.layout||'auto')}</select>
-    </div>
-    <div class="autoplay-type-layout-list">${autoplayLayoutByTypeRows(quiz,s)}</div>
-    <div class="field autoplay-background-field">
-      <label class="field-label">Style du timer</label>
-      <div class="autoplay-choice-grid autoplay-timer-grid">${autoplayTimerOptions(s.timerStyle||getAutoplayPreset(s.preset==='auto'?resolveAutoplayPreset(quiz,'auto'):s.preset).timerStyle||'ring')}</div>
-    </div>
-    <div class="field autoplay-background-field">
-      <label class="field-label">Position du timer</label>
-      <select class="autoplay-background-select" data-action="ap-set-timer-position">
-        <option value="auto" ${(s.timerPosition||'auto')==='auto'?'selected':''}>Automatique — adaptée au layout</option>
-        <option value="top-center" ${s.timerPosition==='top-center'?'selected':''}>En haut — centré</option>
-        <option value="top-right" ${s.timerPosition==='top-right'?'selected':''}>En haut à droite</option>
-        <option value="top-left" ${s.timerPosition==='top-left'?'selected':''}>En haut à gauche</option>
-        <option value="right-panel" ${s.timerPosition==='right-panel'?'selected':''}>Dans le panneau d'information</option>
-      </select>
-    </div>
-    <div class="field"><label class="field-label">${tr('response_time')}</label><div class="mode-grid" style="grid-template-columns:repeat(4,1fr);">${times.map(t=>`<div class="mode-opt ${s.responseTime===t?'selected':''}" data-action="ap-set-response-time" data-value="${t}">${t}${tr('duration_short')}</div>`).join('')}</div></div>
-    <div class="two-col">
-      <div class="field"><label class="field-label">${tr('reveal_duration')}</label><div class="range-row"><input type="range" min="1" max="6" value="${s.revealDuration}" data-action="ap-set-reveal-duration"><span class="val" id="ap-reveal-val">${s.revealDuration}s</span></div></div>
-      <div class="field"><label class="field-label">${tr('next_delay')}</label><div class="range-row"><input type="range" min="0" max="5" step="0.5" value="${s.nextDelay}" data-action="ap-set-next-delay"><span class="val" id="ap-delay-val">${s.nextDelay}s</span></div></div>
-    </div>
-    ${guessSection}
-    <div class="section-title">${tr('shuffle_title')}</div>
-    <div class="checkbox-row" style="margin-bottom:22px;"><div class="cat-toggle ${s.shuffleQ?'selected':''}" data-action="ap-toggle-shuffle-q">${tr('shuffle_questions')}</div><div class="cat-toggle ${s.shuffleA?'selected':''}" data-action="ap-toggle-shuffle-a">${tr('shuffle_answers')}</div></div>
-    <p class="hint" style="margin-bottom:18px;">${tr('fullscreen_hint')}</p>
-    <div class="field autoplay-background-field autoplay-intro-field">
-      <label class="field-label">Message d’introduction vidéo</label>
-      <select class="autoplay-background-select" data-action="ap-set-intro-message">${autoplayIntroMessageOptions(s.introMessage||'lets-go')}</select>
-      <p class="hint">Un écran d’accueil 16:9 présentera le quiz avant la première question.</p>
-    </div>
-    <div class="autoplay-static-preview-hint"><strong>Les aperçus ci-dessus sont statiques</strong><span>Ils servent uniquement à visualiser la composition. Le vrai rendu utilise ensuite le décor, les animations et les transitions du style choisi.</span></div>
-    <div class="autoplay-launch-actions">
-      <button class="btn btn-primary" data-action="launch-autoplay-stage">${Icons.cast(16)} ${tr('start_quiz')}</button>
-    </div>
-  </div>`;
-}
+function renderAutoplaySetupView(){ return renderStudioSetup(); }
 
 /* ============================================================
    20. AUTO PLAY — BROADCAST STAGE ENGINE
    ============================================================ */
-let apTimers = { phaseTimeout:null, tickRAF:null };
+let apTimers = { phaseTimeout:null, tickRAF:null, transition:null };
+function scheduleAutoplay(callback,ms){
+  const eng=STATE.autoplayEngine;if(!eng)return;
+  eng.nextAction=callback;eng.nextAt=performance.now()+ms;
+  apTimers.phaseTimeout=setTimeout(()=>{if(STATE.autoplayEngine===eng&&!eng.paused)callback();},ms);
+}
 let _stageEndActionsTimer = null;
 function clearApTimers(){
   if(apTimers.phaseTimeout) clearTimeout(apTimers.phaseTimeout);
   if(apTimers.tickRAF) cancelAnimationFrame(apTimers.tickRAF);
+  if(apTimers.transition)clearTimeout(apTimers.transition);
+  apTimers.transition=null;
   apTimers.phaseTimeout=null; apTimers.tickRAF=null;
 }
 function shuffleArray(arr){
@@ -585,14 +473,18 @@ function launchAutoplayStage(){
   const s = STATE.autoplaySetup;
   const quiz = getQuiz(s.quizId);
   if(!quiz) return;
+  const issues=quizIssues(quiz);if(issues.length){showToast(issues[0],'err');return;}
+  saveStudioSettings();
+  studioInitAudio(s.sound);
   let order = quiz.questions.map((_,i)=>i);
   if(s.shuffleQ) order = shuffleArray(order);
   ensureAutoplayGuessSelections(s,quiz);
   STATE.autoplayEngine = {
+    ...s, fixedResponseTime:s.responseTime,
     quizId:s.quizId, order, pos:0, phase:'intro', introStep:1,
     responseTime:s.responseTime, revealDuration:s.revealDuration, nextDelay:s.nextDelay, shuffleA:s.shuffleA, preset:resolveAutoplayPreset(quiz,s.preset||'auto'), backgroundMode:s.backgroundMode||'style', backgroundVariant:s.backgroundVariant||'1', customMediaUrl:s.customMediaUrl||'', customMediaType:s.customMediaType||'image', revealLanguage:s.revealLanguage||'auto', textStyle:s.textStyle||'preset', layout:s.layout||'auto', layoutByType:{...(s.layoutByType||{})}, timerStyle:s.timerStyle||getAutoplayPreset(resolveAutoplayPreset(quiz,s.preset||'auto')).timerStyle||'ring', timerPosition:s.timerPosition||getAutoplayPreset(resolveAutoplayPreset(quiz,s.preset||'auto')).timerPosition||'auto',
     guessMode:s.guessMode||'normal', guessDifficulty:s.guessDifficulty||'normal', introMessage:s.introMessage||'lets-go', guessModeByQuestion:{...(s.guessModeByQuestion||{})}, guessRandomByQuestion:{},
-    phaseStart:performance.now(), answerOrder:null, _answerOrderForQ:null,
+    paused:false,phaseStart:performance.now(), answerOrder:null, _answerOrderForQ:null,
   };
   renderStageShell();        // creates the fullscreen-capable container ONCE for the whole quiz
   runAutoplayIntroSequence();
@@ -605,22 +497,10 @@ function autoplayDifficultyLabel(quiz,lang){
   if(lang==='en') return ({easy:'Easy',facile:'Easy',normal:'Normal',medium:'Normal',hard:'Hard',difficile:'Hard'}[d]||'Normal');
   return ({easy:'Facile',facile:'Facile',normal:'Normale',medium:'Normale',hard:'Difficile',difficile:'Difficile'}[d]||'Normale');
 }
-function autoplayIntroSlideMarkup(eng,quiz,step){
-  const lang=autoplayRevealLanguage(eng,quiz);
-  const preset=eng.preset||'cinematic';
-  const world=autoplayIntroWorld(preset);
-  const difficulty=autoplayDifficultyLabel(quiz,lang);
-  const count=quiz.questions.length;
-  const seconds=eng.responseTime;
-  const text=autoplayIntroMessage(eng.introMessage);
-  if(lang==='en'){
-    if(step===1) return `<div class="stage-intro-screen stage-intro-screen-1"><span class="stage-intro-eyebrow">QUIZCAST</span><div class="stage-intro-big">Welcome to a<br><strong>${escapeHTML(world)}</strong> quiz</div></div>`;
-    if(step===2) return `<div class="stage-intro-screen stage-intro-screen-2"><span class="stage-intro-eyebrow">GET READY</span><div class="stage-intro-stats"><strong>${count}</strong><span>questions</span><i></i><strong>${escapeHTML(difficulty)}</strong><i></i><strong>${seconds}s</strong><span>to think</span></div></div>`;
-    return `<div class="stage-intro-screen stage-intro-screen-3"><div class="stage-intro-final">${escapeHTML(text)}</div></div>`;
-  }
-  if(step===1) return `<div class="stage-intro-screen stage-intro-screen-1"><span class="stage-intro-eyebrow">QUIZCAST</span><div class="stage-intro-big">Bienvenue à un quiz<br><strong>${escapeHTML(world)}</strong></div></div>`;
-  if(step===2) return `<div class="stage-intro-screen stage-intro-screen-2"><span class="stage-intro-eyebrow">PRÉPARE-TOI</span><div class="stage-intro-stats"><strong>${count}</strong><span>questions</span><i></i><strong>${escapeHTML(difficulty)}</strong><i></i><strong>${seconds}s</strong><span>pour réfléchir</span></div></div>`;
-  return `<div class="stage-intro-screen stage-intro-screen-3"><div class="stage-intro-final">${escapeHTML(text)}</div></div>`;
+function autoplayIntroSlideMarkup(eng,quiz){
+  const en=autoplayRevealLanguage(eng,quiz)==='en';
+  const hook=eng.hook||quiz.videoHook||(en?'How many can you get right?':'Combien de bonnes réponses vas-tu trouver ?');
+  return `<div class="studio-intro"><span class="eyebrow">QUIZCAST · ${quiz.questions.length} ${en?'QUESTIONS':'QUESTIONS'}</span><h1>${escapeHTML(quiz.name)}</h1><p>${escapeHTML(hook)}</p><div class="intro-rule">${en?'One point per correct answer. Keep your score!':'Une bonne réponse = un point. Garde ton score !'}</div><div class="intro-start">${en?'LET’S PLAY':'À TOI DE JOUER'} <span>→</span></div></div>`;
 }
 function renderAutoplayIntro(){
   const eng=STATE.autoplayEngine, quiz=eng&&getQuiz(eng.quizId);
@@ -632,68 +512,45 @@ function renderAutoplayIntro(){
   setTimeout(()=>content.classList.remove('stage-intro-in'),700);
 }
 function startAutoplayCountdown(){
-  const eng=STATE.autoplayEngine;
-  if(!eng||eng.phase!=='intro') return;
-  clearApTimers();
-  eng.introStep=3;
-  renderAutoplayIntro();
-  apTimers.phaseTimeout=setTimeout(()=>{
-    eng.phase='counting';
-    eng.phaseStart=performance.now();
-    renderQuestionIntoStage(()=>runAutoplayPhaseTimer());
-  },1300);
+  const eng=STATE.autoplayEngine;if(!eng)return;clearApTimers();
+  eng.phase='counting';renderQuestionIntoStage(()=>runAutoplayPhaseTimer());
 }
 function runAutoplayIntroSequence(){
-  const eng=STATE.autoplayEngine;
-  if(!eng||eng.phase!=='intro') return;
-  eng.introStep=eng.introStep||1;
+  const eng=STATE.autoplayEngine;if(!eng)return;
   renderAutoplayIntro();
-  const duration=eng.introStep===1?1800:eng.introStep===2?2100:1300;
-  apTimers.phaseTimeout=setTimeout(()=>{
-    if(eng.introStep<3){
-      eng.introStep+=1;
-      runAutoplayIntroSequence();
-    }else{
-      eng.phase='counting';
-      eng.phaseStart=performance.now();
-      renderQuestionIntoStage(()=>runAutoplayPhaseTimer());
-    }
-  },duration);
+  scheduleAutoplay(startAutoplayCountdown,(eng.introDuration??4)*1000);
+}
+function autoplayAdvance(){
+  const eng=STATE.autoplayEngine;if(!eng)return;
+  eng.pos++;eng.phase='counting';eng.paused=false;
+  renderQuestionIntoStage(()=>runAutoplayPhaseTimer());
 }
 function runAutoplayPhaseTimer(){
   clearApTimers();
-  const eng = STATE.autoplayEngine;
-  if(!eng || eng.phase==='intro') return;
+  const eng=STATE.autoplayEngine;if(!eng||eng.paused)return;
   if(eng.phase==='counting'){
-    eng.phaseStart = performance.now();
-    tickCountdown();
-    apTimers.phaseTimeout = setTimeout(()=>{
-      eng.phase='revealing'; eng.phaseStart=performance.now();
-      updateRevealVisuals();
-      runAutoplayPhaseTimer();
-    }, eng.responseTime*1000);
-  } else if(eng.phase==='revealing'){
-    apTimers.phaseTimeout = setTimeout(()=>{
-      if(eng.pos >= eng.order.length-1){
-        eng.phase='finished';
-        renderFinishedStage();
-      } else {
-        eng.phase='pausing';
-        apTimers.phaseTimeout = setTimeout(()=>{
-          eng.pos++; eng.phase='counting';
-          renderQuestionIntoStage(()=>runAutoplayPhaseTimer());
-        }, eng.nextDelay*1000);
-      }
-    }, eng.revealDuration*1000);
+    eng.phaseStart=performance.now();eng.lastTick=null;tickCountdown();
+    scheduleAutoplay(()=>{eng.phase='revealing';eng.phaseStart=performance.now();updateRevealVisuals();studioTone('reveal');runAutoplayPhaseTimer();},eng.responseTime*1000);
+  }else if(eng.phase==='revealing'){
+    scheduleAutoplay(()=>{
+      if(eng.pos>=eng.order.length-1){eng.phase='finished';renderFinishedStage();return;}
+      eng.phase='pausing';
+      scheduleAutoplay(()=>{
+        if(eng.checkpointEvery&&(eng.pos+1)%eng.checkpointEvery===0){
+          eng.phase='checkpoint';renderAutoplayCheckpoint();scheduleAutoplay(autoplayAdvance,3000);
+        }else autoplayAdvance();
+      },eng.nextDelay*1000);
+    },eng.revealDuration*1000);
   }
 }
 function tickCountdown(){
   const eng = STATE.autoplayEngine;
-  if(!eng || eng.phase!=='counting') return;
+  if(!eng || eng.paused || eng.phase!=='counting') return;
   const elapsed = (performance.now()-eng.phaseStart)/1000;
   const remain = Math.max(0, eng.responseTime-elapsed);
   const pct = clamp(elapsed/eng.responseTime,0,1);
   updateCountdownDOM(remain,pct);
+  if(Math.ceil(remain)<=3 && Math.ceil(remain)>0 && eng.lastTick!==Math.ceil(remain)){eng.lastTick=Math.ceil(remain);studioTone('tick');}
   apTimers.tickRAF = requestAnimationFrame(tickCountdown);
 }
 function updateCountdownDOM(remain,pct){
@@ -723,7 +580,7 @@ function renderStageShell(){
   const preset = STATE.autoplayEngine?.preset || 'cinematic';
   const textStyle=STATE.autoplayEngine?.textStyle||'preset';
   const bgMedia=autoplayBackgroundMarkup(preset,STATE.autoplayEngine?.backgroundMode||'style',quiz?.thumbnail||'',STATE.autoplayEngine?.backgroundVariant||'1',STATE.autoplayEngine?.customMediaUrl||'',STATE.autoplayEngine?.customMediaType||'image');
-  root.innerHTML = `<div class="stage-wrap${presetClass ? ' '+presetClass : ''}" id="stage-wrap"><div class="stage-16x9${presetClass} autoplay-text-style-${textStyle}" id="stage-16x9">
+  root.innerHTML = `<div class="stage-wrap${presetClass ? ' '+presetClass : ''}" id="stage-wrap"><div class="stage-16x9 studio-scene${presetClass} autoplay-text-style-${textStyle}" id="stage-16x9">
     <svg width="0" height="0" style="position:absolute"><defs>
       <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#7c5cfc"/>
@@ -736,22 +593,21 @@ function renderStageShell(){
       <div class="stage-video-progress" id="stage-video-progress">1 / 1</div>
     </div>
     <div class="stage-video-progress-line"><span id="stage-video-progress-fill"></span></div>
-    ${bgMedia}<div class="stage-content" id="stage-content"></div>
-    <div class="stage-exit" style="display:flex;gap:8px;">
-      <button class="btn btn-ghost btn-icon" data-action="toggle-fullscreen-stage" title="${tr('toggle_fullscreen')}">${Icons.maximize(16)}</button>
-      <button class="btn btn-ghost btn-icon" data-action="exit-autoplay-stage" title="${tr('exit_stage')}">${Icons.x(16)}</button>
-    </div>
-  </div></div>`;
+    ${bgMedia}<div class="scene-orb orb-one"></div><div class="scene-orb orb-two"></div><div class="stage-content" id="stage-content"></div><div class="scene-footer" id="scene-footer"></div>
+  </div><div class="broadcast-controls" aria-label="Commandes de répétition">
+      <button class="btn" data-action="studio-previous">← Précédente</button><button class="btn" data-action="studio-pause" id="studio-pause">Pause</button><button class="btn" data-action="studio-next">Suivante →</button><span>Capture OBS : cadre 16:9 uniquement</span>
+      <button class="btn" data-action="toggle-fullscreen-stage" title="Plein écran">${Icons.maximize(16)}</button><button class="btn" data-action="exit-autoplay-stage">Fermer · Échap</button>
+    </div></div>`;
 }
 function renderQuestionIntoStage(onReady){
   const eng = STATE.autoplayEngine;
   const quiz = eng && getQuiz(eng.quizId);
   const content = document.getElementById('stage-content');
   if(!eng || !quiz || !content) return;
-  const populate = () => { populateStageContent(eng, quiz, content); if(onReady) onReady(); };
+  const populate = () => { if(STATE.autoplayEngine!==eng)return;populateStageContent(eng, quiz, content); if(onReady) onReady(); };
   if(content.children.length){
     content.classList.add('stage-fade-out');
-    setTimeout(populate, 280);
+    eng.transitioning=true;apTimers.transition=setTimeout(()=>{eng.transitioning=false;populate();},280);
   } else {
     populate();
   }
@@ -774,6 +630,10 @@ function getAutoplayGuessQuestion(q,eng){
 function populateStageContent(eng,quiz,content){
   const originalQ=quiz.questions[eng.order[eng.pos]];
   eng._answerOrderForQ=null;
+  eng.responseTime=studioResponseTime({...eng,responseTime:eng.fixedResponseTime},originalQ);
+  document.getElementById('stage-16x9')?.classList.remove('is-revealing');
+  const footer=document.getElementById('scene-footer');
+  if(footer)footer.textContent=originalQ.chapter||(autoplayRevealLanguage(eng,quiz)==='en'?'Keep your score · One point per answer':'Garde ton score · Un point par bonne réponse');
   content.classList.remove('stage-fade-out');
   content.innerHTML=buildAutoplayQuestionMarkup(eng,quiz,originalQ,false);
   const titleEl=document.getElementById('stage-video-title');
@@ -792,6 +652,11 @@ function updateRevealVisuals(){
   const ringWrap=document.getElementById('timer-ring-wrap');
   if(ringWrap)ringWrap.classList.add('hiding');
   const content=document.getElementById('stage-content');
+  document.getElementById('stage-16x9')?.classList.add('is-revealing');
+  if(content){
+    const note=document.createElement('div');note.className='scene-explanation';note.textContent=q.explanation||autoplayCorrectLabel(eng,quiz);content.appendChild(note);
+  }
+  if(q.type==='open_answer'){if(content)content.innerHTML=studioRevealMarkup(q,eng,quiz);return;}
   if(q.type==='ranking'){
     const list=document.querySelector('#stage-content .stage-ranking');if(!list)return;
     const before=new Map([...list.children].map(el=>[el.dataset.aid,el.getBoundingClientRect().top]));
@@ -804,26 +669,7 @@ function updateRevealVisuals(){
     const pct=clamp((q.value-q.min)/(q.max-q.min)*100,0,100);const fill=document.getElementById('stage-number-fill'),marker=document.getElementById('stage-number-marker'),val=document.getElementById('stage-number-value');
     if(fill)fill.style.width=pct+'%';if(marker){marker.style.left=pct+'%';marker.classList.add('revealed');}if(val){val.textContent=`${q.value}${q.unit?' '+q.unit:''}`;val.classList.add('visible');}return;
   }
-  if(q.type==='guess_character'){
-    if(content){
-      content.classList.add('stage-reveal-out');
-      setTimeout(()=>{
-        content.innerHTML=`<div class="stage-guess-reveal stage-reveal-soft preset-reveal-${eng.preset}">
-          <div class="stage-guess-reveal-bg" aria-hidden="true"><img src="${q.image||''}" alt=""></div>
-          <div class="stage-guess-reveal-media"><img class="stage-guess-reveal-img" src="${q.image||''}" alt=""></div>
-          <div class="stage-guess-reveal-copy">
-            <div class="stage-guess-kicker">${autoplayCorrectLabel(eng,quiz)}</div>
-            <div class="stage-reveal-line"></div>
-            <div class="stage-guess-answer">${escapeHTML(q.answerText||'Réponse inconnue')}</div>
-          </div>
-        </div>`;
-        content.classList.remove('stage-reveal-out');
-        content.classList.add('stage-reveal-in');
-        setTimeout(()=>content.classList.remove('stage-reveal-in'),800);
-      },260);
-    }
-    return;
-  }
+  if(q.type==='guess_character'){if(content)content.innerHTML=studioRevealMarkup(q,eng,quiz);return;}
   if(content){ content.classList.add('stage-reveal-in'); setTimeout(()=>content.classList.remove('stage-reveal-in'),700); }
   document.querySelectorAll('#stage-content .stage-tile').forEach(tile=>{if(tile.dataset.aid===q.correctAnswerId){tile.classList.add('correct-pulse');const badge=document.createElement('span');badge.className='correct-badge';badge.innerHTML=Icons.check(20);tile.appendChild(badge);}else tile.classList.add('dim');});
 }
@@ -848,31 +694,23 @@ function renderFinishedStage(){
   clearApTimers();
   const content = document.getElementById('stage-content');
   if(!content) return;
-  content.innerHTML = `
-    <div class="stage-end qfade-in">
-      <div class="confetti-wrap">${confettiPieces()}</div>
-      <div class="stage-end-emoji">🎬</div>
-      <h2>${tr('stage_thanks')}</h2>
-      <div class="stage-end-actions" id="stage-end-actions" style="opacity:0;pointer-events:none;transition:opacity .6s ease;">
-        <button class="btn btn-outline" data-action="exit-autoplay-stage">${tr('stage_exit_lib')}</button>
-        <button class="btn btn-primary" data-action="replay-autoplay-stage">${Icons.repeat(14)} ${tr('stage_replay')}</button>
-      </div>
-    </div>`;
-  clearTimeout(_stageEndActionsTimer);
-  _stageEndActionsTimer = setTimeout(()=>{
-    const el = document.getElementById('stage-end-actions');
-    if(el){ el.style.opacity='1'; el.style.pointerEvents='auto'; }
-  }, 5000);
+  const en=autoplayRevealLanguage(eng,quiz)==='en';
+  const message=(eng.endMessage||(en?'Your score out of {total}? Tell us in the comments!':'Ton score sur {total} ? Écris-le en commentaire !')).replaceAll('{total}',String(quiz.questions.length));
+  document.getElementById('stage-16x9')?.classList.remove('is-revealing');
+  content.innerHTML=`<div class="studio-outro"><div class="confetti-wrap">${confettiPieces()}</div><span class="eyebrow">${en?'CHALLENGE COMPLETE':'DÉFI TERMINÉ'}</span><h2>${en?'So, what’s your score?':'Alors, combien de points ?'}</h2><div class="outro-score">? <span>/ ${quiz.questions.length}</span></div><p>${escapeHTML(message)}</p><small>${en?'Want another challenge? See you in the next quiz.':'Envie d’un autre défi ? Rendez-vous au prochain quiz.'}</small></div>`;
+  scheduleAutoplay(()=>{eng.phase='ended';document.getElementById('studio-pause').textContent='Rejouer';},(eng.outroDuration||6)*1000);
 }
+
 function toggleFullscreenStage(){
   if(document.fullscreenElement){ document.exitFullscreen().catch(()=>{}); }
-  else if(document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen().catch(()=>{}); }
+  else document.getElementById('stage-16x9')?.requestFullscreen?.().catch(()=>{});
 }
 function exitAutoplayStage(){
   clearApTimers();
   clearTimeout(_stageEndActionsTimer);
   if(document.fullscreenElement) document.exitFullscreen().catch(()=>{});
   STATE.autoplayEngine=null;
+  studioStopAudio();
   const root = document.getElementById('autoplay-root'); if(root) root.innerHTML='';
   STATE.view='autoplaySetup';
   render();

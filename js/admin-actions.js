@@ -14,6 +14,7 @@ function duplicateQuiz(id){
   const q = getQuiz(id); if(!q) return;
   const suffix = STATE.settings.uiLanguage==='en' ? ' (copy)' : ' (copie)';
   const copy = JSON.parse(JSON.stringify(q));
+  delete copy.catalogKey;delete copy.editorialOrigin;
   copy.id = uid(); copy.name = (q.name||'') + suffix; copy.isDemo=false;
   copy.createdAt = nowISO(); copy.updatedAt = nowISO();
   copy.questions = copy.questions.map(qq=>{
@@ -29,9 +30,9 @@ function duplicateQuiz(id){
   render();
   showToast(tr('toast_quiz_duplicated'));
 }
-function doDeleteQuiz(id){
+async function doDeleteQuiz(id){
   STATE.quizzes = STATE.quizzes.filter(q=>q.id!==id);
-  deleteQuizStorage(id);
+  await deleteQuizStorage(id);
   if(STATE.currentQuizId===id){ STATE.currentQuizId=null; STATE.view='library'; }
   render();
   showToast(tr('toast_quiz_deleted'));
@@ -53,7 +54,8 @@ async function handleImportFile(file){
   try{
     const text = await file.text();
     const data = JSON.parse(text);
-    if(!data || !Array.isArray(data.quizzes)) throw new Error('bad shape');
+    if(!data || !Array.isArray(data.quizzes) || !data.quizzes.length) throw new Error('Aucun quiz dans ce fichier');
+    validateQuizImport(data);
     const idMap = {};
     (data.categories||[]).forEach(c=>{
       const existing = STATE.categories.find(ec=>ec.name===c.name);
@@ -65,6 +67,7 @@ async function handleImportFile(file){
     data.quizzes.forEach(q=>{
       const nq = JSON.parse(JSON.stringify(q));
       // Imported quizzes get a fresh id so repeated imports never overwrite an existing quiz.
+      delete nq.catalogKey;delete nq.editorialOrigin;
       nq.id = uid();
       nq.categoryIds = (q.categoryIds||[]).map(cid=>idMap[cid]).filter(Boolean);
       nq.questions = (q.questions||[]).map(qq=>{
@@ -92,7 +95,7 @@ async function handleImportFile(file){
     render();
   }catch(err){
     console.error(err);
-    showToast(tr('toast_import_error'),'err');
+    showToast(tr('toast_import_error')+' : '+(err.message||'vérifie le contenu'),'err');
   }
 }
 async function handleQuizThumbFile(file){
@@ -165,13 +168,13 @@ function saveEditCategory(){
   render();
   showToast(tr('toast_saved'));
 }
-function doDeleteCategory(id){
+async function doDeleteCategory(id){
+  STATE.hiddenCategories=[...new Set([...(STATE.hiddenCategories||[]),id])];
+  await Store.setJSON('app:hidden-categories',STATE.hiddenCategories);
   STATE.categories = STATE.categories.filter(c=>c.id!==id);
   STATE.categories.forEach(c=>{ if(c.parentId===id) c.parentId=null; });
-  STATE.quizzes.forEach(q=>{
-    if((q.categoryIds||[]).includes(id)){ q.categoryIds = q.categoryIds.filter(cid=>cid!==id); saveQuiz(q); }
-  });
-  saveCategories();
+  await Promise.all(STATE.quizzes.filter(q=>(q.categoryIds||[]).includes(id)).map(q=>{q.categoryIds=q.categoryIds.filter(cid=>cid!==id);return saveQuiz(q);}));
+  await saveCategories();
   render();
   showToast(tr('toast_cat_deleted'));
 }

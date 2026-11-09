@@ -1,0 +1,7 @@
+semaine,sujet,langue,format,duree_video,date_publication,url,temps_production_heures,impressions_j7,ctr_j7,duree_moyenne_j7,pourcentage_moyen_j7,retention_30s_j7,abonnes_gagnes_j7,impressions_j28,ctr_j28,duree_moyenne_j28,abonnes_gagnes_j28,observations
+1,Capitales,fr,QCM,,,,,,,,,,,,,,,
+2,Films en emojis,fr,QCM visuel,,,,,,,,,,,,,,,
+3,Animaux,fr,Vrai ou faux,,,,,,,,,,,,,,,
+4,Devinettes,fr,Réponse libre,,,,,,,,,,,,,,,
+5,Le juste nombre,fr,Estimation,,,,,,,,,,,,,,,
+6,Jeux vidéo,fr,QCM,,,,,,,,,,,,,,,

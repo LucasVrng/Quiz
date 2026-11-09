@@ -3,9 +3,10 @@
    ============================================================ */
 const I18N = {
 fr:{
+  public_view_site:'Voir le site', public_view_quiz:'Voir la fiche',
   app_name:'QuizCast',
   public_nav_home:'Accueil', public_nav_quizzes:'Quiz', public_nav_categories:'Catégories', public_nav_random:'Quiz aléatoire', public_admin:'Admin',
-  public_kicker:'Des quiz. Du fun. À toi de jouer.', public_hero_title:'Teste tes connaissances.<br><span>Montre ce que tu sais.</span>', public_hero_sub:'Découvre des quiz sur le gaming, les films, la culture, Internet et bien plus. Choisis un quiz et lance-toi.', public_play_random:'Jouer à un quiz aléatoire', public_browse:'Explorer les quiz', public_popular:'Quiz populaires', public_new:'Nouveaux quiz', public_categories:'Explorer par catégorie', public_see_all:'Tout voir', public_no_quizzes:'Aucun quiz disponible pour le moment.', public_questions:'questions', public_question:'question', public_play:'Jouer', public_quizzes_found:'quiz', public_back:'Retour', public_start:'Commencer le quiz', public_about:'À propos de ce quiz', public_related:'Tu pourrais aussi aimer', public_category_count:'quiz', public_footer:'QuizCast — joue, découvre, recommence.',
+  public_kicker:'Des quiz. Du fun. À toi de jouer.', public_hero_title:'Teste tes connaissances.<br><span>Montre ce que tu sais.</span>', public_hero_sub:'Découvre des quiz sur le gaming, les films, la culture, Internet et bien plus. Choisis un quiz et lance-toi.', public_play_random:'Jouer à un quiz aléatoire', public_browse:'Explorer les quiz', public_popular:'À découvrir', public_new:'Nouveaux quiz', public_categories:'Explorer par catégorie', public_see_all:'Tout voir', public_no_quizzes:'Aucun quiz disponible pour le moment.', public_questions:'questions', public_question:'question', public_play:'Jouer', public_quizzes_found:'quiz', public_back:'Retour', public_start:'Commencer le quiz', public_about:'À propos de ce quiz', public_related:'Tu pourrais aussi aimer', public_category_count:'quiz', public_footer:'QuizCast — joue, découvre, recommence.',
   nav_dashboard:'Tableau de bord', nav_library:'Bibliothèque', nav_categories:'Catégories',
   sidebar_new_quiz:'Nouveau quiz',
   storage_note:'Sauvegarde automatique dans cet artefact.',
@@ -99,9 +100,10 @@ fr:{
   answers_count:'Nombre de réponses', true_label:'Vrai', false_label:'Faux', true_false_hint:'Deux réponses fixes : Vrai et Faux. Définis simplement laquelle est correcte.',
 },
 en:{
+  public_view_site:'View website', public_view_quiz:'View quiz',
   app_name:'QuizCast',
   public_nav_home:'Home', public_nav_quizzes:'Quizzes', public_nav_categories:'Categories', public_nav_random:'Random Quiz', public_admin:'Admin',
-  public_kicker:'Quizzes. Fun. Your turn.', public_hero_title:'Test your knowledge.<br><span>Show what you know.</span>', public_hero_sub:'Discover quizzes about gaming, movies, trivia, the internet and more. Pick a quiz and start playing.', public_play_random:'Play a random quiz', public_browse:'Explore quizzes', public_popular:'Popular quizzes', public_new:'New quizzes', public_categories:'Explore by category', public_see_all:'See all', public_no_quizzes:'No quizzes available yet.', public_questions:'questions', public_question:'question', public_play:'Play', public_quizzes_found:'quizzes', public_back:'Back', public_start:'Start quiz', public_about:'About this quiz', public_related:'You might also like', public_category_count:'quizzes', public_footer:'QuizCast — play, discover, repeat.',
+  public_kicker:'Quizzes. Fun. Your turn.', public_hero_title:'Test your knowledge.<br><span>Show what you know.</span>', public_hero_sub:'Discover quizzes about gaming, movies, trivia, the internet and more. Pick a quiz and start playing.', public_play_random:'Play a random quiz', public_browse:'Explore quizzes', public_popular:'Discover quizzes', public_new:'New quizzes', public_categories:'Explore by category', public_see_all:'See all', public_no_quizzes:'No quizzes available yet.', public_questions:'questions', public_question:'question', public_play:'Play', public_quizzes_found:'quizzes', public_back:'Back', public_start:'Start quiz', public_about:'About this quiz', public_related:'You might also like', public_category_count:'quizzes', public_footer:'QuizCast — play, discover, repeat.',
   nav_dashboard:'Dashboard', nav_library:'Library', nav_categories:'Categories',
   sidebar_new_quiz:'New quiz',
   storage_note:'Auto-saved inside this artifact.',
@@ -538,6 +540,10 @@ async function saveQuiz(quiz){
   await saveQuizIndex();
 }
 async function deleteQuizStorage(id){
+  if(STATE.catalogIds?.includes(id)){
+    STATE.hiddenCatalog=[...new Set([...(STATE.hiddenCatalog||[]),id])];
+    await Store.setJSON('app:hidden-catalog',STATE.hiddenCatalog);
+  }
   await Store.delete('quiz:'+id);
   await saveQuizIndex();
 }
@@ -593,17 +599,26 @@ function seedDemoData(){
    ============================================================ */
 async function loadAll(){
   const requestedQuizId = window.QC_BOOT?.publicQuizId || window.QC_BOOT?.currentQuizId || null;
-  const [cats, settings, quizKeys, quizIndex, requestedQuiz] = await Promise.all([
+  const [cats, settings, quizKeys, quizIndex, requestedQuiz, catalog, hiddenIds] = await Promise.all([
     Store.getJSON('app:categories'),
     Store.getJSON('app:settings'),
     Store.list('quiz:'),
     Store.getJSON('app:quiz-index'),
-    requestedQuizId ? Store.getJSON('quiz:'+requestedQuizId) : Promise.resolve(null)
+    requestedQuizId ? Store.getJSON('quiz:'+requestedQuizId) : Promise.resolve(null),
+    fetch(qcRoute('data/catalog.json')).then(r=>{if(!r.ok)throw Error('Catalogue indisponible');return r.json();}).catch(e=>{console.error(e);STATE.catalogError=true;return {categories:[],quizzes:[]};}),
+    Store.getJSON('app:hidden-catalog')
   ]);
   STATE.categories = cats || [];
-  STATE.settings = settings || { uiLanguage:'fr', publicTheme:'warm' };
+  STATE.settings = settings || { uiLanguage:'fr', publicTheme:'pop' };
+  STATE.hiddenCatalog=hiddenIds||[];
+  for(const q of catalog.quizzes||[]){if(q.thumbnail?.startsWith('COVER_ROOT/'))q.thumbnail=new URL(qcRoute(q.thumbnail.slice(11)),location.href).pathname;}
+  STATE.catalogIds=(catalog.quizzes||[]).map(q=>q.id);
+  const hiddenCategories=await Store.getJSON('app:hidden-categories')||[];
+  STATE.hiddenCategories=hiddenCategories;
+  const categoryIds=new Set(STATE.categories.map(c=>c.id));
+  STATE.categories.push(...(catalog.categories||[]).filter(c=>!categoryIds.has(c.id)&&!hiddenCategories.includes(c.id)));
 
-  const byId = new Map();
+  const byId = new Map((catalog.quizzes||[]).filter(q=>!STATE.hiddenCatalog.includes(q.id)).map(q=>[q.id,q]));
   const allQuizIds = new Set((quizKeys||[]).filter(Boolean));
   for(const id of Array.isArray(quizIndex)?quizIndex:[]){ if(id) allQuizIds.add('quiz:'+id); }
   for(const k of allQuizIds){
@@ -626,6 +641,7 @@ async function loadAll(){
   if(window.QC_BOOT?.publicQuizId) STATE.publicQuizId = window.QC_BOOT.publicQuizId;
   if(window.QC_BOOT?.currentQuizId) STATE.currentQuizId = window.QC_BOOT.currentQuizId;
   STATE.ready = true;
+  if(STATE.catalogError) showToast('Catalogue indisponible. Tes quiz locaux restent accessibles. Recharge la page pour réessayer.','err');
   if(window.QC_BOOT?.view==='publicProfile') getProfile().then(p=>{STATE.publicProfile=p; render();});
   else if(window.QC_BOOT?.view==='play' && window.QC_BOOT?.publicQuizId) startPlay(window.QC_BOOT.publicQuizId,'publicQuiz');
   else if(window.QC_BOOT?.view==='autoplaySetup' && window.QC_BOOT?.currentQuizId) openAutoplaySetup(window.QC_BOOT.currentQuizId);

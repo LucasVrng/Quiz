@@ -17,6 +17,11 @@ Le projet reste une application statique, mais le monolithe `index.html` a été
 - `js/app.js` — dispatcher de rendu et effets de vue.
 - `js/admin-actions.js` — actions CRUD/import/export de l'administration.
 - `js/events.js` — délégation globale des événements.
+- `js/studio.js` — parcours créateur, modèles, aperçu et réglages vidéo, sons et import groupé.
+- `css/studio.css` — refonte de l’admin et scène relative à son conteneur.
+- `data/catalog.json` — catalogue commun livré aux visiteurs ; les créations et modifications restent locales.
+- `scripts/build-catalog.py` — génération reproductible du catalogue et des couvertures.
+- `tests/browser.test.cjs` — validations fonctionnelles avec Chromium.
 
 ## Pourquoi garder des scripts classiques ?
 

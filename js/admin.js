@@ -3,12 +3,13 @@
    ============================================================ */
 function renderSidebar(){
   const lang = STATE.settings.uiLanguage;
-  const navItem=(view,label,icon)=>`<div class="nav-item ${STATE.view===view?'active':''}" data-action="set-view" data-view="${view}">${icon(18)}<span>${label}</span></div>`;
+  const navItem=(view,label,icon)=>`<button class="nav-item ${STATE.view===view?'active':''}" data-action="set-view" data-view="${view}" ${STATE.view===view?'aria-current="page"':''}>${icon(18)}<span>${label}</span></button>`;
   return `<div class="sidebar">
     <div class="brand"><div class="brand-mark"><span></span></div><div class="brand-word">QUIZ<em>CAST</em></div></div>
     <div class="nav">
       ${navItem('dashboard', tr('nav_dashboard'), Icons.home)}
       ${navItem('library', tr('nav_library'), Icons.library)}
+      ${navItem('collection', 'Idées & collections', Icons.cast)}
       ${navItem('categories', tr('nav_categories'), Icons.tag)}
     </div>
     <button class="sidebar-cta" data-action="new-quiz">${Icons.plus(15)} ${tr('sidebar_new_quiz')}</button>
@@ -18,7 +19,7 @@ function renderSidebar(){
         <button class="${lang==='fr'?'active':''}" data-action="set-lang" data-lang="fr">FR</button>
         <button class="${lang==='en'?'active':''}" data-action="set-lang" data-lang="en">EN</button>
       </div>
-      <div class="storage-note">${liveStorageAvailable()? tr('storage_note') : tr('storage_note_offline')}</div>
+      <div class="storage-note">Sauvegarde sur cet appareil.<br>Exporte régulièrement une copie.</div>
     </div>
   </div>`;
 }
@@ -26,45 +27,7 @@ function renderSidebar(){
 /* ============================================================
    13. RENDER — DASHBOARD
    ============================================================ */
-function renderDashboard(){
-  if(STATE.quizzes.length===0){
-    return `<div class="topbar"><div><h1>${tr('dash_title')}</h1><div class="sub">${tr('dash_sub')}</div></div></div>
-    <div class="empty-state panel">${Icons.cast(34)}<h3>${tr('empty_dash_title')}</h3><p>${tr('empty_dash')}</p>
-      <div style="margin-top:18px;"><button class="btn btn-primary" data-action="new-quiz">${Icons.plus(15)} ${tr('action_new_quiz')}</button></div>
-    </div>`;
-  }
-  const totalQuestions = STATE.quizzes.reduce((s,q)=>s+q.questions.length,0);
-  const frCount = STATE.quizzes.filter(q=>q.language==='fr').length;
-  const enCount = STATE.quizzes.filter(q=>q.language==='en').length;
-  const recentCreated = [...STATE.quizzes].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);
-  const recentUpdated = [...STATE.quizzes].sort((a,b)=>new Date(b.updatedAt)-new Date(a.updatedAt)).slice(0,5);
-  const statCard=(num,label,color)=>`<div class="stat-card" style="--stat-color:${color}"><div class="stat-num">${num}</div><div class="stat-label">${label}</div></div>`;
-  const miniQuizRow=(q)=>`<div class="mini-row" data-action="open-quiz-editor" data-id="${q.id}">
-      <div class="mini-thumb" style="${q.thumbnail?`background-image:url(${q.thumbnail});background-size:cover;background-position:center;`:''}">${q.thumbnail?'':'🎬'}</div>
-      <div class="mini-info"><div class="name">${escapeHTML(q.name)||'—'}</div><div class="meta">${q.questions.length} ${tr(q.questions.length===1?'q_count_1':'q_count')} · ${(q.language||'fr').toUpperCase()}</div></div>
-    </div>`;
-  return `
-  <div class="topbar"><div><h1>${tr('dash_title')}</h1><div class="sub">${tr('dash_sub')}</div></div></div>
-  <div class="stat-grid">
-    ${statCard(STATE.quizzes.length, tr('stat_quizzes'), 'var(--violet)')}
-    ${statCard(totalQuestions, tr('stat_questions'), 'var(--teal)')}
-    ${statCard(STATE.categories.length, tr('stat_categories'), 'var(--amber)')}
-    ${statCard(frCount, tr('stat_fr'), 'var(--coral)')}
-    ${statCard(enCount, tr('stat_en'), 'var(--green)')}
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
-    <div><div class="section-title">${tr('recent_created')}<span class="see-all" data-action="set-view" data-view="library">${tr('see_all')}</span></div>
-      <div class="mini-list panel">${recentCreated.map(miniQuizRow).join('')}</div></div>
-    <div><div class="section-title">${tr('recent_updated')}<span class="see-all" data-action="set-view" data-view="library">${tr('see_all')}</span></div>
-      <div class="mini-list panel">${recentUpdated.map(miniQuizRow).join('')}</div></div>
-  </div>
-  <div class="section-title">${tr('quick_actions')}</div>
-  <div style="display:flex;gap:12px;flex-wrap:wrap;">
-    <button class="btn btn-primary" data-action="new-quiz">${Icons.plus(15)} ${tr('action_new_quiz')}</button>
-    <button class="btn btn-ghost" data-action="set-view" data-view="library">${Icons.library(15)} ${tr('action_library')}</button>
-    <button class="btn btn-ghost" data-action="set-view" data-view="categories">${Icons.tag(15)} ${tr('action_categories')}</button>
-  </div>`;
-}
+function renderDashboard(){ return renderStudioDashboard(); }
 
 /* ============================================================
    14. RENDER — LIBRARY
@@ -88,7 +51,7 @@ function renderQuizCard(q){
     <div class="quiz-actions">
       <button class="btn btn-ghost" data-action="play-quiz" data-id="${q.id}" title="${tr('btn_play')}">${Icons.play(13)}</button>
       <button class="btn btn-ghost" data-action="public-view-quiz" data-id="${q.id}" title="${tr('public_view_quiz')}">${Icons.globe(13)}</button>
-      <button class="btn btn-ghost" data-action="autoplay-setup" data-id="${q.id}" title="${tr('btn_autoplay')}">${Icons.cast(13)}</button>
+      <button class="btn btn-ghost" data-action="autoplay-setup" data-id="${q.id}" title="${tr('btn_autoplay')}">${Icons.cast(13)} Vidéo</button>
       <button class="btn btn-ghost" data-action="duplicate-quiz" data-id="${q.id}" title="${tr('btn_duplicate')}">${Icons.copy(13)}</button>
       <button class="btn btn-danger" data-action="delete-quiz" data-id="${q.id}" title="${tr('btn_delete')}">${Icons.trash(13)}</button>
     </div>
@@ -203,7 +166,7 @@ function renderQuestionRow(q, idx){
   const type = QuestionTypes[q.type];
   return `<div class="q-row" draggable="true" data-qid="${q.id}" data-idx="${idx}">
     <div class="drag-handle">${Icons.grip(16)}</div>
-    <div class="q-num">${idx+1}</div>
+    <div class="q-order"><button data-action="question-up" data-id="${q.id}" aria-label="Monter la question ${idx+1}" ${idx===0?'disabled':''}>↑</button><div class="q-num">${idx+1}</div><button data-action="question-down" data-id="${q.id}" aria-label="Descendre la question ${idx+1}" ${idx===currentQuiz().questions.length-1?'disabled':''}>↓</button></div>
     <div class="q-type-icon" style="color:${type.accent}">${type.icon(16)}</div>
     <div class="q-info">
       <div class="q-text">${escapeHTML(q.text)||'—'}</div>
@@ -236,6 +199,7 @@ function renderQuizEditorView(){
       <button class="btn btn-primary" data-action="autoplay-setup" data-id="${quiz.id}">${Icons.cast(14)} ${tr('launch_autoplay')}</button>
     </div>
   </div>
+  ${renderQuizReadiness(quiz)}
   <div class="editor-grid">
     <div class="panel">
       <div class="field">
@@ -283,10 +247,12 @@ function renderQuizEditorView(){
       <button class="btn btn-danger btn-block" data-action="delete-quiz" data-id="${quiz.id}">${Icons.trash(14)} ${tr('btn_delete')}</button>
     </div>
     <div>
+      <div class="question-palette">${QUESTION_TYPE_ORDER.map(k=>`<button class="question-format" data-action="add-question" data-type="${k}">${QuestionTypes[k].icon(18)}<strong>${QuestionTypes[k].label()}</strong><small>${QuestionTypes[k].desc()}</small></button>`).join('')}</div>
       <div class="q-list-header">
         <h2 style="font-size:16px;">${tr('questions_title')} (${quiz.questions.length})</h2>
         <div class="add-q-menu">
           <button class="btn btn-primary btn-sm" data-action="toggle-add-question-menu">${Icons.plus(13)} ${tr('add_question')}</button>
+          <button class="btn btn-outline btn-sm" data-action="open-bulk-questions">${Icons.plus(13)} Ajouter en lot</button>
           <button class="btn btn-outline btn-sm" data-action="open-guess-bulk-import">${Icons.upload(13)} Importer des personnages</button>
           <div class="dropdown" id="add-question-dropdown">${addMenuItems}</div>
         </div>
@@ -355,15 +321,15 @@ function renderQuestionModal(){
   if(!q) return;
   const type = QuestionTypes[q.type];
   const isNew = STATE._questionModalIsNew;
-  const answersHTML = q.type==='guess_character' ? '' : q.type==='ranking' ? `<div class="ranking-editor-list" id="ranking-editor-list">${q.answers.map((a,idx)=>`<div class="ranking-edit-item" draggable="true" data-aid="${a.id}"><span class="ranking-grip">${Icons.grip(16)}</span><span class="ranking-index">${idx+1}</span><input type="text" value="${escapeHTML(a.text)}" placeholder="${tr('field_answer_ph')} ${idx+1}" data-action="ranking-answer-text-input" data-aid="${a.id}"></div>`).join('')}</div>` : q.type==='number' ? `<p class="hint">${tr('number_hint')}</p>` : q.answers.map((a,idx)=>`
+  const answersHTML = ['guess_character','open_answer'].includes(q.type) ? '' : q.type==='ranking' ? `<div class="ranking-editor-list" id="ranking-editor-list">${q.answers.map((a,idx)=>`<div class="ranking-edit-item" draggable="true" data-aid="${a.id}"><span class="ranking-grip">${Icons.grip(16)}</span><span class="ranking-index">${idx+1}</span><input type="text" value="${escapeHTML(a.text)}" placeholder="${tr('field_answer_ph')} ${idx+1}" data-action="ranking-answer-text-input" data-aid="${a.id}"></div>`).join('')}</div>` : q.type==='number' ? `<p class="hint">${tr('number_hint')}</p>` : q.answers.map((a,idx)=>`
     <div class="answer-edit-row" data-aid="${a.id}">
-      <div class="correct-radio ${q.correctAnswerId===a.id?'checked':''}" data-action="set-correct" data-aid="${a.id}"></div>
+      <button type="button" class="correct-radio ${q.correctAnswerId===a.id?'checked':''}" data-action="set-correct" data-aid="${a.id}" aria-label="Définir la réponse ${idx+1} comme correcte" aria-pressed="${q.correctAnswerId===a.id}"></button>
       <input type="text" value="${escapeHTML(a.text)}" ${q.type==='true_false'?'readonly':''} placeholder="${tr('field_answer_ph')} ${idx+1}" data-action="answer-text-input" data-aid="${a.id}">
       ${q.type!=='true_false' && q.answers.length>2 ? `<button type="button" class="btn btn-icon btn-outline" data-action="remove-answer" data-aid="${a.id}" title="${tr('remove_answer')}">${Icons.x(14)}</button>` : ''}
     </div>`).join('');
   const html = `
   <div class="modal-overlay open" id="question-modal-overlay">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="${escapeHTML(type.modalTitle(isNew))}">
       <div class="modal-header"><h3>${type.modalTitle(isNew)}</h3><div class="modal-close" data-action="close-question-modal">${Icons.x(18)}</div></div>
       <div class="modal-body">
         <div class="field">
@@ -371,7 +337,7 @@ function renderQuestionModal(){
           <textarea placeholder="${tr('field_question_text_ph')}" data-action="q-text-input">${escapeHTML(q.text)}</textarea>
         </div>
         ${type.renderEditorExtra(q)}
-        ${q.type==='number'||q.type==='guess_character'?'':`<div class="field">
+        ${q.type==='number'||['guess_character','open_answer'].includes(q.type)?'':`<div class="field">
           <label class="field-label">${q.type==='ranking'?tr('ranking_items'):tr('field_answers')}</label>
           <div>${answersHTML}</div>
           ${q.type==='ranking'?'':`<p class="hint">${tr('mark_correct_hint')}</p>${q.type!=='true_false' && q.answers.length<6 ? `<button type="button" class="btn btn-outline btn-sm" data-action="add-answer" style="margin-top:6px;">${Icons.plus(13)} ${tr('add_answer')}</button>` : ''}`}
@@ -394,6 +360,7 @@ function renderQuestionModal(){
             </select>
           </div>
         </div>
+        ${renderQuestionPresentationFields(q)}
         <div class="field">
           <label class="field-label">${tr('field_tags')}</label>
           <input type="text" value="${escapeHTML(q._tagsRaw||'')}" placeholder="mario, nintendo…" data-action="q-tags-input">
@@ -451,8 +418,8 @@ function saveQuestionFromModal(){
   const quiz = getQuiz(STATE._questionModalQuizId);
   if(!quiz || !draft) return;
   if(!draft.text || !draft.text.trim()){ showToast(tr('field_question_text'),'err'); return; }
-  if(draft.type!=='number' && draft.type!=='guess_character') draft.answers = draft.answers.filter(a=>a.text && a.text.trim());
-  if(draft.type==='guess_character'){
+  if(draft.type!=='number' && !['guess_character','open_answer'].includes(draft.type)) draft.answers = draft.answers.filter(a=>a.text && a.text.trim());
+  if(['guess_character','open_answer'].includes(draft.type)){
     if(!draft.answerText || !draft.answerText.trim()){ showToast(tr('field_expected_answer'),'err'); return; }
     draft.answerText=draft.answerText.trim();
     draft.answers=[]; draft.correctAnswerId=null;
@@ -468,9 +435,11 @@ function saveQuestionFromModal(){
   if(['guess_character','zoom'].includes(draft.type) && !draft.image){ showToast(tr('field_character_image'),'err'); return; }
   if(draft.type==='number'){
     draft.value=Number(draft.value); draft.min=Number(draft.min); draft.max=Number(draft.max); draft.step=Number(draft.step);
-    if(!Number.isFinite(draft.value)||!Number.isFinite(draft.min)||!Number.isFinite(draft.max)||draft.max<=draft.min){ showToast(tr('field_number_value'),'err'); return; }
+    if(!Number.isFinite(draft.value)||!Number.isFinite(draft.min)||!Number.isFinite(draft.max)||!Number.isFinite(draft.step)||draft.step<=0||draft.max<=draft.min){ showToast(tr('field_number_value'),'err'); return; }
     if(draft.value<draft.min || draft.value>draft.max){ showToast(tr('field_number_value'),'err'); return; }
   }
+  if(draft.type==='open_answer') draft.acceptedAnswers=(draft._acceptedRaw??(draft.acceptedAnswers||[]).join(';')).split(';').map(x=>x.trim()).filter(Boolean);
+  delete draft._acceptedRaw;
   draft.tags = (draft._tagsRaw||'').split(',').map(t=>t.trim()).filter(Boolean);
   delete draft._tagsRaw;
   const idx = quiz.questions.findIndex(qq=>qq.id===draft.id);

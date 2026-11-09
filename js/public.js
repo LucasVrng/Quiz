@@ -152,7 +152,7 @@ function publicHeader(){
 }
 function renderPublicHome(){
   const quizzes=publicQuizList();
-  const popular=[...quizzes].sort((a,b)=>(b.questions?.length||0)-(a.questions?.length||0)).slice(0,4);
+  const popular=[...quizzes].sort((a,b)=>Number(!!b.catalogKey&&!b.catalogKey.startsWith('legacy'))-Number(!!a.catalogKey&&!a.catalogKey.startsWith('legacy'))).slice(0,4);
   const newest=[...quizzes].sort((a,b)=>new Date(b.updatedAt||0)-new Date(a.updatedAt||0)).slice(0,4);
   const cats=STATE.categories.slice(0,8);
   const totalQuestions=quizzes.reduce((n,q)=>n+(q.questions?.length||0),0);
@@ -176,27 +176,32 @@ function renderPublicHome(){
     ${cats.length?`<section class="public-section landing-categories"><div class="public-section-head"><div><span class="section-eyebrow">À chacun son terrain de jeu</span><h2>Choisis ton univers</h2><p>Retrouve tes passions ou découvre-en une nouvelle.</p></div><button class="public-see-all" data-action="public-categories">Toutes les catégories →</button></div><div class="public-category-grid">${cats.map(c=>`<button class="public-category" data-action="public-category" data-id="${c.id}"><span class="cat-icon">${publicCatIcon(c.name)}</span><strong>${escapeHTML(c.name)}</strong><span>${publicQuizList().filter(q=>(q.categoryIds||[]).includes(c.id)).length} ${tr('public_category_count')}</span><i>→</i></button>`).join('')}</div></section>`:''}
     ${newest.length?`<section class="public-section"><div class="public-section-head"><div><span class="section-eyebrow">Tout juste ajoutés</span><h2>${tr('public_new')}</h2><p>De nouvelles occasions de te surprendre.</p></div><button class="public-see-all" data-action="public-quizzes">Voir tous les quiz →</button></div><div class="public-quiz-grid">${newest.map(publicQuizCard).join('')}</div></section>`:''}
     ${!quizzes.length?`<div class="public-section public-empty">${tr('public_no_quizzes')}</div>`:''}
-    <footer class="public-footer"><span>${tr('public_footer')}</span><span>QuizCast</span></footer>
+    <section class="channel-invitation"><div><span class="section-eyebrow">LE DÉFI CONTINUE EN VIDÉO</span><h2>Joue ici. Retrouve-nous sur YouTube.</h2><p>Un quiz à partager, un score à comparer. Découvre les vidéos de GumwinSarball.</p></div><a href="https://www.youtube.com/@GumwinSarball" target="_blank" rel="noopener noreferrer">Voir la chaîne ${Icons.arrowRight(18)}</a></section>
+    <footer class="public-footer"><span>${tr('public_footer')}</span><span>Ta progression reste sur cet appareil.</span></footer>
   </main></div>`;
 }
 function renderPublicQuizzes(){
   let list=publicQuizList(); const term=(STATE.publicSearch||'').trim().toLowerCase();
+  if(STATE.publicLanguage)list=list.filter(q=>q.language===STATE.publicLanguage);
   if(term) list=list.filter(q=>(q.name+' '+q.description).toLowerCase().includes(term));
   const cat=STATE.publicCategoryFilter||''; if(cat) list=list.filter(q=>(q.categoryIds||[]).includes(cat));
   return `<div class="public-shell" data-public-theme="${STATE.settings.publicTheme||'warm'}">${publicHeader()}<main class="public-content browse-page">
     <div class="public-page-title browse-title"><div><span class="section-eyebrow">Trouve ton prochain défi</span><h1>${tr('public_nav_quizzes')}</h1><p>${list.length} quiz à lancer, seul ou entre amis.</p></div><button class="btn btn-primary" data-action="public-random">${Icons.shuffle(14)} Surprends-moi</button></div>
     <div class="public-browse-toolbar"><div class="public-browse-search">${Icons.search(15)}<input type="search" placeholder="${escapeHTML(tr('search_ph'))}" value="${escapeHTML(STATE.publicSearch||'')}" data-action="public-search"></div>
       <select data-action="public-category-filter"><option value="">${tr('filter_all_cat')}</option>${STATE.categories.map(c=>`<option value="${c.id}" ${cat===c.id?'selected':''}>${escapeHTML(c.name)}</option>`).join('')}</select>
+      <select class="public-language-filter" aria-label="Langue des quiz" data-action="public-language-filter"><option value="">Toutes les langues</option><option value="fr" ${STATE.publicLanguage==='fr'?'selected':''}>Français</option><option value="en" ${STATE.publicLanguage==='en'?'selected':''}>English</option></select>
     </div>
     ${list.length?`<div class="public-quiz-grid">${list.map(publicQuizCard).join('')}</div>`:`<div class="public-empty">${tr('public_no_quizzes')}</div>`}
-    <footer class="public-footer"><span>${tr('public_footer')}</span><span>QuizCast</span></footer>
+    <section class="channel-invitation"><div><span class="section-eyebrow">LE DÉFI CONTINUE EN VIDÉO</span><h2>Joue ici. Retrouve-nous sur YouTube.</h2><p>Un quiz à partager, un score à comparer. Découvre les vidéos de GumwinSarball.</p></div><a href="https://www.youtube.com/@GumwinSarball" target="_blank" rel="noopener noreferrer">Voir la chaîne ${Icons.arrowRight(18)}</a></section>
+    <footer class="public-footer"><span>${tr('public_footer')}</span><span>Ta progression reste sur cet appareil.</span></footer>
   </main></div>`;
 }
 function renderPublicCategories(){
   const cats=STATE.categories;
   return `<div class="public-shell" data-public-theme="${STATE.settings.publicTheme||'warm'}">${publicHeader()}<main class="public-content browse-page"><div class="public-page-title"><span class="section-eyebrow">Il y en a pour toutes les curiosités</span><h1>${tr('public_nav_categories')}</h1><p>Choisis un univers et vois jusqu’où vont tes connaissances.</p></div>
     ${cats.length?`<div class="public-category-grid">${cats.map(c=>`<button class="public-category" data-action="public-category" data-id="${c.id}"><span class="cat-icon">${publicCatIcon(c.name)}</span><strong>${escapeHTML(c.name)}</strong><span>${publicQuizList().filter(q=>(q.categoryIds||[]).includes(c.id)).length} quiz à jouer</span><i>→</i></button>`).join('')}</div>`:`<div class="public-empty">${tr('public_no_quizzes')}</div>`}
-    <footer class="public-footer"><span>${tr('public_footer')}</span><span>QuizCast</span></footer></main></div>`;
+    <section class="channel-invitation"><div><span class="section-eyebrow">LE DÉFI CONTINUE EN VIDÉO</span><h2>Joue ici. Retrouve-nous sur YouTube.</h2><p>Un quiz à partager, un score à comparer. Découvre les vidéos de GumwinSarball.</p></div><a href="https://www.youtube.com/@GumwinSarball" target="_blank" rel="noopener noreferrer">Voir la chaîne ${Icons.arrowRight(18)}</a></section>
+    <footer class="public-footer"><span>${tr('public_footer')}</span><span>Ta progression reste sur cet appareil.</span></footer></main></div>`;
 }
 function renderPublicQuizDetail(){
   const q=getQuiz(STATE.publicQuizId);
@@ -213,7 +218,8 @@ function renderPublicQuizDetail(){
     </div></section>
     ${renderYouTubeEpisode(q,'detail')}
     ${related.length?`<section class="public-section"><div class="public-section-head"><div><h2>${tr('public_related')}</h2></div></div><div class="public-quiz-grid">${related.map(publicQuizCard).join('')}</div></section>`:''}
-    <footer class="public-footer"><span>${tr('public_footer')}</span><span>QuizCast</span></footer></div></main></div>`;
+    <section class="channel-invitation"><div><span class="section-eyebrow">LE DÉFI CONTINUE EN VIDÉO</span><h2>Joue ici. Retrouve-nous sur YouTube.</h2><p>Un quiz à partager, un score à comparer. Découvre les vidéos de GumwinSarball.</p></div><a href="https://www.youtube.com/@GumwinSarball" target="_blank" rel="noopener noreferrer">Voir la chaîne ${Icons.arrowRight(18)}</a></section>
+    <footer class="public-footer"><span>${tr('public_footer')}</span><span>Ta progression reste sur cet appareil.</span></footer></div></main></div>`;
 }
 function renderPublicProfile(){
   const p=STATE.publicProfile||{...DEFAULT_PROFILE,history:[],achievements:[]};

@@ -10,6 +10,7 @@ function renderMain(){
     case 'publicQuiz': return renderPublicQuizDetail();
     case 'publicProfile': return renderPublicProfile();
     case 'dashboard': return renderDashboard();
+    case 'collection': return renderCollection();
     case 'library': return renderLibrary();
     case 'categories': return renderCategories();
     case 'quizEditor': return renderQuizEditorView();
@@ -20,6 +21,7 @@ function renderMain(){
 }
 function render(){
   if(!STATE.ready) return;
+  document.body.dataset.area=STATE.view==='play'?'play':STATE.view.startsWith('public')?'public':'admin';
   const publicViews=['publicHome','publicQuizzes','publicCategories','publicQuiz','publicProfile'];
   const isPublicPage=publicViews.includes(STATE.view)||STATE.view==='play';
   if(isPublicPage){const theme=STATE.settings?.publicTheme||'warm';document.documentElement.dataset.qcTheme=theme;try{sessionStorage.setItem('quizcast:public-theme',theme);}catch(e){}}else{delete document.documentElement.dataset.qcTheme;}
@@ -30,5 +32,6 @@ function render(){
 }
 function wireViewSpecificEffects(){
   if(STATE.view==='quizEditor') setupQuestionListDnD();
+  if(STATE.view==='autoplaySetup') renderStudioPreview();
   if(STATE.view==='play' && STATE.play){ const q=getQuiz(STATE.play.quizId)?.questions[STATE.play.order[STATE.play.pos]]; if(q?.type==='ranking' && !STATE.play.revealed) setupRankingPlayDnD(); }
 }

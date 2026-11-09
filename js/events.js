@@ -18,6 +18,22 @@ function onGlobalClick(e){
   const action = el.dataset.action;
   const id = el.dataset.id;
   switch(action){
+    case 'open-bulk-questions':openBulkQuestionEditor();break;
+    case 'close-bulk-questions':STATE.bulkQuestions=null;document.getElementById('modal-root').innerHTML='';break;
+    case 'confirm-bulk-questions':confirmBulkQuestions();break;
+    case 'question-up':moveQuestion(id,-1);break;
+    case 'question-down':moveQuestion(id,1);break;
+    case 'close-template': document.getElementById('modal-root').innerHTML=''; break;
+    case 'browse-collection': document.getElementById('modal-root').innerHTML='';STATE.view='collection';render();break;
+    case 'create-template': createFromTemplate(el.dataset.template);break;
+    case 'studio-tab': STATE.studioTab=el.dataset.tab;render();break;
+    case 'studio-preset': {const s=STATE.autoplaySetup;s.preset=el.dataset.preset;s.backgroundMode='style';saveStudioSettings();render();break;}
+    case 'studio-sample-prev': case 'studio-sample-next': {const s=STATE.autoplaySetup,q=getQuiz(s.quizId);STATE.studioSample=((STATE.studioSample||0)+(action==='studio-sample-next'?1:-1)+q.questions.length)%q.questions.length;STATE.studioReveal=false;render();break;}
+    case 'studio-preview-reveal': STATE.studioReveal=!STATE.studioReveal;render();break;
+    case 'studio-production-kit': downloadProductionKit();break;
+    case 'studio-pause': studioPause();break;
+    case 'studio-previous': studioSkip(-1);break;
+    case 'studio-next': studioSkip(1);break;
     case 'choose-guess-mode': { const s=window._guessModeSelection||{mode:'normal',difficulty:'normal'}; s.mode=el.dataset.mode; window._guessModeSelection=s; document.querySelectorAll('.guess-mode-choice').forEach(x=>x.classList.toggle('selected',x===el)); break; }
     case 'choose-guess-difficulty': { const s=window._guessModeSelection||{mode:'normal',difficulty:'normal'}; s.difficulty=el.dataset.difficulty; window._guessModeSelection=s; document.querySelectorAll('.guess-difficulty-choice').forEach(x=>x.classList.toggle('selected',x===el)); break; }
     case 'start-guess-mode': startSelectedGuessMode(); break;
@@ -47,7 +63,7 @@ function onGlobalClick(e){
     case 'public-play-quiz': location.href=qcRoute('play/')+'?id='+encodeURIComponent(id); break;
     case 'public-back': location.href=qcRoute('quizzes/'); break;
     case 'public-category': location.href=qcRoute('quizzes/')+'?category='+encodeURIComponent(id); break;
-    case 'new-quiz': createNewQuiz(); break;
+    case 'new-quiz': openTemplateChooser(); break;
     case 'set-lang': STATE.settings.uiLanguage = el.dataset.lang; saveSettings(); render(); break;
 
     case 'open-quiz-editor': location.href=qcRoute('admin/editor.html')+'?id='+encodeURIComponent(id); break;
@@ -116,7 +132,7 @@ function onGlobalClick(e){
     case 'ap-set-guess-mode': STATE.autoplaySetup.guessMode = el.dataset.mode || 'normal'; render(); break;
     case 'ap-set-layout': STATE.autoplaySetup.layout = el.dataset.layout || 'auto'; render(); break;
     case 'ap-set-layout-default': if(STATE.autoplaySetup){ STATE.autoplaySetup.layout = el.value || 'auto'; render(); } break;
-    case 'ap-set-layout-type': if(STATE.autoplaySetup){ if(!STATE.autoplaySetup.layoutByType) STATE.autoplaySetup.layoutByType={}; const type=el.dataset.qtype; const value=el.value||'auto'; if(value==='auto') delete STATE.autoplaySetup.layoutByType[type]; else STATE.autoplaySetup.layoutByType[type]=value; render(); } break;
+    case 'ap-set-layout-type': if(STATE.autoplaySetup){ if(!STATE.autoplaySetup.layoutByType) STATE.autoplaySetup.layoutByType={}; const type=el.dataset.qtype; const value=el.value||'auto'; if(value==='auto') delete STATE.autoplaySetup.layoutByType[type]; else STATE.autoplaySetup.layoutByType[type]=value; saveStudioSettings();render(); } break;
     case 'ap-set-timer-style': STATE.autoplaySetup.timerStyle = el.dataset.timerStyle || 'ring'; render(); break;
     case 'ap-set-guess-difficulty': STATE.autoplaySetup.guessDifficulty = el.dataset.difficulty || 'normal'; render(); break;
     case 'ap-set-text-style': STATE.autoplaySetup.textStyle = el.value || 'preset'; render(); break;
@@ -134,6 +150,11 @@ function onGlobalInput(e){
   if(!el) return;
   const action = el.dataset.action;
   switch(action){
+    case 'studio-setting': if(el.tagName!=='SELECT')updateStudioSetting(el);break;
+    case 'bulk-question-text':if(STATE.bulkQuestions)STATE.bulkQuestions.text=el.value;break;
+    case 'accepted-answers-input': if(STATE._questionDraft)STATE._questionDraft._acceptedRaw=el.value;break;
+    case 'question-chapter': if(STATE._questionDraft)STATE._questionDraft.chapter=el.value;break;
+    case 'question-source': if(STATE._questionDraft)STATE._questionDraft.source=el.value;break;
     case 'lib-search': handleLibSearchInput(el.value); break;
     case 'public-search': STATE.publicSearch=el.value; if(STATE.view!=='publicQuizzes') STATE.view='publicQuizzes'; debouncedPublicRender(); break;
     case 'new-cat-name-input': if(STATE._newCategoryDraft) STATE._newCategoryDraft.name = el.value; break;
@@ -167,7 +188,11 @@ function onGlobalChange(e){
   if(!el) return;
   const action = el.dataset.action;
   switch(action){
+    case 'studio-setting': if(el.tagName==='SELECT')updateStudioSetting(el);break;
+    case 'bulk-question-type':if(STATE.bulkQuestions){STATE.bulkQuestions.type=el.value;renderBulkQuestionEditor();}break;
+    case 'question-layout': if(STATE._questionDraft)STATE._questionDraft.videoLayout=el.value;break;
     case 'lib-filter-cat': STATE.library.category = el.value; render(); break;
+    case 'public-language-filter': STATE.publicLanguage=el.value;render();break;
     case 'public-category-filter': STATE.publicCategoryFilter=el.value; render(); break;
     case 'lib-filter-diff': STATE.library.difficulty = el.value; render(); break;
     case 'lib-filter-lang': STATE.library.language = el.value; render(); break;
@@ -181,11 +206,11 @@ function onGlobalChange(e){
     case 'ap-set-reveal-language': { if(STATE.autoplaySetup){ STATE.autoplaySetup.revealLanguage = el.value || 'auto'; render(); } break; }
     case 'ap-set-timer-position': { if(STATE.autoplaySetup){ STATE.autoplaySetup.timerPosition = el.value || 'auto'; render(); } break; }
     case 'ap-set-layout-default': { if(STATE.autoplaySetup){ STATE.autoplaySetup.layout = el.value || 'auto'; render(); } break; }
-    case 'ap-set-layout-type': { if(STATE.autoplaySetup){ if(!STATE.autoplaySetup.layoutByType) STATE.autoplaySetup.layoutByType={}; const type=el.dataset.qtype; const value=el.value || 'auto'; if(value==='auto') delete STATE.autoplaySetup.layoutByType[type]; else STATE.autoplaySetup.layoutByType[type]=value; render(); } break; }
+    case 'ap-set-layout-type': { if(STATE.autoplaySetup){ if(!STATE.autoplaySetup.layoutByType) STATE.autoplaySetup.layoutByType={}; const type=el.dataset.qtype; const value=el.value || 'auto'; if(value==='auto') delete STATE.autoplaySetup.layoutByType[type]; else STATE.autoplaySetup.layoutByType[type]=value; saveStudioSettings();render(); } break; }
     case 'ap-set-text-style': { if(STATE.autoplaySetup){ STATE.autoplaySetup.textStyle = el.value || 'preset'; render(); } break; }
     case 'ap-set-custom-media-url': { if(STATE.autoplaySetup){ STATE.autoplaySetup.customMediaUrl = el.value; STATE.autoplaySetup.customMediaType=/\.(mp4|webm|ogg|mov)(?:\?|#|$)/i.test(el.value)?'video':'image'; render(); } break; }
-    case 'ap-set-custom-media-file': { if(STATE.autoplaySetup && el.files && el.files[0]){ const file=el.files[0]; if(STATE.autoplaySetup.customMediaObjectUrl) URL.revokeObjectURL(STATE.autoplaySetup.customMediaObjectUrl); const url=URL.createObjectURL(file); STATE.autoplaySetup.customMediaObjectUrl=url; STATE.autoplaySetup.customMediaUrl=url; STATE.autoplaySetup.customMediaType=file.type.startsWith('video/')?'video':'image'; render(); } break; }
-    case 'ap-set-guess-question-mode': { if(STATE.autoplaySetup){ if(!STATE.autoplaySetup.guessModeByQuestion) STATE.autoplaySetup.guessModeByQuestion={}; STATE.autoplaySetup.guessModeByQuestion[el.dataset.qid]=el.value; render(); } break; }
+    case 'ap-set-custom-media-file': { if(STATE.autoplaySetup && el.files && el.files[0]){ const file=el.files[0]; if(STATE.autoplaySetup.customMediaObjectUrl) URL.revokeObjectURL(STATE.autoplaySetup.customMediaObjectUrl); const url=URL.createObjectURL(file); STATE.autoplaySetup.customMediaObjectUrl=url; STATE.autoplaySetup.customMediaUrl=url; STATE.autoplaySetup.customMediaType=file.type.startsWith('video/')?'video':'image'; saveStudioSettings();render(); } break; }
+    case 'ap-set-guess-question-mode': { if(STATE.autoplaySetup){ if(!STATE.autoplaySetup.guessModeByQuestion) STATE.autoplaySetup.guessModeByQuestion={}; STATE.autoplaySetup.guessModeByQuestion[el.dataset.qid]=el.value; saveStudioSettings();render(); } break; }
     case 'q-duration-input': if(STATE._questionDraft) STATE._questionDraft.duration = parseInt(el.value,10); break;
     case 'q-difficulty-input': if(STATE._questionDraft) STATE._questionDraft.difficulty = el.value; break;
     case 'quiz-thumb-file-change': if(el.files[0]) handleQuizThumbFile(el.files[0]); break;
@@ -197,13 +222,14 @@ function onGlobalChange(e){
 }
 function initEventDelegation(){
   document.addEventListener('click', onGlobalClick);
-document.addEventListener('keydown', e=>{ if(STATE.view==='play' && STATE.play && STATE.play.returnView==='publicQuiz' && !STATE.play.revealed){ const q=getQuiz(STATE.play.quizId)?.questions[STATE.play.order[STATE.play.pos]]; const n=Number(e.key); if(n>=1&&n<=6 && q && q.type!=='ranking' && q.type!=='number' && q.type!=='guess_character' && q.answers?.[n-1]){ selectPlayAnswer(q.answers[n-1].id); return; } if(e.key==='Enter' && q?.type==='guess_character'){ submitPlayGuess(); return; } if(e.key==='Escape'){ STATE.play=null; STATE.publicMode=true; STATE.publicQuizId=null; STATE.view='publicHome'; render(); } }});
+document.addEventListener('keydown', e=>{ if(STATE.view==='play' && STATE.play && STATE.play.returnView==='publicQuiz' && !STATE.play.revealed){ const q=getQuiz(STATE.play.quizId)?.questions[STATE.play.order[STATE.play.pos]]; const n=Number(e.key); if(n>=1&&n<=6 && q && q.type!=='ranking' && q.type!=='number' && !['guess_character','open_answer'].includes(q.type) && q.answers?.[n-1]){ selectPlayAnswer(q.answers[n-1].id); return; } if(e.key==='Enter' && ['guess_character','open_answer'].includes(q?.type)){ submitPlayGuess(); return; } if(e.key==='Escape'){ STATE.play=null; STATE.publicMode=true; STATE.publicQuizId=null; STATE.view='publicHome'; render(); } }});
   document.addEventListener('input', onGlobalInput);
   document.addEventListener('change', onGlobalChange);
   document.addEventListener('keydown', e=>{
     if(e.key==='Escape'){
       if(STATE.autoplayEngine) exitAutoplayStage();
       else if(STATE._questionDraft) closeQuestionModal();
+      else document.getElementById('modal-root').innerHTML='';
     }
   });
 }
