@@ -20,13 +20,14 @@ async function session(viewport={width:1440,height:1000}){
 }
 async function go(page,route){await page.goto(origin+route);await page.waitForFunction(()=>STATE.ready&&document.querySelector('#app').textContent.trim().length>0);}
 
-test('shipped catalogue: all 540 questions have valid playable content and stable unique IDs',async()=>{
+test('shipped catalogue: ready catalogue has valid playable content; incomplete storyboards stay drafts and stable unique IDs',async()=>{
  const {context,page,errors}=await session();await go(page,'/');
- assert.equal(await page.evaluate(()=>STATE.quizzes.length),34);
- const issues=await page.evaluate(()=>STATE.quizzes.flatMap(q=>quizIssues(q).map(i=>q.id+': '+i)));assert.deepEqual(issues,[]);
+ assert.equal(await page.evaluate(()=>STATE.quizzes.length),39);
+ const issues=await page.evaluate(()=>STATE.quizzes.filter(q=>q.status!=='draft').flatMap(q=>quizIssues(q).map(i=>q.id+': '+i)));assert.deepEqual(issues,[]);
  const data=JSON.parse(readFileSync(path.join(root,'data/catalog.json'),'utf8'));
- const questions=data.quizzes.flatMap(q=>q.questions);assert.equal(questions.length,540);assert.equal(new Set(questions.map(q=>q.id)).size,540);
- for(const q of data.quizzes){assert.equal(q.questions.length,new Set(q.questions.map(x=>x.text)).size,q.name);}
+ const questions=data.quizzes.flatMap(q=>q.questions);assert.equal(questions.length,640);assert.equal(new Set(questions.map(q=>q.id)).size,640);
+ assert.equal(data.quizzes.filter(q=>q.status==='draft').length,2);
+ assert.equal(data.quizzes.filter(q=>q.status!=='draft').flatMap(q=>q.questions).length,600);
  assert.deepEqual(errors,[]);await context.close();
 });
 
@@ -149,7 +150,132 @@ test('production sheet downloads, optional synthesized audio starts on click, em
  await page.waitForFunction(()=>studioAudio?.state==='running');assert.equal(await page.evaluate(()=>STATE.autoplayEngine.sound),true);await page.evaluate(()=>exitAutoplayStage());
  const id=await page.evaluate(async()=>{createNewQuiz();currentQuiz().name='Quiz vide';await saveQuiz(currentQuiz());return STATE.currentQuizId;});
  await go(page,'/admin/autoplay.html?id='+id);assert.match(await page.locator('#studio-preview').innerText(),/première question/);
- await page.click('[data-action="launch-autoplay-stage"]');assert.equal(await page.evaluate(()=>!!STATE.autoplayEngine),false);
+ assert.equal(await page.locator('[data-action="launch-autoplay-stage"]').isDisabled(),true);
+ await page.evaluate(()=>launchAutoplayStage());assert.equal(await page.evaluate(()=>!!STATE.autoplayEngine),false);
  await go(page,'/admin/autoplay.html?id=missing');assert.equal(await page.evaluate(()=>STATE.view),'library');
  assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: mixed packs are discoverable, ten question types exist, drafts are excluded from public routes',async()=>{
+ const {context,page,errors}=await session();await go(page,'/admin/');
+ await page.click('[data-view="collection"]');assert.equal(await page.locator('.quiz-card').count(),3);
+ await page.click('[data-filter="storyboards"]');assert.equal(await page.locator('.quiz-card').count(),2);assert.match(await page.locator('.quiz-grid').innerText(),/À illustrer/);
+ await page.click('[data-filter="all"]');assert.equal(await page.locator('.quiz-card').count(),39);
+ assert.equal(await page.evaluate(()=>QUESTION_TYPE_ORDER.length),10);
+ assert.ok(await page.evaluate(()=>new Set(getQuiz('catalog-nintendo-remix').questions.map(q=>q.type)).size>=6));
+ assert.ok(await page.evaluate(()=>new Set(getQuiz('catalog-grand-mix-visuel').questions.map(q=>q.type)).size>=8));
+ assert.equal(await page.evaluate(()=>new Set(getQuiz('catalog-personnages-mysteres').questions.map(q=>q.visualMode)).size),4);
+ assert.equal(await page.evaluate(()=>publicQuizList().length),37);
+ await go(page,'/quizzes/quiz.html?id=catalog-films-3-captures');assert.match(await page.locator('#app').innerText(),/Quiz introuvable/);
+ await go(page,'/play/?id=catalog-films-3-captures');assert.equal(await page.evaluate(()=>STATE.view),'publicQuizzes');
+ assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: import three captures, preserve them through save and JSON import, keep unfinished storyboard as draft',async()=>{
+ const {context,page,errors}=await session();await go(page,'/admin/autoplay.html?id=catalog-films-3-captures');
+ assert.equal(await page.locator('[data-action="launch-autoplay-stage"]').isDisabled(),true);
+ assert.equal(await page.locator('img[src=""]').count(),0);
+ await page.click('[data-action="complete-storyboard"]');assert.match(await page.locator('.modal-body').innerText(),/paquebot/);
+ for(let index=0;index<3;index++)await page.setInputFiles(`[data-action="visual-clue-file"][data-index="${index}"]`,{name:`capture-${index}.svg`,mimeType:'image/svg+xml',buffer:Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="${['red','green','blue'][index]}"/></svg>`)});
+ await page.waitForFunction(()=>STATE._questionDraft.clues.every(c=>c.image.startsWith('data:image/png')));
+ await page.click('[data-action="save-question-from-modal"]');await page.waitForFunction(()=>!STATE._questionDraft);
+ const result=await page.evaluate(async()=>{const q=currentQuiz(),original=q.questions[0];await handleImportFile(new File([JSON.stringify({categories:[],quizzes:[{...q,id:'copy-test',questions:[original]}]})],'visual.json'));const copy=STATE.quizzes.at(-1);return {draft:q.status,answer:copy.questions[0].answerText,images:copy.questions[0].clues.map(c=>c.image),fresh:copy.questions[0].id!==original.id};});
+ assert.equal(result.draft,'draft');assert.equal(result.answer,'Titanic');assert.ok(result.fresh);assert.equal(new Set(result.images).size,3);
+ await go(page,'/admin/editor.html?id=catalog-films-3-captures');assert.equal(await page.evaluate(()=>getQuiz('catalog-films-3-captures').questions[0].clues.every(c=>c.image.startsWith('data:'))),true);
+ assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: progressive clues unlock at their scheduled times and reveal the answer without choice tiles',async()=>{
+ const {context,page,errors}=await session();await go(page,'/admin/');await page.clock.install();
+ await page.evaluate(()=>{const source=getQuiz('catalog-nintendo-remix'),q=source.questions.find(q=>q.type==='image_clues');const quiz={...source,id:'clue-timeline',questions:[q]};STATE.quizzes.push(quiz);openAutoplaySetup(quiz.id);Object.assign(STATE.autoplaySetup,{introDuration:0,responseTime:3,timingMode:'fixed',revealDuration:1,checkpointEvery:0});launchAutoplayStage();});
+ await page.waitForFunction(()=>STATE.autoplayEngine.phase==='intro');await page.clock.runFor(400);
+ assert.equal(await page.locator('#stage-content .clue-locked').count(),2);assert.equal(await page.locator('#stage-content .stage-tile').count(),0);
+ await page.clock.runFor(1000);assert.equal(await page.locator('#stage-content .clue-locked').count(),1);
+ await page.clock.runFor(1000);assert.equal(await page.locator('#stage-content .clue-locked').count(),0);
+ await page.clock.runFor(1000);assert.match(await page.locator('#stage-content .studio-answer-card strong').innerText(),/Super Mario/);
+ assert.equal(await page.locator('#stage-content .clue-locked').count(),0);assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: silhouette, zoom, hidden tiles and blur remain independent per question and fully reveal',async()=>{
+ const {context,page,errors}=await session({width:1920,height:1080});await go(page,'/admin/autoplay.html?id=catalog-nintendo-remix');
+ await page.click('[data-action="launch-autoplay-stage"]');await page.waitForFunction(()=>STATE.autoplayEngine.phase==='intro');
+ for(const [pos,mode]of [[0,'silhouette'],[3,'zoom'],[6,'hidden'],[8,'blurred']]){
+  await page.evaluate(pos=>{clearApTimers();const e=STATE.autoplayEngine;e.phase='counting';e.pos=pos;populateStageContent(e,getQuiz(e.quizId),document.getElementById('stage-content'));},pos);
+  assert.equal(await page.locator('#stage-content .mystery-picture').getAttribute('data-mystery'),mode);
+  if(mode==='silhouette')assert.match(await page.locator('#stage-content .mystery-picture > img').evaluate(el=>getComputedStyle(el).filter),/brightness\(0\)/);
+  const before=mode==='zoom'?await page.locator('#stage-content .mystery-picture').evaluate(el=>parseFloat(el.style.getPropertyValue('--mystery-zoom'))):0;
+  await page.evaluate(()=>updateCountdownDOM(1,.85));
+  if(mode==='zoom')assert.ok(await page.locator('#stage-content .mystery-picture').evaluate(el=>parseFloat(el.style.getPropertyValue('--mystery-zoom')))<before);
+  if(mode==='hidden')assert.equal(await page.locator('#stage-content .mystery-covers .uncovered').count(),9);
+  if(mode==='blurred')assert.ok(await page.locator('#stage-content .mystery-picture').evaluate(el=>parseFloat(el.style.getPropertyValue('--mystery-blur')))<5);
+  await page.evaluate(()=>{STATE.autoplayEngine.phase='revealing';updateRevealVisuals();});
+  assert.equal(await page.locator('#stage-content .mystery-picture').count(),0);assert.equal(await page.locator('#stage-content .studio-answer-card > img').count(),1);
+ }
+ assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: free visual answers and image intruders score in public play; hint reveals are usable',async()=>{
+ const {context,page,errors}=await session();await go(page,'/play/?id=catalog-nintendo-remix');
+ await page.fill('#play-guess-input','LINK');await page.click('[data-action="submit-guess"]');assert.equal(await page.evaluate(()=>STATE.play.correctCount),1);
+ await page.click('[data-action="next-play-question"]');assert.equal(await page.locator('.clue-card').count(),3);await page.fill('#play-guess-input','super mario');await page.click('[data-action="submit-guess"]');assert.equal(await page.evaluate(()=>STATE.play.correctCount),2);
+ await page.evaluate(()=>{STATE.play.pos=4;STATE.play.revealed=false;render();});
+ const aid=await page.evaluate(()=>getQuiz(STATE.play.quizId).questions[4].correctAnswerId);await page.locator(`[data-action="select-answer"][data-aid="${aid}"]`).click();assert.equal(await page.evaluate(()=>STATE.play.correctCount),3);
+ await page.evaluate(()=>{STATE.play.pos=6;STATE.play.revealed=false;render();});const before=await page.locator('.mystery-covers .uncovered').count();await page.click('[data-action="visual-hint"]');assert.ok(await page.locator('.mystery-covers .uncovered').count()>before);
+ assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: every theme uses readable fonts and high contrast at 1080p; clue composition fits its capture frame',async()=>{
+ const {context,page,errors}=await session({width:1920,height:1080});await go(page,'/admin/autoplay.html?id=catalog-nintendo-remix');
+ await page.click('[data-action="launch-autoplay-stage"]');await page.waitForFunction(()=>STATE.autoplayEngine.phase==='intro');
+ const results=await page.evaluate(()=>{
+  function lum(hex){const values=hex.trim().replace('#','').match(/../g).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return values[0]*.2126+values[1]*.7152+values[2]*.0722;}
+  const e=STATE.autoplayEngine,scene=document.getElementById('stage-16x9'),quiz=getQuiz(e.quizId);clearApTimers();e.phase='counting';e.pos=1;
+  return ['pop','show','paper','nintendo','cartoon','arcade','horror','cinematic'].map(preset=>{
+   scene.className=`stage-16x9 studio-scene broadcast-v2 autoplay-preset-${preset} autoplay-text-style-bold`;populateStageContent(e,quiz,document.getElementById('stage-content'));
+   const style=getComputedStyle(scene),bg=lum(style.getPropertyValue('--b-bg')),ink=lum(style.getPropertyValue('--b-ink')),font=getComputedStyle(scene.querySelector('.round-heading h2')).fontFamily;
+   const frame=scene.getBoundingClientRect(),safe=[...scene.querySelectorAll('.round-heading h2,.clue-card,.round-bottom')].every(el=>{const box=el.getBoundingClientRect();return box.top>=frame.top+frame.height*.08&&box.bottom<=frame.bottom-frame.height*.08&&box.left>=frame.left&&box.right<=frame.right;});
+   return {preset,contrast:(Math.max(bg,ink)+.05)/(Math.min(bg,ink)+.05),font,safe};
+  });
+ });
+ for(const result of results){assert.ok(result.contrast>=4.5,JSON.stringify(result));assert.doesNotMatch(result.font,/Impact/);assert.ok(result.safe,JSON.stringify(result));}
+ assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: a single illustrated question can be rehearsed while the rest of a storyboard is incomplete',async()=>{
+ const {context,page,errors}=await session();await go(page,'/admin/autoplay.html?id=catalog-films-3-captures');
+ await page.evaluate(()=>{const q=getQuiz('catalog-films-3-captures').questions[0],source=getQuiz('catalog-nintendo-remix').questions.find(q=>q.type==='image_clues');q.clues=JSON.parse(JSON.stringify(source.clues));render();});
+ assert.equal(await page.locator('[data-action="launch-autoplay-stage"]').isDisabled(),true);
+ assert.equal(await page.locator('[data-action="launch-autoplay-sample"]').isDisabled(),false);
+ await page.click('[data-action="launch-autoplay-sample"]');await page.waitForFunction(()=>STATE.autoplayEngine.phase==='counting'&&document.getElementById('stage-video-title').textContent.startsWith('TEST'));
+ assert.deepEqual(await page.evaluate(()=>STATE.autoplayEngine.order),[0]);assert.match(await page.locator('#stage-video-title').innerText(),/TEST/);
+ await page.evaluate(()=>{clearApTimers();STATE.autoplayEngine.phase='revealing';updateRevealVisuals();});assert.equal(await page.locator('.studio-answer-card strong').innerText(),'Titanic');
+ assert.equal(await page.evaluate(()=>getQuiz('catalog-films-3-captures').status),'draft');assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: closing while media preload is pending never restarts the broadcast later',async()=>{
+ const {context,page,errors}=await session();await go(page,'/admin/autoplay.html?id=catalog-nintendo-remix');
+ let release;const gate=new Promise(resolve=>release=resolve),requests=[];
+ await page.route('**/assets/characters/**',async route=>{requests.push(route);await gate;await route.continue();});
+ await page.click('[data-action="launch-autoplay-stage"]');await page.waitForFunction(()=>STATE.autoplayEngine.phase==='preparing');
+ await page.evaluate(()=>exitAutoplayStage());release();await page.waitForTimeout(300);
+ assert.equal(await page.evaluate(()=>STATE.autoplayEngine),null);assert.equal(await page.locator('#stage-content').count(),0);assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: rehearse a text-only round inside a mixed visual pack without stalling preload',async()=>{
+ const {context,page,errors}=await session();await go(page,'/admin/autoplay.html?id=catalog-nintendo-remix');
+ await page.evaluate(()=>{STATE.studioSample=2;render();});await page.click('[data-action="launch-autoplay-sample"]');
+ await page.waitForFunction(()=>STATE.autoplayEngine.phase==='counting'&&document.querySelector('#stage-content .stage-tile'));
+ assert.deepEqual(await page.evaluate(()=>STATE.autoplayEngine.order),[2]);assert.equal(await page.locator('#stage-content .stage-tile').count(),2);
+ assert.deepEqual(errors,[]);await context.close();
+});
+
+test('visual v2: opaque images cannot silently turn into a black rectangle in silhouette mode',async()=>{
+ const {context,page,errors}=await session();await go(page,'/admin/');
+ await page.evaluate(()=>{createNewQuiz();currentQuiz().name='Contrôle alpha';openQuestionModal(currentQuiz().id,null,'visual_guess');});
+ await page.fill('[data-action="guess-answer-input"]','Carré');
+ await page.setInputFiles('[data-action="visual-main-file"]',{name:'opaque.svg',mimeType:'image/svg+xml',buffer:Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="red"/></svg>')});
+ await page.waitForFunction(()=>STATE._questionDraft.imageHasAlpha===false);await page.click('[data-action="save-question-from-modal"]');
+ assert.match(await page.locator('#toast-wrap').innerText(),/fond transparent/);assert.equal(await page.evaluate(()=>currentQuiz().questions.length),0);
+ await page.selectOption('[data-action="visual-mode"]','zoom');await page.click('[data-action="save-question-from-modal"]');
+ await page.waitForFunction(()=>currentQuiz().questions.length===1&&!STATE._questionDraft);assert.deepEqual(errors,[]);await context.close();
 });

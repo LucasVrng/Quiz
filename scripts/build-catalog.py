@@ -349,5 +349,7 @@ for i,q in enumerate(quizzes):
  if len(q['questions'])==20:q['videoSettings']={'responseTime':12,'revealDuration':4,'nextDelay':.8,'preset':'pop'}
 used={cid for q in quizzes for cid in q['categoryIds']}
 result={'version':2,'editorialNote':'13 nouvelles séries originales (260 questions), 20 séries préexistantes (260 questions) et un test Nintendo anglais préexistant (20 questions). Relecture éditoriale avant diffusion recommandée.','categories':[c for c in cat_by_name.values() if c['id'] in used],'quizzes':quizzes}
+from visual_catalog import extend_visual_catalog
+result=extend_visual_catalog(ROOT,result)
 (ROOT/'data/catalog.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
-print(len(quizzes),'quiz,',sum(len(q['questions']) for q in quizzes),'questions')
+print(len(result['quizzes']),'quiz / storyboards,',sum(len(q['questions']) for q in result['quizzes']),'questions')

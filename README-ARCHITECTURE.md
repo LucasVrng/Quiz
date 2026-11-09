@@ -4,7 +4,7 @@ L’application reste statique, avec des pages publiques distinctes et une admin
 
 ## Données
 
-`js/core.js` charge en parallèle le catalogue `data/catalog.json` et le stockage du navigateur. Les quiz du catalogue sont la base commune à tous les visiteurs ; une sauvegarde locale portant le même identifiant la remplace pour ce navigateur. Les créations locales s’ajoutent à la base. Les suppressions de contenu intégré sont conservées dans des listes locales de masquage.
+`js/core.js` charge en parallèle le catalogue `data/catalog.json` et le stockage du navigateur. Les quiz complets du catalogue sont la base commune à tous les visiteurs ; une sauvegarde locale portant le même identifiant la remplace pour ce navigateur. Les créations locales s’ajoutent à la base. Les suppressions de contenu intégré sont conservées dans des listes locales de masquage.
 
 IndexedDB est le stockage principal. Les anciennes données `window.storage` et `localStorage` restent compatibles. Aucun transfert automatique vers un autre utilisateur ou appareil n’a lieu. L’import crée de nouveaux identifiants ; l’export permet de sauvegarder et d’échanger les créations. Modifier l’admin ne modifie pas le fichier du catalogue livré aux visiteurs.
 
@@ -19,7 +19,9 @@ IndexedDB est le stockage principal. Les anciennes données `window.storage` et 
 
 ## Studio vidéo
 
-`js/studio.js` gère les parcours créateur, les modèles, la validation, les réglages sauvegardés, l’aperçu, l’import en lot et les commandes. `js/play.js` compose les questions et pilote les phases : intro, réflexion, révélation, pause entre questions, intermède, fin. Le temporisateur est annulable et peut être suspendu. Le même cadre est conservé pendant la lecture pour garder le plein écran.
+`js/visual-questions.js` ajoute trois formats visuels : indices en trois images, image mystère avec effet par question et intrus. Les deux storyboards à captures sont marqués `draft` et restent exclus des routes publiques tant que leurs médias ne sont pas complétés.
+
+`js/studio.js` gère les parcours créateur, les modèles, la validation, les réglages sauvegardés, l’aperçu, l’import en lot et les commandes. `js/play.js` compose les questions et pilote les phases : intro, réflexion, révélation, pause entre questions, intermède, fin. Le temporisateur est annulable et peut être suspendu. La scène attend le préchargement des médias avant l’introduction. Une répétition peut ne viser qu’une question complète dans un storyboard encore incomplet. Le même cadre est conservé pendant la lecture pour garder le plein écran.
 
 La scène utilise des unités relatives à son conteneur, pour conserver la composition entre l’aperçu et la capture. Les commandes sont placées en dehors de la scène à capturer. Le téléchargement de la fiche de production est du texte ; la vidéo doit être enregistrée avec OBS ou un outil comparable.
 

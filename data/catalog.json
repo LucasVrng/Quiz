@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "editorialNote": "13 nouvelles séries originales (260 questions), 20 séries préexistantes (260 questions) et un test Nintendo anglais préexistant (20 questions). Relecture éditoriale avant diffusion recommandée.",
+  "editorialNote": "39 quiz / storyboards : 37 jouables (600 questions) et 2 storyboards à illustrer (40 questions). Les trois collections visuelles jouables ajoutent 60 manches ; certaines réutilisent des questions du catalogue.",
   "categories": [
     {
       "id": "id_7534de8dd913",
@@ -118,6 +118,2798 @@
     }
   ],
   "quizzes": [
+    {
+      "id": "catalog-nintendo-remix",
+      "catalogKey": "nintendo-remix",
+      "visualCollection": true,
+      "status": "ready",
+      "name": "Nintendo Remix · 20 manches, formats variés",
+      "language": "fr",
+      "categoryIds": [
+        "id_video_games"
+      ],
+      "difficulty": "moyen",
+      "description": "Silhouettes, trois images, zoom, intrus, vrai/faux, nombres et classement : le format change à chaque manche.",
+      "questions": [
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Link était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/link.png",
+          "imageHasAlpha": true,
+          "answerText": "Link",
+          "acceptedAnswers": [
+            "link"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q1"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quelle série de jeux relie ces trois personnages ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois personnages appartiennent à Super Mario.",
+          "clues": [
+            {
+              "image": "COVER_ROOT/assets/characters/yoshi.webp"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/cappy.png"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/toadette.webp"
+            }
+          ],
+          "answerText": "Super Mario",
+          "acceptedAnswers": [
+            "Super Mario"
+          ],
+          "progressiveClues": true,
+          "id": "catalog-nintendo-remix-q2"
+        },
+        {
+          "type": "true_false",
+          "text": "Samus est le personnage principal de Metroid.",
+          "answers": [
+            {
+              "id": "catalog-nintendo-remix-q3-a0",
+              "text": "Vrai"
+            },
+            {
+              "id": "catalog-nintendo-remix-q3-a1",
+              "text": "Faux"
+            }
+          ],
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Samus Aran est l’héroïne de la série Metroid.",
+          "correctAnswerId": "catalog-nintendo-remix-q3-a0",
+          "id": "catalog-nintendo-remix-q3"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Yoshi était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/yoshi.webp",
+          "imageHasAlpha": true,
+          "answerText": "Yoshi",
+          "acceptedAnswers": [
+            "yoshi"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q4"
+        },
+        {
+          "type": "odd_one_out",
+          "text": "Quel personnage n’appartient pas à l’univers Mario ?",
+          "answers": [
+            {
+              "id": "catalog-nintendo-remix-q5-a0",
+              "text": "Yoshi",
+              "image": "COVER_ROOT/assets/characters/yoshi.webp"
+            },
+            {
+              "id": "catalog-nintendo-remix-q5-a1",
+              "text": "Cappy",
+              "image": "COVER_ROOT/assets/characters/cappy.png"
+            },
+            {
+              "id": "catalog-nintendo-remix-q5-a2",
+              "text": "Link",
+              "image": "COVER_ROOT/assets/characters/link.png"
+            },
+            {
+              "id": "catalog-nintendo-remix-q5-a3",
+              "text": "Toadette",
+              "image": "COVER_ROOT/assets/characters/toadette.webp"
+            }
+          ],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Link est l’intrus dans cette sélection.",
+          "correctAnswerId": "catalog-nintendo-remix-q5-a2",
+          "id": "catalog-nintendo-remix-q5"
+        },
+        {
+          "type": "number",
+          "text": "Combien de triangles composent la Triforce ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La Triforce est formée de trois triangles.",
+          "value": 3,
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "",
+          "id": "catalog-nintendo-remix-q6"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Pichu était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/pichu.png",
+          "imageHasAlpha": true,
+          "answerText": "Pichu",
+          "acceptedAnswers": [
+            "pichu"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q7"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quelle série de jeux relie ces trois personnages ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois personnages appartiennent à The Legend of Zelda.",
+          "clues": [
+            {
+              "image": "COVER_ROOT/assets/characters/link.png"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/zelda.png"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/ganondorf.jpg"
+            }
+          ],
+          "answerText": "The Legend of Zelda",
+          "acceptedAnswers": [
+            "Zelda"
+          ],
+          "progressiveClues": true,
+          "id": "catalog-nintendo-remix-q8"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Samus était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/samus.webp",
+          "imageHasAlpha": true,
+          "answerText": "Samus",
+          "acceptedAnswers": [
+            "samus"
+          ],
+          "visualMode": "blurred",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q9"
+        },
+        {
+          "type": "ranking",
+          "text": "Classe ces consoles selon leur première sortie.",
+          "answers": [
+            {
+              "id": "catalog-nintendo-remix-q10-a0",
+              "text": "Nintendo 64"
+            },
+            {
+              "id": "catalog-nintendo-remix-q10-a1",
+              "text": "GameCube"
+            },
+            {
+              "id": "catalog-nintendo-remix-q10-a2",
+              "text": "Wii"
+            },
+            {
+              "id": "catalog-nintendo-remix-q10-a3",
+              "text": "Switch"
+            }
+          ],
+          "duration": 18,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Ordre attendu : Nintendo 64 → GameCube → Wii → Switch.",
+          "criterion": "Du plus ancien au plus récent",
+          "id": "catalog-nintendo-remix-q10"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Roi Boo était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/king-boo.webp",
+          "imageHasAlpha": true,
+          "answerText": "Roi Boo",
+          "acceptedAnswers": [
+            "king boo"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q11"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quelle série de jeux relie ces trois personnages ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois personnages appartiennent à Pokémon.",
+          "clues": [
+            {
+              "image": "COVER_ROOT/assets/characters/pichu.png"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/togepi.jpg"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/charizard.png"
+            }
+          ],
+          "answerText": "Pokémon",
+          "acceptedAnswers": [
+            "Pokémon"
+          ],
+          "progressiveClues": true,
+          "id": "catalog-nintendo-remix-q12"
+        },
+        {
+          "type": "odd_one_out",
+          "text": "Quelle image ne représente pas un Pokémon ?",
+          "answers": [
+            {
+              "id": "catalog-nintendo-remix-q13-a0",
+              "text": "Pichu",
+              "image": "COVER_ROOT/assets/characters/pichu.png"
+            },
+            {
+              "id": "catalog-nintendo-remix-q13-a1",
+              "text": "Évoli",
+              "image": "COVER_ROOT/assets/characters/eevee.jpg"
+            },
+            {
+              "id": "catalog-nintendo-remix-q13-a2",
+              "text": "Kirby",
+              "image": "COVER_ROOT/assets/characters/kirby.jpg"
+            },
+            {
+              "id": "catalog-nintendo-remix-q13-a3",
+              "text": "Togepi",
+              "image": "COVER_ROOT/assets/characters/togepi.jpg"
+            }
+          ],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Kirby est l’intrus dans cette sélection.",
+          "correctAnswerId": "catalog-nintendo-remix-q13-a2",
+          "id": "catalog-nintendo-remix-q13"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Zelda était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/zelda.png",
+          "imageHasAlpha": true,
+          "answerText": "Zelda",
+          "acceptedAnswers": [
+            "zelda"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q14"
+        },
+        {
+          "type": "true_false",
+          "text": "Link et Zelda sont toujours le même personnage.",
+          "answers": [
+            {
+              "id": "catalog-nintendo-remix-q15-a0",
+              "text": "Vrai"
+            },
+            {
+              "id": "catalog-nintendo-remix-q15-a1",
+              "text": "Faux"
+            }
+          ],
+          "duration": 10,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Link et Zelda sont deux personnages distincts.",
+          "correctAnswerId": "catalog-nintendo-remix-q15-a1",
+          "id": "catalog-nintendo-remix-q15"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Donkey Kong était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/donkey-kong.webp",
+          "imageHasAlpha": true,
+          "answerText": "Donkey Kong",
+          "acceptedAnswers": [
+            "donkey kong"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q16"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quelle série de jeux relie ces trois personnages ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois personnages appartiennent à Donkey Kong.",
+          "clues": [
+            {
+              "image": "COVER_ROOT/assets/characters/donkey-kong.webp"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/diddy-kong.webp"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/funky-kong.jpg"
+            }
+          ],
+          "answerText": "Donkey Kong",
+          "acceptedAnswers": [
+            "Donkey Kong"
+          ],
+          "progressiveClues": true,
+          "id": "catalog-nintendo-remix-q17"
+        },
+        {
+          "type": "number",
+          "text": "Combien de pierres ancestrales Link doit-il obtenir enfant dans Ocarina of Time ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Il obtient trois pierres ancestrales : la Kokiri, la Goron et la Zora.",
+          "value": 3,
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "",
+          "id": "catalog-nintendo-remix-q18"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Waluigi était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/waluigi.webp",
+          "imageHasAlpha": true,
+          "answerText": "Waluigi",
+          "acceptedAnswers": [
+            "waluigi"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-nintendo-remix-q19"
+        },
+        {
+          "type": "odd_one_out",
+          "text": "Quel personnage n’appartient pas à l’univers Zelda ?",
+          "answers": [
+            {
+              "id": "catalog-nintendo-remix-q20-a0",
+              "text": "Link",
+              "image": "COVER_ROOT/assets/characters/link.png"
+            },
+            {
+              "id": "catalog-nintendo-remix-q20-a1",
+              "text": "Zelda",
+              "image": "COVER_ROOT/assets/characters/zelda.png"
+            },
+            {
+              "id": "catalog-nintendo-remix-q20-a2",
+              "text": "Samus",
+              "image": "COVER_ROOT/assets/characters/samus.webp"
+            },
+            {
+              "id": "catalog-nintendo-remix-q20-a3",
+              "text": "Ganondorf",
+              "image": "COVER_ROOT/assets/characters/ganondorf.jpg"
+            }
+          ],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Samus est l’intrus dans cette sélection.",
+          "correctAnswerId": "catalog-nintendo-remix-q20-a2",
+          "id": "catalog-nintendo-remix-q20"
+        }
+      ],
+      "createdAt": "2026-11-09T18:00:00Z",
+      "updatedAt": "2026-11-09T18:00:00Z",
+      "editorialOrigin": "Manches visuelles QuizCast · personnages issus de l’archive du dépôt",
+      "videoSettings": {
+        "sceneVersion": 2,
+        "preset": "show",
+        "textStyle": "clean",
+        "timingMode": "question",
+        "revealDuration": 4,
+        "checkpointEvery": 5
+      },
+      "videoHook": "Des images, des indices, des surprises. Quel sera ton score ?",
+      "thumbnail": "COVER_ROOT/assets/covers/nintendo-remix.svg"
+    },
+    {
+      "id": "catalog-personnages-mysteres",
+      "catalogKey": "personnages-mysteres",
+      "visualCollection": true,
+      "status": "ready",
+      "name": "20 personnages · ombre, zoom, cases et flou",
+      "language": "fr",
+      "categoryIds": [
+        "id_video_games"
+      ],
+      "difficulty": "moyen",
+      "description": "Quatre effets visuels alternés. Aucune proposition de réponse : à toi de reconnaître le personnage.",
+      "questions": [
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Link était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/link.png",
+          "imageHasAlpha": true,
+          "answerText": "Link",
+          "acceptedAnswers": [
+            "link"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q1"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Zelda était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/zelda.png",
+          "imageHasAlpha": true,
+          "answerText": "Zelda",
+          "acceptedAnswers": [
+            "zelda"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q2"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Samus était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/samus.webp",
+          "imageHasAlpha": true,
+          "answerText": "Samus",
+          "acceptedAnswers": [
+            "samus"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q3"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Yoshi était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/yoshi.webp",
+          "imageHasAlpha": true,
+          "answerText": "Yoshi",
+          "acceptedAnswers": [
+            "yoshi"
+          ],
+          "visualMode": "blurred",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q4"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Pichu était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/pichu.png",
+          "imageHasAlpha": true,
+          "answerText": "Pichu",
+          "acceptedAnswers": [
+            "pichu"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q5"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Donkey Kong était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/donkey-kong.webp",
+          "imageHasAlpha": true,
+          "answerText": "Donkey Kong",
+          "acceptedAnswers": [
+            "donkey kong"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q6"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Diddy Kong était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/diddy-kong.webp",
+          "imageHasAlpha": true,
+          "answerText": "Diddy Kong",
+          "acceptedAnswers": [
+            "diddy kong"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q7"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Waluigi était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/waluigi.webp",
+          "imageHasAlpha": true,
+          "answerText": "Waluigi",
+          "acceptedAnswers": [
+            "waluigi"
+          ],
+          "visualMode": "blurred",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q8"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Meta Knight était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/meta-knight.webp",
+          "imageHasAlpha": true,
+          "answerText": "Meta Knight",
+          "acceptedAnswers": [
+            "meta knight"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q9"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Cappy était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/cappy.png",
+          "imageHasAlpha": true,
+          "answerText": "Cappy",
+          "acceptedAnswers": [
+            "cappy"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q10"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Falco était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/falco.webp",
+          "imageHasAlpha": true,
+          "answerText": "Falco",
+          "acceptedAnswers": [
+            "falco"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q11"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Captain Falcon était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/captain-falcon.webp",
+          "imageHasAlpha": true,
+          "answerText": "Captain Falcon",
+          "acceptedAnswers": [
+            "captain falcon"
+          ],
+          "visualMode": "blurred",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q12"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Marth était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/marth.webp",
+          "imageHasAlpha": true,
+          "answerText": "Marth",
+          "acceptedAnswers": [
+            "marth"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q13"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Olimar était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/olimar.webp",
+          "imageHasAlpha": true,
+          "answerText": "Olimar",
+          "acceptedAnswers": [
+            "olimar"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q14"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Shulk était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/shulk.webp",
+          "imageHasAlpha": true,
+          "answerText": "Shulk",
+          "acceptedAnswers": [
+            "shulk"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q15"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Tom Nook était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/tom-nook.webp",
+          "imageHasAlpha": true,
+          "answerText": "Tom Nook",
+          "acceptedAnswers": [
+            "tom nook"
+          ],
+          "visualMode": "blurred",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q16"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Roi Boo était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/king-boo.webp",
+          "imageHasAlpha": true,
+          "answerText": "Roi Boo",
+          "acceptedAnswers": [
+            "king boo"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q17"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Cynthia était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/cynthia.webp",
+          "imageHasAlpha": true,
+          "answerText": "Cynthia",
+          "acceptedAnswers": [
+            "cynthia"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q18"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Toadette était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/toadette.webp",
+          "imageHasAlpha": true,
+          "answerText": "Toadette",
+          "acceptedAnswers": [
+            "toadette"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q19"
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Méga-Dracaufeu X était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/charizard.png",
+          "imageHasAlpha": true,
+          "answerText": "Méga-Dracaufeu X",
+          "acceptedAnswers": [
+            "charizard"
+          ],
+          "visualMode": "blurred",
+          "zoomStart": 4,
+          "id": "catalog-personnages-mysteres-q20"
+        }
+      ],
+      "createdAt": "2026-11-09T18:00:00Z",
+      "updatedAt": "2026-11-09T18:00:00Z",
+      "editorialOrigin": "Manches visuelles QuizCast · personnages issus de l’archive du dépôt",
+      "videoSettings": {
+        "sceneVersion": 2,
+        "preset": "show",
+        "textStyle": "clean",
+        "timingMode": "question",
+        "revealDuration": 4,
+        "checkpointEvery": 5
+      },
+      "videoHook": "Des images, des indices, des surprises. Quel sera ton score ?",
+      "thumbnail": "COVER_ROOT/assets/covers/personnages-mysteres.svg"
+    },
+    {
+      "id": "catalog-grand-mix-visuel",
+      "catalogKey": "grand-mix-visuel",
+      "visualCollection": true,
+      "status": "ready",
+      "name": "Le grand mix visuel · 20 défis sans routine",
+      "language": "fr",
+      "categoryIds": [
+        "id_video_games"
+      ],
+      "difficulty": "moyen",
+      "description": "Une compilation qui alterne personnages, indices, intrus, devinettes, culture générale et chiffres.",
+      "questions": [
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Meta Knight était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/meta-knight.webp",
+          "imageHasAlpha": true,
+          "answerText": "Meta Knight",
+          "acceptedAnswers": [
+            "meta knight"
+          ],
+          "visualMode": "silhouette",
+          "zoomStart": 4,
+          "id": "catalog-grand-mix-visuel-q1"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q2",
+          "type": "true_false",
+          "text": "Le Soleil est une étoile.",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "espace"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q2-a0",
+              "text": "Vrai"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q2-a1",
+              "text": "Faux"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "correctAnswerId": "catalog-grand-mix-visuel-q2-a0",
+          "explanation": "Le Soleil est l’étoile au centre du Système solaire."
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q3",
+          "type": "number",
+          "text": "Combien de cases compte un échiquier ?",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "nombres"
+          ],
+          "answers": [],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "value": 64,
+          "min": 0,
+          "max": 100,
+          "unit": "cases",
+          "explanation": "8 rangées de 8 cases : 8 × 8 = 64.",
+          "step": 1
+        },
+        {
+          "type": "image_clues",
+          "text": "Quelle série de jeux relie ces trois personnages ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois personnages appartiennent à Super Mario.",
+          "clues": [
+            {
+              "image": "COVER_ROOT/assets/characters/yoshi.webp"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/cappy.png"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/toadette.webp"
+            }
+          ],
+          "answerText": "Super Mario",
+          "acceptedAnswers": [
+            "Super Mario"
+          ],
+          "progressiveClues": true,
+          "id": "catalog-grand-mix-visuel-q4"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q5",
+          "type": "open_answer",
+          "text": "Plus on m’enlève de matière, plus je deviens grand. Qui suis-je ?",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "devinettes"
+          ],
+          "answers": [],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "answerText": "Un trou",
+          "acceptedAnswers": [
+            "trou"
+          ],
+          "explanation": "Réponse proposée : Un trou."
+        },
+        {
+          "type": "odd_one_out",
+          "text": "Quelle image ne représente pas un Pokémon ?",
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q6-a0",
+              "text": "Pichu",
+              "image": "COVER_ROOT/assets/characters/pichu.png"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q6-a1",
+              "text": "Évoli",
+              "image": "COVER_ROOT/assets/characters/eevee.jpg"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q6-a2",
+              "text": "Kirby",
+              "image": "COVER_ROOT/assets/characters/kirby.jpg"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q6-a3",
+              "text": "Togepi",
+              "image": "COVER_ROOT/assets/characters/togepi.jpg"
+            }
+          ],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Kirby est l’intrus dans cette sélection.",
+          "correctAnswerId": "catalog-grand-mix-visuel-q6-a2",
+          "id": "catalog-grand-mix-visuel-q6"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q7",
+          "type": "ranking",
+          "text": "Classe ces unités de longueur.",
+          "duration": 15,
+          "difficulty": "facile",
+          "tags": [
+            "classements"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q7-a0",
+              "text": "Millimètre"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q7-a1",
+              "text": "Centimètre"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q7-a2",
+              "text": "Mètre"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q7-a3",
+              "text": "Kilomètre"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "criterion": "De la plus petite à la plus grande",
+          "explanation": "Ordre attendu : Millimètre → Centimètre → Mètre → Kilomètre."
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q8",
+          "type": "true_false",
+          "text": "Les chauves-souris sont des oiseaux.",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "animaux"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q8-a0",
+              "text": "Vrai"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q8-a1",
+              "text": "Faux"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "correctAnswerId": "catalog-grand-mix-visuel-q8-a1",
+          "explanation": "Ce sont des mammifères capables de vol actif."
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Cappy était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/cappy.png",
+          "imageHasAlpha": true,
+          "answerText": "Cappy",
+          "acceptedAnswers": [
+            "cappy"
+          ],
+          "visualMode": "hidden",
+          "zoomStart": 4,
+          "id": "catalog-grand-mix-visuel-q9"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q10",
+          "type": "number",
+          "text": "Combien de touches compte un piano standard moderne ?",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "nombres"
+          ],
+          "answers": [],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "value": 88,
+          "min": 0,
+          "max": 120,
+          "unit": "touches",
+          "explanation": "Il comprend 52 touches blanches et 36 touches noires.",
+          "step": 1
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Tom Nook était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/tom-nook.webp",
+          "imageHasAlpha": true,
+          "answerText": "Tom Nook",
+          "acceptedAnswers": [
+            "tom nook"
+          ],
+          "visualMode": "zoom",
+          "zoomStart": 4,
+          "id": "catalog-grand-mix-visuel-q11"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q12",
+          "type": "open_answer",
+          "text": "Je possède un cou, mais pas de tête. Je contiens une boisson. Qui suis-je ?",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "devinettes"
+          ],
+          "answers": [],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "answerText": "Une bouteille",
+          "acceptedAnswers": [
+            "bouteille"
+          ],
+          "explanation": "Réponse proposée : Une bouteille."
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q13",
+          "type": "ranking",
+          "text": "Classe ces fractions.",
+          "duration": 15,
+          "difficulty": "facile",
+          "tags": [
+            "classements"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q13-a0",
+              "text": "1/8"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q13-a1",
+              "text": "1/4"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q13-a2",
+              "text": "1/2"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q13-a3",
+              "text": "3/4"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "criterion": "De la plus petite à la plus grande",
+          "explanation": "Ordre attendu : 1/8 → 1/4 → 1/2 → 3/4."
+        },
+        {
+          "type": "image_clues",
+          "text": "Quelle série de jeux relie ces trois personnages ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois personnages appartiennent à Pokémon.",
+          "clues": [
+            {
+              "image": "COVER_ROOT/assets/characters/pichu.png"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/togepi.jpg"
+            },
+            {
+              "image": "COVER_ROOT/assets/characters/charizard.png"
+            }
+          ],
+          "answerText": "Pokémon",
+          "acceptedAnswers": [
+            "Pokémon"
+          ],
+          "progressiveClues": true,
+          "id": "catalog-grand-mix-visuel-q14"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q15",
+          "type": "true_false",
+          "text": "Le cœur humain possède quatre cavités.",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "corps"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q15-a0",
+              "text": "Vrai"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q15-a1",
+              "text": "Faux"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "correctAnswerId": "catalog-grand-mix-visuel-q15-a0",
+          "explanation": "Deux oreillettes et deux ventricules."
+        },
+        {
+          "type": "visual_guess",
+          "text": "Quel personnage se cache ici ?",
+          "answers": [],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Falco était le personnage à retrouver.",
+          "image": "COVER_ROOT/assets/characters/falco.webp",
+          "imageHasAlpha": true,
+          "answerText": "Falco",
+          "acceptedAnswers": [
+            "falco"
+          ],
+          "visualMode": "blurred",
+          "zoomStart": 4,
+          "id": "catalog-grand-mix-visuel-q16"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q17",
+          "type": "qcm",
+          "text": "Quelle est la capitale du Brésil ?",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "capitales"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q17-a0",
+              "text": "São Paulo"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q17-a1",
+              "text": "Salvador"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q17-a2",
+              "text": "Brasília"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q17-a3",
+              "text": "Rio de Janeiro"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "correctAnswerId": "catalog-grand-mix-visuel-q17-a2",
+          "explanation": "Réponse : Brasília."
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q18",
+          "type": "qcm",
+          "text": "Quel être mythologique renaît de ses cendres ?",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "mythologie"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q18-a0",
+              "text": "Le phénix"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q18-a1",
+              "text": "Le griffon"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q18-a2",
+              "text": "Le centaure"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q18-a3",
+              "text": "La sirène"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "correctAnswerId": "catalog-grand-mix-visuel-q18-a0",
+          "explanation": "Réponse : Le phénix."
+        },
+        {
+          "type": "odd_one_out",
+          "text": "Quel personnage n’appartient pas à l’univers Mario ?",
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q19-a0",
+              "text": "Yoshi",
+              "image": "COVER_ROOT/assets/characters/yoshi.webp"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q19-a1",
+              "text": "Cappy",
+              "image": "COVER_ROOT/assets/characters/cappy.png"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q19-a2",
+              "text": "Link",
+              "image": "COVER_ROOT/assets/characters/link.png"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q19-a3",
+              "text": "Toadette",
+              "image": "COVER_ROOT/assets/characters/toadette.webp"
+            }
+          ],
+          "duration": 14,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Link est l’intrus dans cette sélection.",
+          "correctAnswerId": "catalog-grand-mix-visuel-q19-a2",
+          "id": "catalog-grand-mix-visuel-q19"
+        },
+        {
+          "id": "catalog-grand-mix-visuel-q20",
+          "type": "qcm",
+          "text": "👽 🚲 🌕 — Quel film se cache ici ?",
+          "duration": 12,
+          "difficulty": "facile",
+          "tags": [
+            "emoji-cinema"
+          ],
+          "answers": [
+            {
+              "id": "catalog-grand-mix-visuel-q20-a0",
+              "text": "Avatar"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q20-a1",
+              "text": "Interstellar"
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q20-a2",
+              "text": "E.T."
+            },
+            {
+              "id": "catalog-grand-mix-visuel-q20-a3",
+              "text": "Alien"
+            }
+          ],
+          "image": null,
+          "chapter": "Échauffement",
+          "source": "",
+          "correctAnswerId": "catalog-grand-mix-visuel-q20-a2",
+          "explanation": "Interprétation proposée : E.T.. Les emojis peuvent admettre d’autres lectures."
+        }
+      ],
+      "createdAt": "2026-11-09T18:00:00Z",
+      "updatedAt": "2026-11-09T18:00:00Z",
+      "editorialOrigin": "Manches visuelles QuizCast · personnages issus de l’archive du dépôt",
+      "videoSettings": {
+        "sceneVersion": 2,
+        "preset": "show",
+        "textStyle": "clean",
+        "timingMode": "question",
+        "revealDuration": 4,
+        "checkpointEvery": 5
+      },
+      "videoHook": "Des images, des indices, des surprises. Quel sera ton score ?",
+      "thumbnail": "COVER_ROOT/assets/covers/grand-mix-visuel.svg"
+    },
+    {
+      "id": "catalog-films-3-captures",
+      "catalogKey": "films-3-captures",
+      "visualCollection": true,
+      "status": "draft",
+      "name": "20 films · 3 captures pour trouver",
+      "language": "fr",
+      "categoryIds": [
+        "id_f8eba3cbf364"
+      ],
+      "difficulty": "moyen",
+      "description": "Storyboard de 20 manches à illustrer avec tes propres captures ou affiches. Les réponses et les plans suggérés sont déjà préparés ; importe les trois images dans chaque question.",
+      "questions": [
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La traversée du Titanic est au cœur du film.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Un plan du paquebot"
+            },
+            {
+              "image": "",
+              "brief": "Un iceberg"
+            },
+            {
+              "image": "",
+              "brief": "Le pont avant du navire"
+            }
+          ],
+          "answerText": "Titanic",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q1"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Ces indices visent le premier film de la saga.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le Poudlard Express"
+            },
+            {
+              "image": "",
+              "brief": "Le Choixpeau"
+            },
+            {
+              "image": "",
+              "brief": "La pierre philosophale"
+            }
+          ],
+          "answerText": "Harry Potter à l’école des sorciers",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q2"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Ces trois lieux apparaissent dans La Communauté de l’anneau.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La Comté"
+            },
+            {
+              "image": "",
+              "brief": "La porte de la Moria"
+            },
+            {
+              "image": "",
+              "brief": "Le Conseil d’Elrond"
+            }
+          ],
+          "answerText": "Le Seigneur des anneaux : La Communauté de l’anneau",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q3"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La machine à voyager dans le temps est une DeLorean.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La DeLorean"
+            },
+            {
+              "image": "",
+              "brief": "L’horloge de Hill Valley"
+            },
+            {
+              "image": "",
+              "brief": "Le bal de 1955"
+            }
+          ],
+          "answerText": "Retour vers le futur",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q4"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Le moustique dans l’ambre fournit un indice central.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La porte du parc"
+            },
+            {
+              "image": "",
+              "brief": "Le moustique dans l’ambre"
+            },
+            {
+              "image": "",
+              "brief": "Le verre d’eau qui tremble"
+            }
+          ],
+          "answerText": "Jurassic Park",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q5"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Choisis des captures de la même adaptation du film.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le rocher des Lions"
+            },
+            {
+              "image": "",
+              "brief": "La savane"
+            },
+            {
+              "image": "",
+              "brief": "Un phacochère et un suricate"
+            }
+          ],
+          "answerText": "Le Roi Lion",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q6"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Le masque de plongée fournit une piste vers Sydney.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Une anémone"
+            },
+            {
+              "image": "",
+              "brief": "Un aquarium"
+            },
+            {
+              "image": "",
+              "brief": "Le masque de plongée"
+            }
+          ],
+          "answerText": "Le Monde de Nemo",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q7"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Le plat de ratatouille joue un rôle clé dans le dénouement.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Les cuisines du restaurant"
+            },
+            {
+              "image": "",
+              "brief": "Une toque"
+            },
+            {
+              "image": "",
+              "brief": "Le plat final de légumes"
+            }
+          ],
+          "answerText": "Ratatouille",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q8"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La plante est un symbole du retour possible sur Terre.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Une Terre couverte de déchets"
+            },
+            {
+              "image": "",
+              "brief": "Une petite plante"
+            },
+            {
+              "image": "",
+              "brief": "Le vaisseau Axiom"
+            }
+          ],
+          "answerText": "WALL-E",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q9"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La maison est transportée par des ballons.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La maison et ses ballons"
+            },
+            {
+              "image": "",
+              "brief": "Un badge d’explorateur"
+            },
+            {
+              "image": "",
+              "brief": "Les chutes du Paradis"
+            }
+          ],
+          "answerText": "Là-haut",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q10"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "L’action se déroule autour de la station balnéaire d’Amity.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La plage d’Amity"
+            },
+            {
+              "image": "",
+              "brief": "Le bateau Orca"
+            },
+            {
+              "image": "",
+              "brief": "Un aileron"
+            }
+          ],
+          "answerText": "Les Dents de la mer",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q11"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La toupie est le totem utilisé par Cobb.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La toupie"
+            },
+            {
+              "image": "",
+              "brief": "La ville qui se replie"
+            },
+            {
+              "image": "",
+              "brief": "Le couloir rotatif"
+            }
+          ],
+          "answerText": "Inception",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q12"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les objets renvoient aux choix et aux sorties de la Matrice.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Les pilules rouge et bleue"
+            },
+            {
+              "image": "",
+              "brief": "Le code vert"
+            },
+            {
+              "image": "",
+              "brief": "Le téléphone à cadran"
+            }
+          ],
+          "answerText": "Matrix",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q13"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La scène du vélo est un des moments emblématiques du film.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le vélo"
+            },
+            {
+              "image": "",
+              "brief": "Le doigt lumineux"
+            },
+            {
+              "image": "",
+              "brief": "Une silhouette devant la Lune"
+            }
+          ],
+          "answerText": "E.T.",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q14"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La voiture Ecto-1 appartient à l’équipe des chasseurs de fantômes.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le piège à fantôme"
+            },
+            {
+              "image": "",
+              "brief": "La voiture Ecto-1"
+            },
+            {
+              "image": "",
+              "brief": "Le bonhomme Stay Puft"
+            }
+          ],
+          "answerText": "Ghostbusters",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q15"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Ces indices ciblent le premier film Pirates des Caraïbes.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le Black Pearl"
+            },
+            {
+              "image": "",
+              "brief": "La pièce d’or aztèque"
+            },
+            {
+              "image": "",
+              "brief": "La grotte du trésor"
+            }
+          ],
+          "answerText": "Pirates des Caraïbes : La Malédiction du Black Pearl",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q16"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les pièges servent à défendre la maison.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La maison des McCallister"
+            },
+            {
+              "image": "",
+              "brief": "Les pièges près de l’escalier"
+            },
+            {
+              "image": "",
+              "brief": "Le visage de Kevin après le rasage"
+            }
+          ],
+          "answerText": "Maman, j’ai raté l’avion !",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q17"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Elsa construit un palais de glace.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le palais de glace"
+            },
+            {
+              "image": "",
+              "brief": "Olaf"
+            },
+            {
+              "image": "",
+              "brief": "La porte de la chambre d’Elsa"
+            }
+          ],
+          "answerText": "La Reine des neiges",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q18"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "La montre de Murph a un rôle crucial dans le récit.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le champ de maïs"
+            },
+            {
+              "image": "",
+              "brief": "Le vaisseau Endurance"
+            },
+            {
+              "image": "",
+              "brief": "La montre de Murph"
+            }
+          ],
+          "answerText": "Interstellar",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q19"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel film relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Ces trois scènes appartiennent au film de Hayao Miyazaki.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Les bains"
+            },
+            {
+              "image": "",
+              "brief": "Le train sur l’eau"
+            },
+            {
+              "image": "",
+              "brief": "Sans-Visage"
+            }
+          ],
+          "answerText": "Le Voyage de Chihiro",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-films-3-captures-q20"
+        }
+      ],
+      "createdAt": "2026-11-09T18:00:00Z",
+      "updatedAt": "2026-11-09T18:00:00Z",
+      "editorialOrigin": "Manches visuelles QuizCast · personnages issus de l’archive du dépôt",
+      "videoSettings": {
+        "sceneVersion": 2,
+        "preset": "show",
+        "textStyle": "clean",
+        "timingMode": "question",
+        "revealDuration": 4,
+        "checkpointEvery": 5
+      },
+      "videoHook": "Des images, des indices, des surprises. Quel sera ton score ?",
+      "thumbnail": "COVER_ROOT/assets/covers/films-3-captures.svg"
+    },
+    {
+      "id": "catalog-jeux-3-captures",
+      "catalogKey": "jeux-3-captures",
+      "visualCollection": true,
+      "status": "draft",
+      "name": "20 jeux vidéo · 3 captures pour trouver",
+      "language": "fr",
+      "categoryIds": [
+        "id_video_games"
+      ],
+      "difficulty": "moyen",
+      "description": "Storyboard de 20 manches à illustrer avec tes propres captures ou affiches. Les réponses et les plans suggérés sont déjà préparés ; importe les trois images dans chaque question.",
+      "questions": [
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Minecraft.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Un bloc d’herbe"
+            },
+            {
+              "image": "",
+              "brief": "Un portail du Nether"
+            },
+            {
+              "image": "",
+              "brief": "Une table de fabrication"
+            }
+          ],
+          "answerText": "Minecraft",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q1"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de The Legend of Zelda: Breath of the Wild.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La tablette Sheikah"
+            },
+            {
+              "image": "",
+              "brief": "La tour du Prélude"
+            },
+            {
+              "image": "",
+              "brief": "Un gardien"
+            }
+          ],
+          "answerText": "The Legend of Zelda: Breath of the Wild",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q2"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Super Mario Odyssey.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "L’Odyssée"
+            },
+            {
+              "image": "",
+              "brief": "Cappy"
+            },
+            {
+              "image": "",
+              "brief": "New Donk City"
+            }
+          ],
+          "answerText": "Super Mario Odyssey",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q3"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Animal Crossing: New Horizons.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le bureau des résidents"
+            },
+            {
+              "image": "",
+              "brief": "Un billet Nook Miles"
+            },
+            {
+              "image": "",
+              "brief": "L’aéroport de l’île"
+            }
+          ],
+          "answerText": "Animal Crossing: New Horizons",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q4"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Pokémon Rouge et Bleu.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le laboratoire du Professeur Chen"
+            },
+            {
+              "image": "",
+              "brief": "Une Poké Ball"
+            },
+            {
+              "image": "",
+              "brief": "Le choix des trois Pokémon de départ"
+            }
+          ],
+          "answerText": "Pokémon Rouge et Bleu",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q5"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Mario Kart 8 Deluxe.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La Route Arc-en-ciel"
+            },
+            {
+              "image": "",
+              "brief": "Une carapace bleue"
+            },
+            {
+              "image": "",
+              "brief": "L’écran de sélection des karts"
+            }
+          ],
+          "answerText": "Mario Kart 8 Deluxe",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q6"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Portal.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Un portail bleu"
+            },
+            {
+              "image": "",
+              "brief": "Un portail orange"
+            },
+            {
+              "image": "",
+              "brief": "Le cube de compagnie"
+            }
+          ],
+          "answerText": "Portal",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q7"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Stardew Valley.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La ferme"
+            },
+            {
+              "image": "",
+              "brief": "Le centre communautaire"
+            },
+            {
+              "image": "",
+              "brief": "La mine"
+            }
+          ],
+          "answerText": "Stardew Valley",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q8"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Hollow Knight.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le Chevalier"
+            },
+            {
+              "image": "",
+              "brief": "Le puits de Dirtmouth"
+            },
+            {
+              "image": "",
+              "brief": "Un banc de sauvegarde"
+            }
+          ],
+          "answerText": "Hollow Knight",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q9"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Among Us.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La cafétéria du Skeld"
+            },
+            {
+              "image": "",
+              "brief": "Un conduit"
+            },
+            {
+              "image": "",
+              "brief": "L’écran de réunion d’urgence"
+            }
+          ],
+          "answerText": "Among Us",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q10"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Pac-Man.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le labyrinthe"
+            },
+            {
+              "image": "",
+              "brief": "Les quatre fantômes"
+            },
+            {
+              "image": "",
+              "brief": "Une cerise"
+            }
+          ],
+          "answerText": "Pac-Man",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q11"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Tetris.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Une ligne presque complète"
+            },
+            {
+              "image": "",
+              "brief": "Un bloc en T"
+            },
+            {
+              "image": "",
+              "brief": "Un bloc long"
+            }
+          ],
+          "answerText": "Tetris",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q12"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Splatoon 3.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La place de Cité-Clabousse"
+            },
+            {
+              "image": "",
+              "brief": "Une arme à encre"
+            },
+            {
+              "image": "",
+              "brief": "Le salmonoïde Cohozuna"
+            }
+          ],
+          "answerText": "Splatoon 3",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q13"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Donkey Kong Country.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Les tonneaux DK"
+            },
+            {
+              "image": "",
+              "brief": "Une mine avec ses wagonnets"
+            },
+            {
+              "image": "",
+              "brief": "Les bananes"
+            }
+          ],
+          "answerText": "Donkey Kong Country",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q14"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Luigi’s Mansion 3.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "L’hôtel du Repos éternel"
+            },
+            {
+              "image": "",
+              "brief": "Le Spectroflash"
+            },
+            {
+              "image": "",
+              "brief": "Le Gluigi"
+            }
+          ],
+          "answerText": "Luigi’s Mansion 3",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q15"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Metroid Dread.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Un E.M.M.I."
+            },
+            {
+              "image": "",
+              "brief": "Samus"
+            },
+            {
+              "image": "",
+              "brief": "Un ascenseur de ZDR"
+            }
+          ],
+          "answerText": "Metroid Dread",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q16"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Super Smash Bros. Ultimate.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Le plateau Champ de Bataille"
+            },
+            {
+              "image": "",
+              "brief": "La Balle Smash"
+            },
+            {
+              "image": "",
+              "brief": "Le grand écran de sélection des combattants"
+            }
+          ],
+          "answerText": "Super Smash Bros. Ultimate",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q17"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Sonic the Hedgehog.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "Green Hill Zone"
+            },
+            {
+              "image": "",
+              "brief": "Un anneau doré"
+            },
+            {
+              "image": "",
+              "brief": "Un moniteur à casser"
+            }
+          ],
+          "answerText": "Sonic the Hedgehog",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q18"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Wii Sports.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La salle de bowling"
+            },
+            {
+              "image": "",
+              "brief": "Un Mii au tennis"
+            },
+            {
+              "image": "",
+              "brief": "Le ring de boxe"
+            }
+          ],
+          "answerText": "Wii Sports",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q19"
+        },
+        {
+          "type": "image_clues",
+          "text": "Quel jeu vidéo relie ces trois images ?",
+          "answers": [],
+          "duration": 16,
+          "difficulty": "moyen",
+          "tags": [
+            "visuel"
+          ],
+          "chapter": "La chasse aux indices",
+          "explanation": "Les trois captures doivent provenir de Fall Guys.",
+          "clues": [
+            {
+              "image": "",
+              "brief": "La couronne"
+            },
+            {
+              "image": "",
+              "brief": "Les portes de Ruée vers les portes"
+            },
+            {
+              "image": "",
+              "brief": "Les personnages haricots"
+            }
+          ],
+          "answerText": "Fall Guys",
+          "acceptedAnswers": [],
+          "progressiveClues": true,
+          "id": "catalog-jeux-3-captures-q20"
+        }
+      ],
+      "createdAt": "2026-11-09T18:00:00Z",
+      "updatedAt": "2026-11-09T18:00:00Z",
+      "editorialOrigin": "Manches visuelles QuizCast · personnages issus de l’archive du dépôt",
+      "videoSettings": {
+        "sceneVersion": 2,
+        "preset": "show",
+        "textStyle": "clean",
+        "timingMode": "question",
+        "revealDuration": 4,
+        "checkpointEvery": 5
+      },
+      "videoHook": "Des images, des indices, des surprises. Quel sera ton score ?",
+      "thumbnail": "COVER_ROOT/assets/covers/jeux-3-captures.svg"
+    },
     {
       "id": "catalog-legacy-1",
       "name": "Nintendo — 20 questions",
@@ -17579,5 +20371,9 @@
         "preset": "pop"
       }
     }
-  ]
+  ],
+  "mediaProvenance": {
+    "characters": "Fichiers extraits sans modification de Characters Silhouette.zip, déjà fourni dans le dépôt. Les droits de diffusion restent à vérifier par le créateur.",
+    "storyboards": "Aucune capture de film ou de jeu téléchargée. Les champs d’image des deux storyboards sont volontairement vides."
+  }
 }

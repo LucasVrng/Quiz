@@ -13,13 +13,35 @@ Ouvrir la racine pour le public, `/admin/` pour créer, `/quizzes/` pour explore
 
 ## Ce qui est inclus
 
-- 34 quiz, 540 questions : 13 nouvelles séries originales (260 questions), 20 séries françaises préexistantes (260 questions) et un quiz Nintendo anglais préexistant (20 questions).
-- QCM, vrai/faux, réponse libre avec synonymes, personnage mystère, zoom, estimation numérique et classement.
+- **37 quiz jouables (600 questions)** et **2 storyboards à illustrer (40 questions)**. La base précédente de 34 quiz est conservée ; trois nouvelles collections visuelles ajoutent 60 manches, dont certaines reprennent des questions du catalogue.
+- Dix types : QCM, vrai/faux, réponse libre, personnage mystère, zoom, estimation numérique, classement, **3 images / 1 réponse**, **image mystère** et **intrus visuel**. Une image mystère peut avoir sa propre silhouette, son zoom, ses cases cachées ou son flou, indépendamment des autres manches.
 - Admin guidé, formats de départ, ajout groupé depuis un tableur ou du texte, import/export JSON, réorganisation par boutons ou glisser-déposer.
-- Studio : aperçu du rendu, neuf styles (huit explicites et sélection automatique), trois nouveaux univers Pop Studio / Grand jeu / Clair & net ; durées fixes ou par question, disposition par type et par question, sons synthétisés facultatifs, accroche, intermèdes, pause/reprise et fiche de production.
+- Studio : typographie explicite sans Impact, surfaces opaques à fort contraste, préchargement des images, répétition d’une question isolée, aperçu du rendu, neuf styles (huit explicites et sélection automatique), trois nouveaux univers Pop Studio / Grand jeu / Clair & net ; durées fixes ou par question, disposition par type et par question, sons synthétisés facultatifs, accroche, intermèdes, pause/reprise et fiche de production.
 - Accueil public, catalogue filtrable par catégorie et langue, profil local, score, lien vers la chaîne et association d’un épisode YouTube à un quiz.
 
 **Auto Play joue une scène à enregistrer avec OBS. Il ne fabrique ni MP4, ni voix, ni publication YouTube.** Aucun changement de la chaîne ou du site en ligne n’est effectué par le développement local.
+
+## Essayer les nouveaux défis visuels
+
+Dans **Admin → Idées & collections**, l’onglet **Défis visuels jouables** ouvre :
+
+- **Nintendo Remix** : trois images, silhouettes, zoom, intrus, vrai/faux, nombres et classement s’alternent.
+- **20 personnages** : ombre, zoom, cases et flou, sans propositions de réponse.
+- **Le grand mix visuel** : images, culture générale, devinettes, chiffres et autres formats dans le même épisode.
+
+Le bouton **Vidéo** sous chaque carte ouvre le studio. **Tester cette question** lance uniquement la manche affichée ; **Lancer la répétition** joue l’épisode entier. Les images sont chargées avant l’introduction. Les boutons de la scène ne sont pas compris dans le cadre à enregistrer.
+
+### Films et jeux avec tes captures
+
+L’onglet **Mes captures à importer** contient deux storyboards de 20 manches : films et jeux vidéo. Les réponses et les trois plans suggérés sont préparés. **Aucune capture n’a été téléchargée ou inventée pour remplir les cases.**
+
+1. Ouvrir un storyboard puis éditer une question, ou utiliser **Importer les captures manquantes** depuis son studio.
+2. Importer une image dans chacun des trois emplacements. Les suggestions de plans ne s’affichent que dans l’éditeur.
+3. Relire la réponse et ajouter les variantes acceptées.
+4. Tester cette question dans le studio dès que ses trois images sont présentes, même si les 19 autres restent à illustrer.
+5. L’épisode complet reste désactivé tant qu’il manque des médias. Une fois toutes les questions complètes et sauvegardées, le storyboard devient un quiz prêt localement. Les brouillons sont exclus du catalogue public.
+
+Pour les silhouettes, utiliser une image à fond transparent ; une image opaque est signalée à l’import et ne peut pas être sauvegardée en silhouette. Le zoom, le flou et les cases restent utilisables sur les captures opaques. Les fichiers de personnages inclus proviennent de l’archive déjà présente dans le dépôt ; ils ont été extraits sans modification. Leur présence n’établit pas des droits de diffusion.
 
 ## Créer et enregistrer un épisode
 
@@ -54,16 +76,16 @@ for f in js/*.js; do node --check "$f" || exit; done
 node --test tests/browser.test.cjs
 ```
 
-Le test démarre son propre serveur local sur 8765. Il vérifie catalogue, routes, création et persistance, sept types, réglages, déroulé temporel de la scène, isolation des navigateurs, import invalide et affichage mobile. Aucun appel YouTube n’est nécessaire. Pas de build ou dépendance externe à charger pour jouer.
+Le test démarre son propre serveur local sur 8765. Il vérifie catalogue, routes, création et persistance, dix types, import de captures, progression des indices, contraste des thèmes, réglages, déroulé temporel de la scène, isolation des navigateurs, import invalide et affichage mobile. Aucun appel YouTube n’est nécessaire. Pas de build ou dépendance externe à charger pour jouer.
 
 ## Organisation
 
 - `js/core.js` : stockage, chargement du catalogue et outils communs.
-- `js/question-types.js` : registre des sept formats.
+- `js/question-types.js` et `js/visual-questions.js` : registre des dix formats, médias et progression des indices.
 - `js/studio.js` : parcours créateur, modèles, validation, aperçu, options vidéo, import groupé, sons et contrôles.
 - `js/play.js` : jeu interactif, composition de la scène et moteur des phases.
 - `js/admin.js`, `js/admin-actions.js`, `js/events.js` : écrans, sauvegardes et interactions.
-- `css/studio.css` : administration claire, scène avec dimensions relatives à son cadre, responsive et réglages d’accessibilité liés au mouvement.
-- `scripts/build-catalog.py`, `data/catalog.json`, `assets/covers/` : contenu livré avec le site.
+- `css/studio.css` et `css/broadcast.css` : administration claire, scène de jeu télévisé, contraste, cadre relatif, responsive et réduction du mouvement.
+- `scripts/build-catalog.py`, `scripts/visual_catalog.py`, `data/catalog.json`, `assets/covers/` et `assets/characters/` : contenu livré avec le site et provenance des médias.
 
 Voir [la stratégie de lancement](docs/STRATEGIE-YOUTUBE.md) et [le tableau de suivi](docs/SUIVI-EPISODES.csv). L’architecture utilise encore des scripts classiques partagés ; une migration vers des modules et une base distante devra faire l’objet d’une étape distincte si le besoin est confirmé.

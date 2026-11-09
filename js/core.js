@@ -611,7 +611,8 @@ async function loadAll(){
   STATE.categories = cats || [];
   STATE.settings = settings || { uiLanguage:'fr', publicTheme:'pop' };
   STATE.hiddenCatalog=hiddenIds||[];
-  for(const q of catalog.quizzes||[]){if(q.thumbnail?.startsWith('COVER_ROOT/'))q.thumbnail=new URL(qcRoute(q.thumbnail.slice(11)),location.href).pathname;}
+  function catalogMedia(value){return value?.startsWith('COVER_ROOT/')?new URL(qcRoute(value.slice(11)),location.href).pathname:value;}
+  for(const q of catalog.quizzes||[]){q.thumbnail=catalogMedia(q.thumbnail);for(const question of q.questions||[]){question.image=catalogMedia(question.image);for(const clue of question.clues||[])clue.image=catalogMedia(clue.image);for(const a of question.answers||[])a.image=catalogMedia(a.image);}}
   STATE.catalogIds=(catalog.quizzes||[]).map(q=>q.id);
   const hiddenCategories=await Store.getJSON('app:hidden-categories')||[];
   STATE.hiddenCategories=hiddenCategories;
@@ -737,7 +738,7 @@ const ImageUtil = {
     });
   },
   async pixelate(dataURL, pixelSize=16){
-    const key='px:'+pixelSize+':'+dataURL.length;
+    const key='px:'+pixelSize+':'+dataURL;
     if(this._procCache.has(key)) return this._procCache.get(key);
     const img=await this.loadEl(dataURL);
     const w=img.width,h=img.height;
@@ -752,7 +753,7 @@ const ImageUtil = {
     return out;
   },
   async silhouette(dataURL){
-    const key='silhouette-alpha:'+dataURL.length;
+    const key='silhouette-alpha:'+dataURL;
     if(this._procCache.has(key)) return this._procCache.get(key);
     const img=await this.loadEl(dataURL);
     const canvas=document.createElement('canvas'); canvas.width=img.width; canvas.height=img.height;

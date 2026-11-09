@@ -26,9 +26,13 @@ function onGlobalClick(e){
     case 'close-template': document.getElementById('modal-root').innerHTML=''; break;
     case 'browse-collection': document.getElementById('modal-root').innerHTML='';STATE.view='collection';render();break;
     case 'create-template': createFromTemplate(el.dataset.template);break;
+    case 'visual-hint':if(STATE.play){STATE.play.visualHints=Math.min(6,(STATE.play.visualHints||0)+1);render();}break;
+    case 'studio-preview-hint':STATE.studioHint=((STATE.studioHint||0)+1)%4;render();break;
+    case 'complete-storyboard':{const quiz=getQuiz(id);if(quiz){STATE.currentQuizId=id;STATE.view='quizEditor';render();const q=quiz.questions.find(q=>visualQuestionIssue(q));if(q)openQuestionModal(id,q);}break;}
+    case 'collection-filter':STATE.collectionFilter=el.dataset.filter;render();break;
     case 'studio-tab': STATE.studioTab=el.dataset.tab;render();break;
     case 'studio-preset': {const s=STATE.autoplaySetup;s.preset=el.dataset.preset;s.backgroundMode='style';saveStudioSettings();render();break;}
-    case 'studio-sample-prev': case 'studio-sample-next': {const s=STATE.autoplaySetup,q=getQuiz(s.quizId);STATE.studioSample=((STATE.studioSample||0)+(action==='studio-sample-next'?1:-1)+q.questions.length)%q.questions.length;STATE.studioReveal=false;render();break;}
+    case 'studio-sample-prev': case 'studio-sample-next': {const s=STATE.autoplaySetup,q=getQuiz(s.quizId);STATE.studioSample=((STATE.studioSample||0)+(action==='studio-sample-next'?1:-1)+q.questions.length)%q.questions.length;STATE.studioReveal=false;STATE.studioHint=0;render();break;}
     case 'studio-preview-reveal': STATE.studioReveal=!STATE.studioReveal;render();break;
     case 'studio-production-kit': downloadProductionKit();break;
     case 'studio-pause': studioPause();break;
@@ -137,6 +141,7 @@ function onGlobalClick(e){
     case 'ap-set-guess-difficulty': STATE.autoplaySetup.guessDifficulty = el.dataset.difficulty || 'normal'; render(); break;
     case 'ap-set-text-style': STATE.autoplaySetup.textStyle = el.value || 'preset'; render(); break;
     case 'ap-set-custom-media-url': if(STATE.autoplaySetup){ STATE.autoplaySetup.customMediaUrl=el.value; STATE.autoplaySetup.customMediaType=/\.(mp4|webm|ogg|mov)(?:\?|#|$)/i.test(el.value)?'video':'image'; } break;
+    case 'launch-autoplay-sample':launchAutoplayStage({sampleIndex:STATE.studioSample||0});break;
     case 'launch-autoplay-stage': launchAutoplayStage(); break;
     case 'start-autoplay-countdown': startAutoplayCountdown(); break;
 
@@ -190,7 +195,11 @@ function onGlobalChange(e){
   switch(action){
     case 'studio-setting': if(el.tagName==='SELECT')updateStudioSetting(el);break;
     case 'bulk-question-type':if(STATE.bulkQuestions){STATE.bulkQuestions.type=el.value;renderBulkQuestionEditor();}break;
+    case 'visual-clue-file':case 'visual-main-file':case 'visual-answer-file':handleVisualMedia(el.files[0],action,Number(el.dataset.index));break;
+    case 'visual-mode':if(STATE._questionDraft){STATE._questionDraft.visualMode=el.value;renderQuestionModal();}break;
+    case 'progressive-clues':if(STATE._questionDraft)STATE._questionDraft.progressiveClues=el.checked;break;
     case 'question-layout': if(STATE._questionDraft)STATE._questionDraft.videoLayout=el.value;break;
+    case 'lib-filter-type':STATE.library.type=el.value;render();break;
     case 'lib-filter-cat': STATE.library.category = el.value; render(); break;
     case 'public-language-filter': STATE.publicLanguage=el.value;render();break;
     case 'public-category-filter': STATE.publicCategoryFilter=el.value; render(); break;
@@ -222,7 +231,7 @@ function onGlobalChange(e){
 }
 function initEventDelegation(){
   document.addEventListener('click', onGlobalClick);
-document.addEventListener('keydown', e=>{ if(STATE.view==='play' && STATE.play && STATE.play.returnView==='publicQuiz' && !STATE.play.revealed){ const q=getQuiz(STATE.play.quizId)?.questions[STATE.play.order[STATE.play.pos]]; const n=Number(e.key); if(n>=1&&n<=6 && q && q.type!=='ranking' && q.type!=='number' && !['guess_character','open_answer'].includes(q.type) && q.answers?.[n-1]){ selectPlayAnswer(q.answers[n-1].id); return; } if(e.key==='Enter' && ['guess_character','open_answer'].includes(q?.type)){ submitPlayGuess(); return; } if(e.key==='Escape'){ STATE.play=null; STATE.publicMode=true; STATE.publicQuizId=null; STATE.view='publicHome'; render(); } }});
+document.addEventListener('keydown', e=>{ if(STATE.view==='play' && STATE.play && STATE.play.returnView==='publicQuiz' && !STATE.play.revealed){ const q=getQuiz(STATE.play.quizId)?.questions[STATE.play.order[STATE.play.pos]]; const n=Number(e.key); if(n>=1&&n<=6 && q && q.type!=='ranking' && q.type!=='number' && !isFreeResponseQuestion(q) && q.answers?.[n-1]){ selectPlayAnswer(q.answers[n-1].id); return; } if(e.key==='Enter' && isFreeResponseQuestion(q)){ submitPlayGuess(); return; } if(e.key==='Escape'){ STATE.play=null; STATE.publicMode=true; STATE.publicQuizId=null; STATE.view='publicHome'; render(); } }});
   document.addEventListener('input', onGlobalInput);
   document.addEventListener('change', onGlobalChange);
   document.addEventListener('keydown', e=>{

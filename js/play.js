@@ -4,6 +4,7 @@
 function quizHasGuessCharacters(quiz){ return !!quiz?.questions?.some(q=>q.type==='guess_character' && q.image); }
 function startPlay(quizId, returnView, guessMode=null, guessDifficulty='normal'){
   const quiz=getQuiz(quizId);
+  if(returnView==='publicQuiz'&&quiz?.status==='draft'){STATE.view='publicQuizzes';render();showToast('Ce storyboard attend encore ses captures.','err');return;}
   if(!quiz || quiz.questions.length===0){showToast(tr('empty_questions_title'),'err');STATE.view=returnView==='publicQuiz'?'publicQuizzes':'library';render();return;}
   if(returnView==='publicQuiz' && quizHasGuessCharacters(quiz) && !guessMode){
     STATE._guessModeSetup={quizId,returnView};
@@ -85,7 +86,7 @@ function submitPlayNumber(){
   if(!input||!input.value.trim()||!input.checkValidity())return;
   const val=Number(input.value);if(!Number.isFinite(val))return;p.answerValue=val;p.revealed=true;p.lastAnswerCorrect=val===Number(q.value);if(p.lastAnswerCorrect)p.correctCount++;render();
 }
-function nextPlayQuestion(){const p=STATE.play;if(!p)return;p.pos++;p.selectedId=null;p.revealed=false;p.answerValue=null;p.rankingSubmitted=false;p._rankingShuffle=null;render();}
+function nextPlayQuestion(){const p=STATE.play;if(!p)return;p.pos++;p.selectedId=null;p.revealed=false;p.answerValue=null;p.rankingSubmitted=false;p._rankingShuffle=null;p.visualHints=0;render();}
 function restartPlay(){const p=STATE.play;if(p)startPlay(p.quizId,p.returnView,p.guessMode,p.guessDifficulty);}
 function changeGuessMode(){
   const p=STATE.play;
@@ -151,8 +152,10 @@ function renderPlayView(){
   if(q.type==='ranking' && !p._rankingShuffle){p._rankingShuffle=shuffleArray(q.answers.map(a=>a.id));}
   let imgHTML='';
   if(q.image){if(q.type==='guess_character'){const displayQ=getGuessDisplayQuestion(q,p);imgHTML=p.revealed?`<div class="play-question-img" style="display:flex;align-items:center;justify-content:center;"><img src="${q.image}" style="max-height:360px;max-width:100%;object-fit:contain;border-radius:14px;"></div>`:`<div class="play-question-img" style="display:flex;align-items:center;justify-content:center;">${modeImageHTML(displayQ,'','max-height:360px;max-width:100%;object-fit:contain;')}</div>`;}else if(q.type==='zoom')imgHTML=`<div class="zoom-image-wrap" style="height:260px;--zoom-scale:${p.revealed?1:q.zoomStart||3};"><img src="${q.image}"></div>`;else imgHTML=`<img class="play-question-img" src="${q.image}">`; }
+  if(q.type==='image_clues')imgHTML=p.revealed?'':renderClueImages(q);
+  if(q.type==='visual_guess')imgHTML=p.revealed?'':renderMysteryImage(q,false,p.visualHints||0)+`<button class="btn btn-outline" data-action="visual-hint">Dévoiler un indice</button>`;
   let body='';
-  if(['guess_character','open_answer'].includes(q.type)) body=renderGuessNormal(q,p);
+  if(isFreeResponseQuestion(q)) body=renderGuessNormal(q,p);
   else if(q.type==='ranking') body=renderRankingNormal(q,p);
   else if(q.type==='number') body=renderNumberNormal(q,p);
   else {
@@ -217,6 +220,7 @@ function autoplayQuestionTypeLabel(type){
   return labels[type] || (QuestionTypes[type]?.label ? QuestionTypes[type].label() : type);
 }
 function autoplayDefaultLayoutForType(type,presetId='cinematic'){
+  if(type==='visual_guess')return 'split-left';
   if(type==='ranking') return 'stacked';
   if(type==='number' || type==='true_false') return 'center';
   if(type==='qcm') return 'center';
@@ -244,11 +248,12 @@ function autoplayLayoutByTypeRows(quiz,s){
   const types=[...new Set((quiz.questions||[]).map(q=>q.type))];
   const base=s.layout||'auto';
   return types.map(type=>{
+    if(type==='image_clues')return '<div class="autoplay-type-layout-row"><div class="autoplay-type-layout-copy"><strong>3 images, 1 réponse</strong><small>Composition dédiée : trois cartes alignées</small></div></div>';
     const current=s.layoutByType?.[type] || 'auto';
     const effective=current!=='auto' ? current : effectiveAutoplayLayout({...s,preset}, {type});
     return `<div class="autoplay-type-layout-row">
       <div class="autoplay-type-layout-copy"><strong>${escapeHTML(autoplayQuestionTypeLabel(type))}</strong><small>Par défaut : ${escapeHTML(autoplayLayoutChoices().find(x=>x[0]===effective)?.[1]||effective)}</small></div>
-      <div class="autoplay-type-layout-controls"><select data-action="ap-set-layout-type" data-qtype="${escapeHTML(type)}">${autoplayLayoutOverrideOptions(current)}</select><span class="autoplay-type-layout-thumb">${autoplayLayoutThumb(effective)}</span></div>
+      <div class="autoplay-type-layout-controls"><select data-action="ap-set-layout-type" data-qtype="${escapeHTML(type)}">${type==='visual_guess'?[['auto','Selon le studio'],['split-left','Image à gauche'],['split-right','Image à droite'],['center','Image centrée']].map(([id,t])=>`<option value="${id}" ${current===id?'selected':''}>${t}</option>`).join(''):autoplayLayoutOverrideOptions(current)}</select><span class="autoplay-type-layout-thumb">${autoplayLayoutThumb(effective)}</span></div>
     </div>`;
   }).join('');
 }
@@ -401,7 +406,7 @@ function buildAutoplayQuestionMarkup(eng,quiz,sourceQ,preview=false){
   }else if(q.type==='ranking'){
     const ids=eng.answerOrder.map(i=>q.answers[i]);
     info=`<div class="stage-qtext-wrap"><div class="stage-qtext">${escapeHTML(q.text)}</div></div>${q.criterion?`<div class="stage-q-criterion">${escapeHTML(q.criterion)}</div>`:''}<div class="stage-ranking">${ids.map((a,i)=>`<div class="stage-ranking-item" data-aid="${a.id}"><span class="ranking-index">${i+1}</span><span>${escapeHTML(a.text)}</span></div>`).join('')}</div>`;
-  }else if(['guess_character','open_answer'].includes(q.type)){
+  }else if(isFreeResponseQuestion(q)){
     info=`<div class="stage-qtext-wrap qfade-in" style="animation-delay:.14s;"><div class="stage-qtext">${escapeHTML(q.text)}</div></div>`;
   }else{
     const letters=['a','b','c','d','e','f'];
@@ -410,6 +415,7 @@ function buildAutoplayQuestionMarkup(eng,quiz,sourceQ,preview=false){
   }
   let timer=autoplayTimerMarkup(eng.timerStyle||'ring',eng.timerPosition||'auto',eng.responseTime||3,preview);
   if(autoplayRevealLanguage(eng,quiz)==='en')timer=timer.replaceAll('Temps restant','Time left').replaceAll('Temps','Time');
+  if(['image_clues','visual_guess'].includes(q.type))return buildVisualRoundMarkup(eng,quiz,q,timer);
   const hasVisual=Boolean(imgHTML);
   const layout=autoplayLayoutClass(effectiveAutoplayLayout(eng,q));
   const rootClass=`stage-question-layout ${layout}${hasVisual?' has-visual':' no-visual'} autoplay-question-type-${q.type}`;
@@ -438,7 +444,7 @@ function openAutoplaySetup(quizId){
   const quiz=getQuiz(quizId);
   if(!quiz){STATE.view='library';render();return;}
   if(!quiz.questions.length)showToast('Ajoute des questions dans l’éditeur avant la répétition.','err');
-  STATE.autoplaySetup={...studioDefaults(quiz),...(quiz.videoSettings||{}),quizId};
+  STATE.autoplaySetup={...migrateStudioSettings(quiz),quizId};
   STATE.studioSample=0;STATE.studioReveal=false;
   ensureAutoplayGuessSelections(STATE.autoplaySetup,quiz);
   STATE.view='autoplaySetup';
@@ -468,26 +474,36 @@ function shuffleArray(arr){
   for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
-function launchAutoplayStage(){
+function launchAutoplayStage(options={}){
   clearApTimers();
   const s = STATE.autoplaySetup;
   const quiz = getQuiz(s.quizId);
   if(!quiz) return;
-  const issues=quizIssues(quiz);if(issues.length){showToast(issues[0],'err');return;}
+  const sampleIndex=Number.isInteger(options.sampleIndex)?options.sampleIndex:null;
+  if(sampleIndex!==null&&!quiz.questions[sampleIndex])return;
+  const issues=quizIssues(sampleIndex===null?quiz:{...quiz,questions:[quiz.questions[sampleIndex]]});if(issues.length){showToast(issues[0],'err');return;}
   saveStudioSettings();
   studioInitAudio(s.sound);
-  let order = quiz.questions.map((_,i)=>i);
+  let order = sampleIndex===null?quiz.questions.map((_,i)=>i):[sampleIndex];
   if(s.shuffleQ) order = shuffleArray(order);
   ensureAutoplayGuessSelections(s,quiz);
   STATE.autoplayEngine = {
-    ...s, fixedResponseTime:s.responseTime,
+    ...s, ...(sampleIndex!==null?{introDuration:0,checkpointEvery:0,sample:true}:{}), fixedResponseTime:s.responseTime,
     quizId:s.quizId, order, pos:0, phase:'intro', introStep:1,
     responseTime:s.responseTime, revealDuration:s.revealDuration, nextDelay:s.nextDelay, shuffleA:s.shuffleA, preset:resolveAutoplayPreset(quiz,s.preset||'auto'), backgroundMode:s.backgroundMode||'style', backgroundVariant:s.backgroundVariant||'1', customMediaUrl:s.customMediaUrl||'', customMediaType:s.customMediaType||'image', revealLanguage:s.revealLanguage||'auto', textStyle:s.textStyle||'preset', layout:s.layout||'auto', layoutByType:{...(s.layoutByType||{})}, timerStyle:s.timerStyle||getAutoplayPreset(resolveAutoplayPreset(quiz,s.preset||'auto')).timerStyle||'ring', timerPosition:s.timerPosition||getAutoplayPreset(resolveAutoplayPreset(quiz,s.preset||'auto')).timerPosition||'auto',
     guessMode:s.guessMode||'normal', guessDifficulty:s.guessDifficulty||'normal', introMessage:s.introMessage||'lets-go', guessModeByQuestion:{...(s.guessModeByQuestion||{})}, guessRandomByQuestion:{},
     paused:false,phaseStart:performance.now(), answerOrder:null, _answerOrderForQ:null,
   };
-  renderStageShell();        // creates the fullscreen-capable container ONCE for the whole quiz
-  runAutoplayIntroSequence();
+  renderStageShell();        // keep one fullscreen container throughout the episode
+  const eng=STATE.autoplayEngine;
+  const episode={...quiz,questions:order.map(i=>quiz.questions[i])};
+  if(episode.questions.some(q=>q.image||q.clues?.some(c=>c.image)||q.answers?.some(a=>a.image))){
+    prepareBroadcastMedia(eng,episode).then(()=>{if(STATE.autoplayEngine===eng&&eng.phase==='preparing'){eng.phase='intro';runAutoplayIntroSequence();}}).catch(()=>{
+      if(STATE.autoplayEngine!==eng)return;
+      eng.phase='media-error';
+      document.getElementById('stage-content').innerHTML='<div class="media-preparing"><h2>Une image n’a pas pu être chargée</h2><p>Ferme la répétition et vérifie les images dans l’éditeur avant de filmer.</p></div>';
+    });
+  }else runAutoplayIntroSequence();
 }
 function autoplayIntroWorld(preset){
   return ({nintendo:'Nintendo',horror:'Horreur',cartoon:'Cartoon',arcade:'Arcade',cinematic:'QuizCast'})[preset]||'QuizCast';
@@ -500,7 +516,7 @@ function autoplayDifficultyLabel(quiz,lang){
 function autoplayIntroSlideMarkup(eng,quiz){
   const en=autoplayRevealLanguage(eng,quiz)==='en';
   const hook=eng.hook||quiz.videoHook||(en?'How many can you get right?':'Combien de bonnes réponses vas-tu trouver ?');
-  return `<div class="studio-intro"><span class="eyebrow">QUIZCAST · ${quiz.questions.length} ${en?'QUESTIONS':'QUESTIONS'}</span><h1>${escapeHTML(quiz.name)}</h1><p>${escapeHTML(hook)}</p><div class="intro-rule">${en?'One point per correct answer. Keep your score!':'Une bonne réponse = un point. Garde ton score !'}</div><div class="intro-start">${en?'LET’S PLAY':'À TOI DE JOUER'} <span>→</span></div></div>`;
+  return `<div class="studio-intro"><span class="eyebrow">QUIZCAST · ${eng.order.length} ${eng.order.length===1?'QUESTION':'QUESTIONS'}${eng.sample?' · TEST':''}</span><h1>${escapeHTML(quiz.name)}</h1><p>${escapeHTML(hook)}</p><div class="intro-rule">${en?'One point per correct answer. Keep your score!':'Une bonne réponse = un point. Garde ton score !'}</div><div class="intro-start">${en?'LET’S PLAY':'À TOI DE JOUER'} <span>→</span></div></div>`;
 }
 function renderAutoplayIntro(){
   const eng=STATE.autoplayEngine, quiz=eng&&getQuiz(eng.quizId);
@@ -562,6 +578,7 @@ function updateCountdownDOM(remain,pct){
   if(ringFg){ ringFg.style.strokeDasharray=c; ringFg.style.strokeDashoffset=c*pct; }
   if(ringWrap) ringWrap.classList.toggle('urgent', remain<=3 && remain>0);
   nums.forEach(n=>{n.textContent=Math.ceil(remain);});
+  updateVisualRoundProgress(pct);
   const bar=document.getElementById('timer-bar-fill'); if(bar) bar.style.width=`${Math.max(0,(1-pct)*100)}%`;
   const pill=document.getElementById('timer-pill-fill'); if(pill) pill.style.width=`${Math.max(0,(1-pct)*100)}%`;
   document.querySelectorAll('#timer-segments i').forEach((el,i)=>el.classList.toggle('active', i < Math.ceil((1-pct)*12)));
@@ -580,7 +597,7 @@ function renderStageShell(){
   const preset = STATE.autoplayEngine?.preset || 'cinematic';
   const textStyle=STATE.autoplayEngine?.textStyle||'preset';
   const bgMedia=autoplayBackgroundMarkup(preset,STATE.autoplayEngine?.backgroundMode||'style',quiz?.thumbnail||'',STATE.autoplayEngine?.backgroundVariant||'1',STATE.autoplayEngine?.customMediaUrl||'',STATE.autoplayEngine?.customMediaType||'image');
-  root.innerHTML = `<div class="stage-wrap${presetClass ? ' '+presetClass : ''}" id="stage-wrap"><div class="stage-16x9 studio-scene${presetClass} autoplay-text-style-${textStyle}" id="stage-16x9">
+  root.innerHTML = `<div class="stage-wrap${presetClass ? ' '+presetClass : ''}" id="stage-wrap"><div class="stage-16x9 studio-scene broadcast-v2${presetClass} autoplay-text-style-${textStyle}" id="stage-16x9">
     <svg width="0" height="0" style="position:absolute"><defs>
       <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#7c5cfc"/>
@@ -590,7 +607,7 @@ function renderStageShell(){
     </defs></svg>
     <div class="stage-video-meta">
       <div class="stage-video-title" id="stage-video-title"></div>
-      <div class="stage-video-progress" id="stage-video-progress">1 / 1</div>
+      <div class="stage-video-progress" id="stage-video-progress">${STATE.autoplayEngine?.order.length||0} QUESTIONS</div>
     </div>
     <div class="stage-video-progress-line"><span id="stage-video-progress-fill"></span></div>
     ${bgMedia}<div class="scene-orb orb-one"></div><div class="scene-orb orb-two"></div><div class="stage-content" id="stage-content"></div><div class="scene-footer" id="scene-footer"></div>
@@ -635,11 +652,12 @@ function populateStageContent(eng,quiz,content){
   const footer=document.getElementById('scene-footer');
   if(footer)footer.textContent=originalQ.chapter||(autoplayRevealLanguage(eng,quiz)==='en'?'Keep your score · One point per answer':'Garde ton score · Un point par bonne réponse');
   content.classList.remove('stage-fade-out');
+  content.dataset.questionType=originalQ.type;
   content.innerHTML=buildAutoplayQuestionMarkup(eng,quiz,originalQ,false);
   const titleEl=document.getElementById('stage-video-title');
   const progressEl=document.getElementById('stage-video-progress');
   const progressFill=document.getElementById('stage-video-progress-fill');
-  if(titleEl) titleEl.textContent=quiz.name||'QuizCast';
+  if(titleEl) titleEl.textContent=(eng.sample?'TEST · ':'')+(quiz.name||'QuizCast');
   if(progressEl) progressEl.textContent=`${eng.pos+1} / ${eng.order.length}`;
   if(progressFill) progressFill.style.width=`${((eng.pos+1)/Math.max(1,eng.order.length))*100}%`;
   flushPendingModeImages();
@@ -656,7 +674,7 @@ function updateRevealVisuals(){
   if(content){
     const note=document.createElement('div');note.className='scene-explanation';note.textContent=q.explanation||autoplayCorrectLabel(eng,quiz);content.appendChild(note);
   }
-  if(q.type==='open_answer'){if(content)content.innerHTML=studioRevealMarkup(q,eng,quiz);return;}
+  if(['open_answer','image_clues','visual_guess'].includes(q.type)){if(content)content.innerHTML=studioRevealMarkup(q,eng,quiz);return;}
   if(q.type==='ranking'){
     const list=document.querySelector('#stage-content .stage-ranking');if(!list)return;
     const before=new Map([...list.children].map(el=>[el.dataset.aid,el.getBoundingClientRect().top]));
@@ -695,9 +713,9 @@ function renderFinishedStage(){
   const content = document.getElementById('stage-content');
   if(!content) return;
   const en=autoplayRevealLanguage(eng,quiz)==='en';
-  const message=(eng.endMessage||(en?'Your score out of {total}? Tell us in the comments!':'Ton score sur {total} ? Écris-le en commentaire !')).replaceAll('{total}',String(quiz.questions.length));
+  const message=(eng.endMessage||(en?'Your score out of {total}? Tell us in the comments!':'Ton score sur {total} ? Écris-le en commentaire !')).replaceAll('{total}',String(eng.order.length));
   document.getElementById('stage-16x9')?.classList.remove('is-revealing');
-  content.innerHTML=`<div class="studio-outro"><div class="confetti-wrap">${confettiPieces()}</div><span class="eyebrow">${en?'CHALLENGE COMPLETE':'DÉFI TERMINÉ'}</span><h2>${en?'So, what’s your score?':'Alors, combien de points ?'}</h2><div class="outro-score">? <span>/ ${quiz.questions.length}</span></div><p>${escapeHTML(message)}</p><small>${en?'Want another challenge? See you in the next quiz.':'Envie d’un autre défi ? Rendez-vous au prochain quiz.'}</small></div>`;
+  content.innerHTML=`<div class="studio-outro"><div class="confetti-wrap">${confettiPieces()}</div><span class="eyebrow">${en?'CHALLENGE COMPLETE':'DÉFI TERMINÉ'}</span><h2>${en?'So, what’s your score?':'Alors, combien de points ?'}</h2><div class="outro-score">? <span>/ ${eng.order.length}</span></div><p>${escapeHTML(message)}</p><small>${en?'Want another challenge? See you in the next quiz.':'Envie d’un autre défi ? Rendez-vous au prochain quiz.'}</small></div>`;
   scheduleAutoplay(()=>{eng.phase='ended';document.getElementById('studio-pause').textContent='Rejouer';},(eng.outroDuration||6)*1000);
 }
 

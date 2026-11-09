@@ -7,6 +7,7 @@ function getFilteredQuizzes(){
   let list = STATE.quizzes.slice();
   const {search,category,difficulty,language,sort} = STATE.library;
   if(search){ const s=search.toLowerCase(); list=list.filter(q=>(q.name||'').toLowerCase().includes(s)||(q.description||'').toLowerCase().includes(s)); }
+  if(STATE.library.type)list=list.filter(q=>q.questions?.some(x=>x.type===STATE.library.type));
   if(category) list=list.filter(q=>(q.categoryIds||[]).includes(category));
   if(difficulty) list=list.filter(q=>q.difficulty===difficulty);
   if(language) list=list.filter(q=>q.language===language);
@@ -76,7 +77,7 @@ function setupMaskEditorEvents(){
    PUBLIC SITE RENDERING
    ============================================================ */
 function publicQuizList(){
-  return STATE.quizzes.filter(q=>q && q.questions && q.questions.length>0);
+  return STATE.quizzes.filter(q=>q && q.status!=='draft' && q.questions && q.questions.length>0);
 }
 function publicDiff(q){ return tr('diff_'+(q.difficulty||'moyen')); }
 function renderYouTubeEpisode(quiz,placement='detail'){
@@ -205,7 +206,7 @@ function renderPublicCategories(){
 }
 function renderPublicQuizDetail(){
   const q=getQuiz(STATE.publicQuizId);
-  if(!q){
+  if(!q||q.status==='draft'){
     return `<div class="public-shell" data-public-theme="${STATE.settings.publicTheme||'warm'}">${publicHeader()}<main class="public-content"><div class="public-empty"><h2>Quiz introuvable</h2><p>Ce quiz n'est pas disponible dans les données enregistrées sur cet appareil.</p><button class="btn btn-primary" data-action="public-quizzes">Voir les quiz</button></div></main></div>`;
   }
   const cats=(q.categoryIds||[]).map(getCategory).filter(Boolean); const related=publicQuizList().filter(x=>x.id!==q.id && (x.categoryIds||[]).some(id=>(q.categoryIds||[]).includes(id))).slice(0,4);

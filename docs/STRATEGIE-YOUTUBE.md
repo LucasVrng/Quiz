@@ -37,12 +37,12 @@ Les cartes de l’admin ouvrent les quiz correspondants. Ce sont des pistes, pas
 
 | Semaine | Sujet | Ce qu’on cherche à comprendre |
 | --- | --- | --- |
-| 1 | 20 capitales du monde | Un thème accessible suscite-t-il le clic et des scores en commentaire ? |
-| 2 | 20 films en emojis | Le jeu visuel apporte-t-il plus d’envie de continuer ? |
-| 3 | Animaux : 20 vrai/faux | Les révélations expliquées fonctionnent-elles mieux que le QCM ? |
-| 4 | 20 devinettes | Le suspense marche-t-il sans illustration sous licence ? |
+| 1 | Nintendo Remix, formats visuels mélangés | Comparer ce nouvel épisode aux deux premiers essais Nintendo. |
+| 2 | 20 films en trois captures | Préparer vos captures ; les indices progressifs donnent-ils envie de continuer ? |
+| 3 | Le grand mix visuel | Les changements de format retiennent-ils mieux que les épisodes homogènes ? |
+| 4 | Personnages : ombre, zoom, cases et flou | Quels effets donnent envie de chercher sans propositions de réponse ? |
 | 5 | Le juste nombre | Les estimations déclenchent-elles des comparaisons de scores ? |
-| 6 | Jeux vidéo | Le gaming plus large fait-il mieux que les deux essais Nintendo ? Le pack existant a 10 questions : le compléter ou le réunir avec un autre jeu de questions pour viser 5 à 10 minutes. |
+| 6 | 20 jeux vidéo en trois captures | Préparer vos captures et comparer au thème cinéma. |
 
 Gardez des conditions comparables : même langue, même créneau habituel, même famille de miniatures, durée proche et introduction courte. Ne changez pas simultanément langue, voix, durée, direction artistique et sujet. Un épisode par thème donne des indices, pas une preuve : les petits volumes sont instables. Répétez ensuite les deux pistes les plus encourageantes avant de décider d’abandonner les autres.
 

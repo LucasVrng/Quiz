@@ -40,13 +40,13 @@ function renderQuizCard(q){
       ${q.thumbnail?'':'🎬'}<span class="lang-badge">${(q.language||'fr').toUpperCase()}</span>
     </div>
     <div class="quiz-body" data-action="open-quiz-editor" data-id="${q.id}" style="cursor:pointer;">
-      <h3>${escapeHTML(q.name)||'—'}${q.isDemo?` <span class="chip">${tr('demo_badge')}</span>`:''}</h3>
+      <h3>${escapeHTML(q.name)||'—'}${q.status==='draft'?'<span class="chip">À illustrer</span>':''}${q.isDemo?` <span class="chip">${tr('demo_badge')}</span>`:''}</h3>
       <div class="desc">${escapeHTML(q.description)||''}</div>
       <div class="chip-row">
         ${cats.slice(0,2).map(c=>`<span class="chip" style="border-color:${c.color}55;color:${c.color}">${escapeHTML(c.name)}</span>`).join('')}
         <span class="chip chip-diff-${q.difficulty}">${diffLabel}</span>
       </div>
-      <div class="quiz-meta-row"><span>${q.questions.length} ${tr(q.questions.length===1?'q_count_1':'q_count')}</span></div>
+      <div class="quiz-format-badges">${[...new Set(q.questions.map(x=>x.type==='visual_guess'?({silhouette:'Silhouette',zoom:'Zoom',hidden:'Image cachée',blurred:'Flou'})[x.visualMode]||'Image mystère':QuestionTypes[x.type]?.label()||x.type))].slice(0,5).map(t=>`<span>${escapeHTML(t)}</span>`).join('')}</div><div class="quiz-meta-row"><span>${q.questions.length} ${tr(q.questions.length===1?'q_count_1':'q_count')}</span></div>
     </div>
     <div class="quiz-actions">
       <button class="btn btn-ghost" data-action="play-quiz" data-id="${q.id}" title="${tr('btn_play')}">${Icons.play(13)}</button>
@@ -74,6 +74,7 @@ function renderLibrary(){
   <div class="toolbar">
     <div class="search-wrap">${Icons.search(15)}<input type="search" placeholder="${tr('search_ph')}" value="${escapeHTML(L.search)}" data-action="lib-search"></div>
     <select data-action="lib-filter-cat"><option value="" ${!L.category?'selected':''}>${tr('filter_all_cat')}</option>${catOptions}</select>
+    <select data-action="lib-filter-type" aria-label="Format des questions"><option value="">Tous les formats</option>${QUESTION_TYPE_ORDER.map(k=>`<option value="${k}" ${L.type===k?'selected':''}>${QuestionTypes[k].label()}</option>`).join('')}</select>
     <select data-action="lib-filter-diff">
       <option value="" ${!L.difficulty?'selected':''}>${tr('filter_all_diff')}</option>
       <option value="facile" ${L.difficulty==='facile'?'selected':''}>${tr('diff_facile')}</option>
@@ -321,11 +322,11 @@ function renderQuestionModal(){
   if(!q) return;
   const type = QuestionTypes[q.type];
   const isNew = STATE._questionModalIsNew;
-  const answersHTML = ['guess_character','open_answer'].includes(q.type) ? '' : q.type==='ranking' ? `<div class="ranking-editor-list" id="ranking-editor-list">${q.answers.map((a,idx)=>`<div class="ranking-edit-item" draggable="true" data-aid="${a.id}"><span class="ranking-grip">${Icons.grip(16)}</span><span class="ranking-index">${idx+1}</span><input type="text" value="${escapeHTML(a.text)}" placeholder="${tr('field_answer_ph')} ${idx+1}" data-action="ranking-answer-text-input" data-aid="${a.id}"></div>`).join('')}</div>` : q.type==='number' ? `<p class="hint">${tr('number_hint')}</p>` : q.answers.map((a,idx)=>`
+  const answersHTML = isFreeResponseQuestion(q) ? '' : q.type==='ranking' ? `<div class="ranking-editor-list" id="ranking-editor-list">${q.answers.map((a,idx)=>`<div class="ranking-edit-item" draggable="true" data-aid="${a.id}"><span class="ranking-grip">${Icons.grip(16)}</span><span class="ranking-index">${idx+1}</span><input type="text" value="${escapeHTML(a.text)}" placeholder="${tr('field_answer_ph')} ${idx+1}" data-action="ranking-answer-text-input" data-aid="${a.id}"></div>`).join('')}</div>` : q.type==='number' ? `<p class="hint">${tr('number_hint')}</p>` : q.answers.map((a,idx)=>`
     <div class="answer-edit-row" data-aid="${a.id}">
       <button type="button" class="correct-radio ${q.correctAnswerId===a.id?'checked':''}" data-action="set-correct" data-aid="${a.id}" aria-label="Définir la réponse ${idx+1} comme correcte" aria-pressed="${q.correctAnswerId===a.id}"></button>
       <input type="text" value="${escapeHTML(a.text)}" ${q.type==='true_false'?'readonly':''} placeholder="${tr('field_answer_ph')} ${idx+1}" data-action="answer-text-input" data-aid="${a.id}">
-      ${q.type!=='true_false' && q.answers.length>2 ? `<button type="button" class="btn btn-icon btn-outline" data-action="remove-answer" data-aid="${a.id}" title="${tr('remove_answer')}">${Icons.x(14)}</button>` : ''}
+      ${!['true_false','odd_one_out'].includes(q.type) && q.answers.length>2 ? `<button type="button" class="btn btn-icon btn-outline" data-action="remove-answer" data-aid="${a.id}" title="${tr('remove_answer')}">${Icons.x(14)}</button>` : ''}
     </div>`).join('');
   const html = `
   <div class="modal-overlay open" id="question-modal-overlay">
@@ -337,10 +338,10 @@ function renderQuestionModal(){
           <textarea placeholder="${tr('field_question_text_ph')}" data-action="q-text-input">${escapeHTML(q.text)}</textarea>
         </div>
         ${type.renderEditorExtra(q)}
-        ${q.type==='number'||['guess_character','open_answer'].includes(q.type)?'':`<div class="field">
+        ${q.type==='number'||isFreeResponseQuestion(q)?'':`<div class="field">
           <label class="field-label">${q.type==='ranking'?tr('ranking_items'):tr('field_answers')}</label>
           <div>${answersHTML}</div>
-          ${q.type==='ranking'?'':`<p class="hint">${tr('mark_correct_hint')}</p>${q.type!=='true_false' && q.answers.length<6 ? `<button type="button" class="btn btn-outline btn-sm" data-action="add-answer" style="margin-top:6px;">${Icons.plus(13)} ${tr('add_answer')}</button>` : ''}`}
+          ${q.type==='ranking'?'':`<p class="hint">${tr('mark_correct_hint')}</p>${!['true_false','odd_one_out'].includes(q.type) && q.answers.length<6 ? `<button type="button" class="btn btn-outline btn-sm" data-action="add-answer" style="margin-top:6px;">${Icons.plus(13)} ${tr('add_answer')}</button>` : ''}`}
         </div>`}
         <div class="field">
           <label class="field-label">${tr('field_explanation')}</label>
@@ -413,18 +414,18 @@ function setupRankingPlayDnD(){
 }
 function rankingOrderFromDOM(){const list=document.getElementById('ranking-play-list');return list?[...list.querySelectorAll('.ranking-play-item')].map(x=>x.dataset.aid):[];}
 
-function saveQuestionFromModal(){
+async function saveQuestionFromModal(){
   const draft = STATE._questionDraft;
   const quiz = getQuiz(STATE._questionModalQuizId);
   if(!quiz || !draft) return;
   if(!draft.text || !draft.text.trim()){ showToast(tr('field_question_text'),'err'); return; }
-  if(draft.type!=='number' && !['guess_character','open_answer'].includes(draft.type)) draft.answers = draft.answers.filter(a=>a.text && a.text.trim());
-  if(['guess_character','open_answer'].includes(draft.type)){
+  if(draft.type!=='number' && !isFreeResponseQuestion(draft)) draft.answers = draft.answers.filter(a=>a.text && a.text.trim());
+  if(isFreeResponseQuestion(draft)){
     if(!draft.answerText || !draft.answerText.trim()){ showToast(tr('field_expected_answer'),'err'); return; }
     draft.answerText=draft.answerText.trim();
     draft.answers=[]; draft.correctAnswerId=null;
   }
-  if(['qcm','true_false','zoom'].includes(draft.type)){
+  if(['qcm','true_false','zoom','odd_one_out'].includes(draft.type)){
     if(draft.answers.length<2){ showToast(tr('field_answers'),'err'); return; }
     if(!draft.answers.find(a=>a.id===draft.correctAnswerId)){ showToast(tr('mark_correct_hint'),'err'); return; }
   }
@@ -438,14 +439,16 @@ function saveQuestionFromModal(){
     if(!Number.isFinite(draft.value)||!Number.isFinite(draft.min)||!Number.isFinite(draft.max)||!Number.isFinite(draft.step)||draft.step<=0||draft.max<=draft.min){ showToast(tr('field_number_value'),'err'); return; }
     if(draft.value<draft.min || draft.value>draft.max){ showToast(tr('field_number_value'),'err'); return; }
   }
-  if(draft.type==='open_answer') draft.acceptedAnswers=(draft._acceptedRaw??(draft.acceptedAnswers||[]).join(';')).split(';').map(x=>x.trim()).filter(Boolean);
+  const visualIssue=visualQuestionIssue(draft);if(visualIssue){showToast(visualIssue,'err');return;}
+  if(isFreeResponseQuestion(draft)) draft.acceptedAnswers=(draft._acceptedRaw??(draft.acceptedAnswers||[]).join(';')).split(';').map(x=>x.trim()).filter(Boolean);
   delete draft._acceptedRaw;
   draft.tags = (draft._tagsRaw||'').split(',').map(t=>t.trim()).filter(Boolean);
   delete draft._tagsRaw;
   const idx = quiz.questions.findIndex(qq=>qq.id===draft.id);
   if(idx>=0) quiz.questions[idx]=draft; else quiz.questions.push(draft);
-  saveQuiz(quiz);
-  closeQuestionModal();
+  if(quiz.status==='draft'&&!quizIssues(quiz).length)quiz.status='ready';
+  try{await saveQuiz(quiz);}catch(error){showToast('La sauvegarde a échoué. Garde cette fenêtre ouverte et réessaie.','err');return;}
+  if(STATE._questionDraft===draft)closeQuestionModal();
   render();
   flashSavedIndicator();
 }
